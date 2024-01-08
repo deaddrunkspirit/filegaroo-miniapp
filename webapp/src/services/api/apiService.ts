@@ -70,13 +70,8 @@ export async function getOrCreateUser(telegram_id: number): Promise<components['
   return response.data
 }
 
-export async function forwardMessage(chat_id: number, message_id: number) {
-  const BOT_TOKEN = "6717689497:AAHD0McVGhxlwWc2SpEmYEL_iH0NeDuLH4M";
-  // TODO cleanup
-  const bot = new Bot(BOT_TOKEN)
-  bot.api.raw.forwardMessage({
-    chat_id: chat_id,
-    from_chat_id: chat_id,
-    message_id: message_id
-  })
+export async function forwardMessage(content_id: number) {
+  const url = `${baseUrl}/contents/forward_message/${content_id}`
+  const response = await axiosInstance.post(url, {});
+  console.log(response)  
 }

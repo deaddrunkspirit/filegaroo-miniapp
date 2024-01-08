@@ -32,7 +32,7 @@ const ContentCard: React.FC<ContentCardProps> = ({ content }) => {
     const handleMessageClick = () => {
         if (!isOpen) {
             closeDropdown();
-            forwardMessage(content.tg_chat_id!!, content.tg_message_id!!)
+            forwardMessage(content.id)
 
             window.Telegram.WebApp.close()
         }

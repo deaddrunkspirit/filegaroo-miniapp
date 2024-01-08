@@ -31,9 +31,8 @@ function App() {
   console.log(webApp.initDataUnsafe)
 
   const debugMode = false;
-  const initData = !debugMode && webApp.initData.user ? webApp.initDataUnsafe : getUser();
+  const initData = webApp.initDataUnsafe;
   const colorScheme = debugMode ? 'dark' : webApp.colorScheme;
-  
   if (colorScheme === 'dark') {
     document.documentElement.classList.add('dark');
   }
