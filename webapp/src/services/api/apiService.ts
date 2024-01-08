@@ -2,7 +2,6 @@ import axios, { AxiosInstance } from 'axios';
 import { components } from './apiClient';
 import { API_BASE_URL } from '../../config';
 import { ContentType } from 'types/content';
-import { Bot } from 'grammy'
 
 const baseUrl: string = API_BASE_URL;
 

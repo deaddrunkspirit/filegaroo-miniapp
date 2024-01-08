@@ -13,8 +13,9 @@ const ContentsPage: React.FC = () => {
     const parentContentId: number | null = parent_content_id ? parseInt(parent_content_id) : null
     console.log(`params: ${ parent_content_id} ${title}`)
     console.log(title)
-    const user_id = 355308090
-    const {data, isError, isPending} = useQuery<ContentType[], Error>({queryKey: ['contents', user_id, parentContentId], queryFn: () => getContents(user_id, parentContentId)});
+    const userString = sessionStorage.getItem('user');
+    const user = userString ? JSON.parse(userString) : null;
+    const {data, isError, isPending} = useQuery<ContentType[], Error>({queryKey: ['contents', user.id, parentContentId], queryFn: () => getContents(user.id, parentContentId)});
     console.log(data)
 
     if (isPending) return <Placeholder text='Loading . . .'/>
