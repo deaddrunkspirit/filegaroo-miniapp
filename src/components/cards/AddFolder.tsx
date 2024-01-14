@@ -9,7 +9,7 @@ interface AddFolderProps {
 }
 
 
-const AddFolder: React.FC<AddFolderProps> = ({ user_id, parent_content_id }) => {
+const AddFolder: React.FC<AddFolderProps> = ({ parent_content_id }) => {
 
     const queryClient = useQueryClient();
     const { colorScheme, tg } = useTelegramContext();
@@ -18,7 +18,7 @@ const AddFolder: React.FC<AddFolderProps> = ({ user_id, parent_content_id }) => 
     const mutation = useMutation({
         mutationFn: () => addFolder(tg!.access_token, tg!.init_data.user.id, parent_content_id),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['contents', user_id] });
+            queryClient.invalidateQueries({ queryKey: ['contents'] });
         },
     });
 
