@@ -24,11 +24,14 @@ function App() {
   }
 
   const queryClient = new QueryClient()
-  console.log(import.meta.env.VITE_API_URL)
+  const DEBUG_MODE = import.meta.env.VITE_DEBUG;
+  const MOCKUP_INIT_DATA = import.meta.env.VITE_MOCKUP_INIT_DATA;
+  const initData = DEBUG_MODE === 'enabled' ? MOCKUP_INIT_DATA : webApp.initData;
+  
   useEffect(() => {
       const doAuth = async () => {
-        const res = await authUser(webApp.initData) 
-        setInitData(res)
+        const res = await authUser(initData); 
+        setInitData(res);
       }
     doAuth().catch(console.error)   
   }, [])

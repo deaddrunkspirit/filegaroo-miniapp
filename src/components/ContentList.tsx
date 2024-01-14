@@ -25,7 +25,7 @@ const ContentList: React.FC<ContentListProps> = ({ data, parent_id }) => {
   });
 
   return (
-    <div className='flex flex-wrap ml-4 gap-8 w-full list-none'>
+    <div className='flex flex-wrap justify-start ml-[8vw] gap-6 min-w-75 w-full max-w-96 h-full list-none'>
       {sortedData.map((content) => (
         <ContentCard key={content.id} content={content} />
       ))}

@@ -16,7 +16,7 @@ const ContentsPageHeader: React.FC<ContentsPageHeaderProps> = ({title }) => {
     navigate(-1);
   }
   return (
-    <div className="flex flex-row items-center p-4 gap-4">
+    <div className="flex flex-row self-start items-center p-4 gap-4">
       <NavLink className='min-w-6 min-h-6' to="/">
         <img className="w-6 h-6 m-0" src={getIcon('home', colorScheme!)} alt="Home" />
       </NavLink>

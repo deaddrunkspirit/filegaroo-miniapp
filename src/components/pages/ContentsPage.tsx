@@ -26,7 +26,7 @@ const ContentsPage: React.FC = () => {
     if (isError) return <Placeholder text='Error fetching data'/>
 
     return (
-        <div className='relative flex flex-col justify-start gap-4 m-0 p-4 h-full min-h-dvh bg-light-primary text-light-onprimary dark:bg-dark-primary dark:text-dark-onprimary'>
+        <div className='relative flex flex-col justify-start items-center gap-4 m-0 p-4 h-full min-h-dvh bg-light-primary text-light-onprimary dark:bg-dark-primary dark:text-dark-onprimary'>
             <ContentsPageHeader title={title ? title : ''} />
             <ContentList data={data!!} parent_id={parentContentId}></ContentList>
         </div>
