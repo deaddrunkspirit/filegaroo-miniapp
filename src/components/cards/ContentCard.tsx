@@ -4,7 +4,7 @@ import { ContentType } from "../../types/content";
 import DropdownMenu from "../DropdownMenu";
 import { useDropdown } from '../../providers/DropdownContext';
 import { forwardMessage } from "../../services/api/apiService";
-import useInitData from "../../queries/queries";
+import { useTelegramContext } from "../../providers/TelegramContext";
 
 declare const window: any;
 
@@ -14,7 +14,8 @@ interface ContentCardProps {
    
 const ContentCard: React.FC<ContentCardProps> = ({ content }) => {
     const { openDropdown, closeDropdown, isOpen } = useDropdown(content.id);
-    const { token } = useInitData();
+    const { tg } = useTelegramContext();
+    if (!tg) return <div>Loading</div>
     const shortlink = `/${content.title}/${content.id}`
     const navigate = useNavigate();
     
@@ -33,7 +34,7 @@ const ContentCard: React.FC<ContentCardProps> = ({ content }) => {
     const handleMessageClick = () => {
         if (!isOpen) {
             closeDropdown();
-            forwardMessage(token.access_token, content.id)
+            forwardMessage(tg.access_token, content.id)
 
             window.Telegram.WebApp.close()
         }

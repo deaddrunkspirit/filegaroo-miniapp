@@ -22,6 +22,6 @@ export const getIconPath = (content: ContentType) => {
         index = 0;
       }
       const iconFileName: string = iconMapping[index] || 'default_icon.svg';
-    return process.env.PUBLIC_URL + `/icons/${iconFileName}`;
+    return import.meta.env.PUBLIC_URL + `/icons/${iconFileName}`;
   };
  

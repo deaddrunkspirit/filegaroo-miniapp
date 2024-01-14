@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.css';
 import MainPage from './components/pages/MainPage';
 import FAQPage from './components/pages/FAQPage';
 import SettingsPage from './components/pages/SettingsPage';
@@ -9,24 +8,20 @@ import {
   QueryClient,
   QueryClientProvider
 } from '@tanstack/react-query'
-import { TelegramProvider } from './providers/ThemeContext';
+import { TelegramProvider } from './providers/TelegramContext';
 import { authUser } from './services/api/apiService';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 declare const window: any;
 
 function App() {
-
+  const [init_data, setInitData] = useState();
   const webApp = window.Telegram.WebApp;
 
-  console.log(webApp.initDataUnsafe)
-
-  const initData = webApp.initData;
   const colorScheme = webApp.colorScheme ?? 'dark';
   if (colorScheme === 'dark') {
     document.documentElement.classList.add('dark');
   }
-  console.log(initData.user.id)
 
   const queryClient = new QueryClient()
 
@@ -37,6 +32,7 @@ function App() {
         queryKey: ['initData'], 
         queryFn: async () => { 
           const res = await authUser(webApp.initData) 
+          setInitData(res)
           return res
         } 
       })
@@ -49,7 +45,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <TelegramProvider colorScheme={colorScheme}>
+      <TelegramProvider colorScheme={colorScheme} tg={init_data} >
         <QueryClientProvider client={queryClient}>
           <DropdownProvider>
             <Routes>

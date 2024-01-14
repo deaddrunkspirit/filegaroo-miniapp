@@ -1,4 +1,4 @@
-import { useTelegramContext } from "../../providers/ThemeContext";
+import { useTelegramContext } from "../../providers/TelegramContext";
 
 interface CardOptionDialogProps {
     handleDelete: () => void;

@@ -1,11 +1,10 @@
 import axios, { AxiosInstance } from 'axios';
-import { components } from './apiClient';
-import { API_BASE_URL } from '../../config';
+import { components } from './schemas';
 import { ContentType } from '../../types/content';
 
 
 const api: AxiosInstance = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: import.meta.env.API_BASE_URL,
   headers: {
     'ngrok-skip-browser-warning': 'true',
     'Content-Type': 'application/json',
@@ -67,12 +66,13 @@ export async function deleteContent(token: string, content_id: number): Promise<
   return response.data;
 }
 
-export async function addFolder(token: string, parent_content_id?: number | null | undefined): Promise<components['schemas']['ContentRead']> {
+export async function addFolder(token: string, user_id: number, parent_content_id?: number | null | undefined): Promise<components['schemas']['ContentRead']> {
   let url = `/contents/`
   type CreateContentRequest = components["schemas"]["ContentCreate"];
   let content: CreateContentRequest = {
     "title": "Новая папка",
     "type": 2,
+    "user_id": user_id,
   }
   if (parent_content_id) {
     content['parent_content_id'] = parent_content_id

@@ -17,33 +17,29 @@ export interface paths {
     /** Delete Content */
     delete: operations["delete_content_contents__content_id__delete"];
   };
-  "/contents/parent/{user_id}/{parent_content_id}": {
+  "/contents/parent/{parent_content_id}": {
     /** Get Contents By Parent Id */
-    get: operations["get_contents_by_parent_id_contents_parent__user_id___parent_content_id__get"];
+    get: operations["get_contents_by_parent_id_contents_parent__parent_content_id__get"];
   };
-  "/contents/parent/{user_id}": {
+  "/contents/parent": {
     /** Get Contents By Parent Id */
-    get: operations["get_contents_by_parent_id_contents_parent__user_id__get"];
+    get: operations["get_contents_by_parent_id_contents_parent_get"];
   };
-  "/contents/folders/{user_id}/{parent_content_id}": {
+  "/contents/folders/{parent_content_id}": {
     /** Get Folders By User Id And Parent Content Id */
-    get: operations["get_folders_by_user_id_and_parent_content_id_contents_folders__user_id___parent_content_id__get"];
+    get: operations["get_folders_by_user_id_and_parent_content_id_contents_folders__parent_content_id__get"];
   };
-  "/contents/folders/{user_id}": {
+  "/contents/folders": {
     /** Get Root Folders By User Id */
-    get: operations["get_root_folders_by_user_id_contents_folders__user_id__get"];
+    get: operations["get_root_folders_by_user_id_contents_folders_get"];
   };
-  "/users/": {
-    /** Create User */
-    post: operations["create_user_users__post"];
+  "/contents/forward_message/{content_id}": {
+    /** Forward Message */
+    post: operations["forward_message_contents_forward_message__content_id__post"];
   };
-  "/users/{user_id}": {
-    /** Update User */
-    put: operations["update_user_users__user_id__put"];
-  };
-  "/users/{telegram_id}": {
-    /** Get User By Telegram Id */
-    get: operations["get_user_by_telegram_id_users__telegram_id__get"];
+  "/users/auth": {
+    /** Authenticate User */
+    post: operations["authenticate_user_users_auth_post"];
   };
 }
 
@@ -60,7 +56,7 @@ export interface components {
       /** Parent Content Id */
       parent_content_id?: number | null;
       /** User Id */
-      user_id?: number | null;
+      user_id: number;
       /** Tg Chat Id */
       tg_chat_id?: number | null;
       /** Tg Message Id */
@@ -79,7 +75,7 @@ export interface components {
       /** Parent Content Id */
       parent_content_id?: number | null;
       /** User Id */
-      user_id?: number | null;
+      user_id: number;
       /** Tg Chat Id */
       tg_chat_id?: number | null;
       /** Tg Message Id */
@@ -100,7 +96,7 @@ export interface components {
       /** Parent Content Id */
       parent_content_id?: number | null;
       /** User Id */
-      user_id?: number | null;
+      user_id: number;
       /** Tg Chat Id */
       tg_chat_id?: number | null;
       /** Tg Message Id */
@@ -114,21 +110,6 @@ export interface components {
     HTTPValidationError: {
       /** Detail */
       detail?: components["schemas"]["ValidationError"][];
-    };
-    /** UserCreate */
-    UserCreate: {
-      /** Telegram Id */
-      telegram_id: number;
-    };
-    /** UserRead */
-    UserRead: {
-      /** Telegram Id */
-      telegram_id: number;
-    };
-    /** UserUpdate */
-    UserUpdate: {
-      /** Telegram Id */
-      telegram_id: number;
     };
     /** ValidationError */
     ValidationError: {
@@ -235,7 +216,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["ContentRead"];
+          "application/json": components["schemas"]["ContentRead"][];
         };
       };
       /** @description Validation Error */
@@ -247,10 +228,9 @@ export interface operations {
     };
   };
   /** Get Contents By Parent Id */
-  get_contents_by_parent_id_contents_parent__user_id___parent_content_id__get: {
+  get_contents_by_parent_id_contents_parent__parent_content_id__get: {
     parameters: {
       path: {
-        user_id: number;
         parent_content_id: number;
       };
     };
@@ -270,12 +250,7 @@ export interface operations {
     };
   };
   /** Get Contents By Parent Id */
-  get_contents_by_parent_id_contents_parent__user_id__get: {
-    parameters: {
-      path: {
-        user_id: number;
-      };
-    };
+  get_contents_by_parent_id_contents_parent_get: {
     responses: {
       /** @description Successful Response */
       200: {
@@ -283,19 +258,12 @@ export interface operations {
           "application/json": components["schemas"]["ContentRead"][];
         };
       };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
     };
   };
   /** Get Folders By User Id And Parent Content Id */
-  get_folders_by_user_id_and_parent_content_id_contents_folders__user_id___parent_content_id__get: {
+  get_folders_by_user_id_and_parent_content_id_contents_folders__parent_content_id__get: {
     parameters: {
       path: {
-        user_id: number;
         parent_content_id: number;
       };
     };
@@ -315,12 +283,7 @@ export interface operations {
     };
   };
   /** Get Root Folders By User Id */
-  get_root_folders_by_user_id_contents_folders__user_id__get: {
-    parameters: {
-      path: {
-        user_id: number;
-      };
-    };
+  get_root_folders_by_user_id_contents_folders_get: {
     responses: {
       /** @description Successful Response */
       200: {
@@ -328,53 +291,20 @@ export interface operations {
           "application/json": components["schemas"]["ContentRead"][];
         };
       };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
     };
   };
-  /** Create User */
-  create_user_users__post: {
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["UserCreate"];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": components["schemas"]["UserRead"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  /** Update User */
-  update_user_users__user_id__put: {
+  /** Forward Message */
+  forward_message_contents_forward_message__content_id__post: {
     parameters: {
       path: {
-        user_id: number;
-      };
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["UserUpdate"];
+        content_id: number;
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["UserRead"];
+          "application/json": components["schemas"]["ContentRead"];
         };
       };
       /** @description Validation Error */
@@ -385,18 +315,18 @@ export interface operations {
       };
     };
   };
-  /** Get User By Telegram Id */
-  get_user_by_telegram_id_users__telegram_id__get: {
-    parameters: {
-      path: {
-        telegram_id: number;
+  /** Authenticate User */
+  authenticate_user_users_auth_post: {
+    requestBody: {
+      content: {
+        "application/json": Record<string, never>;
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["UserRead"];
+          "application/json": unknown;
         };
       };
       /** @description Validation Error */

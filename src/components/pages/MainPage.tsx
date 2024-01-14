@@ -5,12 +5,13 @@ import { ContentType } from '../../types/content';
 import { getContents } from '../../services/api/apiService';
 import { useQuery } from '@tanstack/react-query';
 import Placeholder from '../../components/placeholders/Placeholder';
-import useInitData from '../../queries/queries';
+import { useTelegramContext } from '../../providers/TelegramContext';
 
 
 const MainPage: React.FC = () => {
-  const { token } = useInitData()
-  const { data, isError } = useQuery<ContentType[], Error>({ queryKey: ['contents'], queryFn: () => getContents(token.access_token) });
+  const { tg } = useTelegramContext();
+    if (!tg) return <div>Loading</div>
+  const { data, isError } = useQuery<ContentType[], Error>({ queryKey: ['contents'], queryFn: () => getContents(tg.access_token) });
   
   if (data) {
     return (

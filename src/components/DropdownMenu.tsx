@@ -6,7 +6,7 @@ import RenameContentDialog from './dialogs/RenameContentDialog';
 import { deleteContent } from '../services/api/apiService';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import CardOptionsDialog from './dialogs/CardOptionsDialog';
-import useInitData from '../queries/queries';
+import { useTelegramContext } from '../providers/TelegramContext';
 
 interface DropdownMenuProps {
   content: ContentType;
@@ -15,10 +15,11 @@ interface DropdownMenuProps {
 const DropdownMenu: React.FC<DropdownMenuProps> = ({ content }) => {
   const { closeDropdown } = useDropdown(content.id);
   const [isEditing, setIsEditing] = useState(false);
-  const {token} = useInitData();
+  const { tg } = useTelegramContext();
+  if (!tg) return <div>Loading</div>
   const queryClient = useQueryClient();
   const deleteMutation = useMutation({
-    mutationFn: () => deleteContent(token.access_token, content.id),
+    mutationFn: () => deleteContent(tg.access_token, content.id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['contents', content.user_id] })
       closeDropdown()

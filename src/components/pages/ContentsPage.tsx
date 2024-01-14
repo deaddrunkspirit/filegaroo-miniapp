@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import ContentList from '../ContentList';
 import ContentsPageHeader from '../headers/ContentsPageHeader';
 import Placeholder from '../../components/placeholders/Placeholder';
-import useInitData from '../../queries/queries';
+import { useTelegramContext } from '../../providers/TelegramContext';
 
 
 const ContentsPage: React.FC = () => {
@@ -14,8 +14,14 @@ const ContentsPage: React.FC = () => {
     const parentContentId: number | null = parent_content_id ? parseInt(parent_content_id) : null
     console.log(`params: ${ parent_content_id} ${title}`)
     console.log(title)
-    const {token} = useInitData()
-    const {data, isError, isPending} = useQuery<ContentType[], Error>({queryKey: ['contents', parentContentId], queryFn: () => getContents(token.access_token, parentContentId)});
+    const { tg } = useTelegramContext();
+    
+    if (!tg) return <div>Loading</div>
+
+    const {data, isError, isPending} = useQuery<ContentType[], Error>({
+            queryKey: ['contents', parentContentId], 
+            queryFn: () => getContents(tg.access_token, parentContentId)
+        });
     console.log(data)
 
     if (isPending) return <Placeholder text='Loading . . .'/>

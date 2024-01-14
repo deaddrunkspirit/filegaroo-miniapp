@@ -1,7 +1,6 @@
 import { addFolder } from "../../services/api/apiService";
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useTelegramContext } from "../../providers/ThemeContext";
-import useInitData from "../../queries/queries";
+import { useTelegramContext } from "../../providers/TelegramContext";
 
 interface AddFolderProps {
     user_id: number,
@@ -12,11 +11,13 @@ interface AddFolderProps {
 const AddFolder: React.FC<AddFolderProps> = ({ user_id, parent_content_id }) => {
 
     const queryClient = useQueryClient();
-    const { colorScheme } = useTelegramContext();
-    const { token } = useInitData()
-    const icon_path = process.env.PUBLIC_URL + `/icons/add-folder-icon-${colorScheme === 'dark' ? 'dark' : 'light'}.svg`
+    const { colorScheme, tg } = useTelegramContext();
+    const icon_path = import.meta.env.PUBLIC_URL + `/icons/add-folder-icon-${colorScheme === 'dark' ? 'dark' : 'light'}.svg`
+    
+    if (!tg) return <div>Loading</div>
+    
     const mutation = useMutation({
-        mutationFn: () => addFolder(token.access_token, parent_content_id),
+        mutationFn: () => addFolder(tg.access_token, tg.init_data.user.id, parent_content_id),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['contents', user_id] });
         },

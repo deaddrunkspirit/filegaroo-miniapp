@@ -1,4 +1,4 @@
-import { useTelegramContext as useThemeContext } from '../../providers/ThemeContext';
+import { useTelegramContext as useThemeContext } from '../../providers/TelegramContext';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';

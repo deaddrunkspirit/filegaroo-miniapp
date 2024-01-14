@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { renameContent } from "../../services/api/apiService";
 import { ContentType } from "../../types/content";
-import useInitData from "../../queries/queries";
+import { useTelegramContext } from "../../providers/TelegramContext";
 
 interface RenameContentDialogProps {
     onEnd: () => void;
@@ -11,9 +11,11 @@ interface RenameContentDialogProps {
 
 const RenameContentDialog: React.FC<RenameContentDialogProps> = ({onEnd, content}) => {
     const [newName, setNewName] = useState<string>('');
-    const { token } = useInitData();
+    const { tg } = useTelegramContext();
+    if (!tg) return <div>Loading</div>
+
     const handleSave = () => {
-        renameContent(token.access_token, content, newName)
+        renameContent(tg.access_token, content, newName)
         onEnd()
     }
 
