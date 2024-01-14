@@ -4,7 +4,7 @@ import { ContentType } from '../../types/content';
 
 
 const api: AxiosInstance = axios.create({
-  baseURL: import.meta.env.API_BASE_URL,
+  baseURL: import.meta.env.VITE_API_URL,
   headers: {
     'ngrok-skip-browser-warning': 'true',
     'Content-Type': 'application/json',
@@ -13,9 +13,10 @@ const api: AxiosInstance = axios.create({
 
 export async function authUser(initData: string) {
     const response = await api.post(`/users/auth`, {
-      grant_type: "telegram",
+      grant_type: "password",
       initData: initData
     })
+    console.log(response.data)
     return response.data;
 }
 
@@ -24,11 +25,13 @@ export async function getContents(token: string, parent_content_id?: number | nu
   if (parent_content_id) {
     url += `/${parent_content_id}`;
   }
+  
   const response = await api.get(url, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
+  console.log(response)
   return response.data;
 }
 

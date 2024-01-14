@@ -12,10 +12,9 @@ interface RenameContentDialogProps {
 const RenameContentDialog: React.FC<RenameContentDialogProps> = ({onEnd, content}) => {
     const [newName, setNewName] = useState<string>('');
     const { tg } = useTelegramContext();
-    if (!tg) return <div>Loading</div>
 
     const handleSave = () => {
-        renameContent(tg.access_token, content, newName)
+        renameContent(tg!.access_token, content, newName)
         onEnd()
     }
 

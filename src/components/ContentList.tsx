@@ -2,8 +2,7 @@ import React from 'react';
 import { ContentType } from '../types/content';
 import ContentCard from './cards/ContentCard';
 import AddFolder from './cards/AddFolder';
-import { UserProps } from '../types/user';
-import Placeholder from './placeholders/Placeholder';
+import { useTelegramContext } from '../providers/TelegramContext';
 
 interface ContentListProps {
   data: ContentType[];
@@ -11,12 +10,8 @@ interface ContentListProps {
 }
 
 const ContentList: React.FC<ContentListProps> = ({ data, parent_id }) => {
-  const userString = sessionStorage.getItem('user');
-  const user: UserProps | null = userString ? JSON.parse(userString) : null;
-  console.log(user)
-  console.log(parent_id)
-  if (user === null) return <Placeholder text='Error: no user id fetched'/>
-
+  const { tg } = useTelegramContext()
+  
   const sortedData = data.sort((a, b) => {
     // First, prioritize type=2 (folders)
     if (a.type === 2 && b.type !== 2) {
@@ -34,7 +29,7 @@ const ContentList: React.FC<ContentListProps> = ({ data, parent_id }) => {
       {sortedData.map((content) => (
         <ContentCard key={content.id} content={content} />
       ))}
-      <AddFolder user_id={user.id} parent_content_id={parent_id} />
+      <AddFolder user_id={tg!.init_data.user.id} parent_content_id={parent_id} />
     </div>
   );
 

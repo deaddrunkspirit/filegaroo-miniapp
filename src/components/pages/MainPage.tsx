@@ -10,9 +10,12 @@ import { useTelegramContext } from '../../providers/TelegramContext';
 
 const MainPage: React.FC = () => {
   const { tg } = useTelegramContext();
-    if (!tg) return <div>Loading</div>
-  const { data, isError } = useQuery<ContentType[], Error>({ queryKey: ['contents'], queryFn: () => getContents(tg.access_token) });
-  
+  console.log(tg)
+  const { data, isError } = useQuery<ContentType[], Error>({ 
+      queryKey: ['contents'], 
+      queryFn: () => getContents(tg!.access_token) 
+    });
+  console.log(data)
   if (data) {
     return (
       <div className='relative flex flex-col justify-start h-full min-h-dvh gap-4 m-0 p-4 bg-light-primary text-light-onprimary dark:bg-dark-primary dark:text-dark-onprimary'>

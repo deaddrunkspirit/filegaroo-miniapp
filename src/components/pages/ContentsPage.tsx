@@ -15,12 +15,10 @@ const ContentsPage: React.FC = () => {
     console.log(`params: ${ parent_content_id} ${title}`)
     console.log(title)
     const { tg } = useTelegramContext();
-    
-    if (!tg) return <div>Loading</div>
 
     const {data, isError, isPending} = useQuery<ContentType[], Error>({
             queryKey: ['contents', parentContentId], 
-            queryFn: () => getContents(tg.access_token, parentContentId)
+            queryFn: () => getContents(tg!.access_token, parentContentId)
         });
     console.log(data)
 

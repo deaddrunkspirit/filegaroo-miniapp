@@ -1,5 +1,6 @@
 // import { useTelegramContext } from 'providers/TelegramContext';
 import React from 'react';
+// import { getIcon } from '../../services/imageService';
 // import { NavLink } from 'react-router-dom';
 
 const MainPageHeader: React.FC = () => {
@@ -10,10 +11,10 @@ const MainPageHeader: React.FC = () => {
       <h1 className=' text-lg h-10 text-light-onprimary dark:text-dark-onprimary'>Главная</h1>
       <div className='grow' />
       {/* <NavLink to="/settings" end>
-        <img className="w-6 h-6 m-0" src={`/icons/settings-icon-${colorScheme}.png`} alt="Home" />
+        <img className="w-6 h-6 m-0" src={getIcon('settings', colorScheme!)} alt="Settings" />
       </NavLink>
       <NavLink to="/faq" end>
-        <img className="w-6 h-6 m-0" src={`/icons/faq-icon-${colorScheme}.png`} alt="Home" />
+        <img className="w-6 h-6 m-0" src={getIcon('faq', colorScheme!)} alt="FAQ" />
       </NavLink> */}
     </div>
   );

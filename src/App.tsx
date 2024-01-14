@@ -24,29 +24,22 @@ function App() {
   }
 
   const queryClient = new QueryClient()
-
-  useEffect(
-    () => {
-
-      queryClient.fetchQuery({ 
-        queryKey: ['initData'], 
-        queryFn: async () => { 
-          const res = await authUser(webApp.initData) 
-          setInitData(res)
-          return res
-        } 
-      })
-      
-    }, []
-  )
+  console.log(import.meta.env.VITE_API_URL)
+  useEffect(() => {
+      const doAuth = async () => {
+        const res = await authUser(webApp.initData) 
+        setInitData(res)
+      }
+    doAuth().catch(console.error)   
+  }, [])
   
+  if (!init_data) return <div>LLLOoo</div>
   window.Telegram.WebApp.ready()
-
 
   return (
     <BrowserRouter>
-      <TelegramProvider colorScheme={colorScheme} tg={init_data} >
-        <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        <TelegramProvider colorScheme={colorScheme} tg={init_data} >
           <DropdownProvider>
             <Routes>
               <Route path='/' element={<MainPage />} />
@@ -55,8 +48,8 @@ function App() {
               <Route path='/:title/:parent_content_id' element={<ContentsPage />} />
             </Routes>
           </DropdownProvider>
-        </QueryClientProvider>
-      </TelegramProvider>
+        </TelegramProvider>
+      </QueryClientProvider>
     </BrowserRouter>
   );
 }
