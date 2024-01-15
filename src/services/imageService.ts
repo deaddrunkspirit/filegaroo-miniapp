@@ -7,8 +7,8 @@ import ImageIcon from '../assets/content-icons/image-icon.svg';
 import VideoIcon from '../assets/content-icons/video-icon.svg';
 import VoiceMessageIcon from '../assets/content-icons/voice-message-icon.svg';
 
-import HomeIconDark from '../assets/control-icons/dark/home-icon-dark.png';
-import HomeIconLight from '../assets/control-icons/light/home-icon-light.png';
+import HomeIconDark from '../assets/control-icons/dark/home-icon-dark.svg';
+import HomeIconLight from '../assets/control-icons/light/home-icon-light.svg';
 import SettingsIconDark from '../assets/control-icons/dark/settings-icon-dark.png'
 import SettingsIconLight from '../assets/control-icons/light/settings-icon-light.png'
 import AddFolderIconDark from '../assets/control-icons/dark/add-folder-icon-dark.svg';

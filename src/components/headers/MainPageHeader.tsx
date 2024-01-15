@@ -7,7 +7,7 @@ const MainPageHeader: React.FC = () => {
   // const { colorScheme } = useTelegramContext();
 
   return (
-    <div className="flex flex-row items-center p-2 gap-2">
+    <div className="flex flex-row items-center self-start p-2 gap-2">
       <h1 className=' text-lg h-10 text-light-onprimary dark:text-dark-onprimary'>Главная</h1>
       <div className='grow' />
       {/* <NavLink to="/settings" end>
