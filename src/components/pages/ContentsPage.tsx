@@ -22,11 +22,11 @@ const ContentsPage: React.FC = () => {
         });
     console.log(data)
 
-    if (isPending) return <Placeholder text='Loading . . .'/>
-    if (isError) return <Placeholder text='Error fetching data'/>
+    if (isPending) return <Placeholder />
+    if (isError) return <Placeholder />
 
     return (
-        <div className='relative flex flex-col justify-start items-center gap-4 m-0 p-4 h-full min-h-dvh bg-light-primary text-light-onprimary dark:bg-dark-primary dark:text-dark-onprimary'>
+        <div className='relative flex flex-col justify-start items-center gap-2 m-0 p-4 h-full min-h-dvh bg-light-primary text-light-onprimary dark:bg-dark-primary dark:text-dark-onprimary'>
             <ContentsPageHeader title={title ? title : ''} />
             <ContentList data={data!!} parent_id={parentContentId}></ContentList>
         </div>

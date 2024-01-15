@@ -23,7 +23,7 @@ const RenameContentDialog: React.FC<RenameContentDialogProps> = ({onEnd, content
     }
     
     return (
-        <div className="m-0 flex w-52 flex-col items-center justify-center space-y-4 rounded-3xl bg-light-primary dark:bg-dark-secondary p-4">
+        <div className="m-0 flex w-52 ml-20 flex-col items-center justify-center space-y-4 rounded-3xl bg-light-primary dark:bg-dark-secondary p-4">
             <div className=" relative h-11 w-full">
                 <input placeholder="Новое название" value={newName} onChange={(e) => setNewName(e.target.value)} 
                         className="border-color_input text-light-onprimary dark:text-dark-onprimary dark:placeholder-shown:border-dark-onsecondary dark:disabled:bg-dark-primary 

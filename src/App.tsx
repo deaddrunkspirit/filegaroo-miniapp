@@ -11,6 +11,7 @@ import {
 import { TelegramProvider } from './providers/TelegramContext';
 import { authUser } from './services/api/apiService';
 import { useEffect, useState } from 'react';
+import Placeholder from './components/placeholders/Placeholder';
 
 declare const window: any;
 
@@ -36,7 +37,7 @@ function App() {
     doAuth().catch(console.error)   
   }, [])
   
-  if (!init_data) return <div>LLLOoo</div>
+  if (!init_data) return <Placeholder/>
   window.Telegram.WebApp.ready()
 
   return (

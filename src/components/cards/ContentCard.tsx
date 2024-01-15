@@ -49,7 +49,7 @@ const ContentCard: React.FC<ContentCardProps> = ({ content }) => {
             </div>
             <p className="grow break-all text-md leading-4 line-clamp-2 text-ellipsis overflow-hidden ...">{content.title}</p>
             <div className="absolute w-12 h-12 p-4 top-0 right-0 rounded-md" onClick={handleDropdown}>
-                <img src={getIcon('dropdown', colorScheme!)} alt=". . ."/>
+                <img src={getIcon('dropdown', colorScheme!)} alt="..."/>
             </div>
             {isOpen && <DropdownMenu content={content} />}
         </div> 
