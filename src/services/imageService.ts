@@ -49,29 +49,30 @@ export const getContentImage = (content: ContentType) => {
       return imageMapping[index] || 'default_icon.svg';
 };
 
+const iconMapping: { [key: string]: { [key: string]: string } }  = {
+  'light': {
+    'faq': FAQIconLight,
+    'settings': SettingsIconLight,
+    'delete': DeleteLight,
+    'edit': EditIconLight,
+    'back': BackIconLight,
+    'add-folder': AddFolderIconLight,
+    'home': HomeIconLight,
+    'dropdown': DropdownIconLight,
+  },
+  'dark': {
+    'faq': FAQIconDark,
+    'settings': SettingsIconDark,
+    'delete': DeleteDark,
+    'edit': EditIconDark,
+    'back': BackIconDark,
+    'add-folder': AddFolderIconDark,
+    'home': HomeIconDark,
+    'dropdown': DropdownIconDark,
+  }
+} 
+
 export const getIcon = (name: string, theme: string): string => {
-  const iconMapping: { [key: string]: { [key: string]: string } }  = {
-    'light': {
-      'faq': FAQIconLight,
-      'settings': SettingsIconLight,
-      'delete': DeleteLight,
-      'edit': EditIconLight,
-      'back': BackIconLight,
-      'add-folder': AddFolderIconLight,
-      'home': HomeIconLight,
-      'dropdown': DropdownIconLight,
-    },
-    'dark': {
-      'faq': FAQIconDark,
-      'settings': SettingsIconDark,
-      'delete': DeleteDark,
-      'edit': EditIconDark,
-      'back': BackIconDark,
-      'add-folder': AddFolderIconDark,
-      'home': HomeIconDark,
-      'dropdown': DropdownIconDark,
-    }
-  } 
   return iconMapping[theme][name];
 }
  
