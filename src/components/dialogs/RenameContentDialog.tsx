@@ -2,6 +2,7 @@ import { useState } from "react";
 import { renameContent } from "../../services/api/apiService";
 import { ContentType } from "../../types/content";
 import { useTelegramContext } from "../../providers/TelegramContext";
+import getLocalizationString from "../../services/languageService";
 
 interface RenameContentDialogProps {
     onEnd: () => void;
@@ -11,7 +12,7 @@ interface RenameContentDialogProps {
 
 const RenameContentDialog: React.FC<RenameContentDialogProps> = ({onEnd, content}) => {
     const [newName, setNewName] = useState<string>('');
-    const { tg } = useTelegramContext();
+    const { tg, lang } = useTelegramContext();
 
     const handleSave = () => {
         renameContent(tg!.access_token, content, newName)
@@ -25,7 +26,7 @@ const RenameContentDialog: React.FC<RenameContentDialogProps> = ({onEnd, content
     return (
         <div className="m-0 flex w-52 ml-20 flex-col items-center justify-center space-y-4 rounded-3xl bg-light-primary dark:bg-dark-secondary p-4">
             <div className=" relative h-11 w-full">
-                <input placeholder="Новое название" value={newName} onChange={(e) => setNewName(e.target.value)} 
+                <input placeholder={getLocalizationString(lang!, 'new-name')} value={newName} onChange={(e) => setNewName(e.target.value)} 
                         className="border-color_input text-light-onprimary dark:text-dark-onprimary dark:placeholder-shown:border-dark-onsecondary dark:disabled:bg-dark-primary 
                                     placeholder-shown:border-light-onsecondary disabled:bg-light-primary 
                                     peer h-full w-full border-b bg-transparent pb-1.5 pt-4 font-sans text-md font-normal outline outline-0 transition-all 
@@ -41,11 +42,11 @@ const RenameContentDialog: React.FC<RenameContentDialogProps> = ({onEnd, content
                                 after:transition-transform after:duration-300 peer-placeholder-shown:text-md peer-placeholder-shown:leading-[4.25] 
                                 peer-focus:text-md peer-focus:leading-tight peer-focus:after:scale-x-100 peer-disabled:text-transparent
                                 peer-focus:text-light-onprimary dark:peer-focus:text-dark-onsecondary 
-                                peer-focus:after:border-light-500 dark:peer-focus:after:border-dark-primary"> Переименовать </label>
+                                peer-focus:after:border-light-500 dark:peer-focus:after:border-dark-primary">{getLocalizationString(lang!, 'rename')}</label>
             </div>
             <div className="flex w-full justify-between m-0">
-                <p className='text-lg text-light-onprimary dark:text-dark-onsecondary' onClick={handleSave}>Сохранить</p>
-                <p className='text-lg text-light-onprimary dark:text-dark-onsecondary' onClick={handleCancel}>Отменить</p>
+                <p className='text-lg text-light-onprimary dark:text-dark-onsecondary' onClick={handleSave}>{getLocalizationString(lang!, 'save')}</p>
+                <p className='text-lg text-light-onprimary dark:text-dark-onsecondary' onClick={handleCancel}>{getLocalizationString(lang!, 'cancel')}</p>
             </div>
         </div>
     );

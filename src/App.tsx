@@ -43,7 +43,7 @@ function App() {
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <TelegramProvider colorScheme={colorScheme} tg={init_data} >
+        <TelegramProvider colorScheme={colorScheme} tg={init_data} lang='ru' >
           <DropdownProvider>
             <Routes>
               <Route path='/' element={<MainPage />} />
