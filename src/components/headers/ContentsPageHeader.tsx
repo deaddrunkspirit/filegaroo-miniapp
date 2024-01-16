@@ -15,6 +15,7 @@ const ContentsPageHeader: React.FC<ContentsPageHeaderProps> = ({title }) => {
   const handleBackButton = () => {
     navigate(-1);
   }
+  
   return (
     <div className="flex flex-row self-start items-center p-4 gap-4">
       <NavLink className='min-w-6 min-h-6' to="/">
