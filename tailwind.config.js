@@ -8,26 +8,26 @@ module.exports = {
     extend: {
       colors: {
         light: {
-          primary: '#fffcfc',
+          primary: '#F0EFEA',
           secondary: '#4d5968',
           onprimary: '#171a21',
-          onsecondary: '#fffcfc',
+          onsecondary: '#F0EFEA',
         },
         dark: {
           primary: '#171a21',
           secondary: '#20232c',
-          onprimary: '#fffcfc',
-          onsecondary: '#fffcfc',
+          onprimary: '#F0EFEA',
+          onsecondary: '#F0EFEA',
         },
         color_input: '#f0f0ed',
         color_alert: '#e91414',
         color_orange: '#ffbb2d',
       },
       fontSize: {
-        'xs': '0.5rem',
-        'sm': '0.625rem',
-        'md': '0.75rem',
-        'lg': '1rem',
+        'xs': '.375rem',
+        'sm': '3.5vw',
+        'md': '4.25vw',
+        'lg': '5.5vw',
       },
       fontFamily: {
         'sf-pro-text': ['SF Pro Text', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif'],

@@ -9,18 +9,18 @@ import VoiceMessageIcon from '../assets/content-icons/voice-message-icon.svg';
 
 import HomeIconDark from '../assets/control-icons/dark/home-icon-dark.svg';
 import HomeIconLight from '../assets/control-icons/light/home-icon-light.svg';
-import SettingsIconDark from '../assets/control-icons/dark/settings-icon-dark.png'
-import SettingsIconLight from '../assets/control-icons/light/settings-icon-light.png'
+import SettingsIconDark from '../assets/control-icons/dark/settings-icon-dark.svg'
+import SettingsIconLight from '../assets/control-icons/light/settings-icon-light.svg'
 import AddFolderIconDark from '../assets/control-icons/dark/add-folder-icon-dark.svg';
 import AddFolderIconLight from '../assets/control-icons/light/add-folder-icon-light.svg';
 import BackIconDark from '../assets/control-icons/dark/back-icon-dark.svg';
 import BackIconLight from '../assets/control-icons/light/back-icon-light.svg';
-import EditIconDark from '../assets/control-icons/dark/edit-icon-dark.png';
-import EditIconLight from '../assets/control-icons/light/edit-icon-light.png';
-import DeleteDark from '../assets/control-icons/dark/delete-icon-dark.png';
-import DeleteLight from '../assets/control-icons/light/delete-icon-light.png';
-import FAQIconDark from '../assets/control-icons/dark/faq-icon-dark.png';
-import FAQIconLight from '../assets/control-icons/light/faq-icon-light.png';
+import EditIconDark from '../assets/control-icons/dark/edit-icon-dark.svg';
+import EditIconLight from '../assets/control-icons/light/edit-icon-light.svg';
+import DeleteDark from '../assets/control-icons/dark/delete-icon-dark.svg';
+import DeleteLight from '../assets/control-icons/light/delete-icon-light.svg';
+import FAQIconDark from '../assets/control-icons/dark/faq-icon-dark.svg';
+import FAQIconLight from '../assets/control-icons/light/faq-icon-light.svg';
 import DropdownIconDark from '../assets/control-icons/dark/dropdown-icon-dark.svg';
 import DropdownIconLight from '../assets/control-icons/light/dropdown-icon-light.svg';
 

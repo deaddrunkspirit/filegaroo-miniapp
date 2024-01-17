@@ -42,13 +42,15 @@ const ContentCard: React.FC<ContentCardProps> = ({ content }) => {
 
     return (
         <div onClick={content.type === 2 ? handleFolderClick : handleMessageClick} 
-                className='relative flex flex-col items-center justify-start pt-3 pb-2 px-4 gap-2 w-[40vw] max-w-40 h-28 rounded-3xl shadow-2xl bg-light-secondary text-light-onsecondary  dark:bg-dark-secondary dark:text-dark-onsecondary m-0' 
+                className='shadow-md shadow-gray-300 dark:shadow-black relative flex flex-col gap-[2vw] items-center justify-center w-[39vw] h-[31vw] px-[3.8vw] pb-[2.56vw] pt-[5.475vw] rounded-3xl dark:drop-shadow-xl bg-light-secondary text-light-onsecondary  dark:bg-dark-secondary dark:text-dark-onsecondary m-0' 
             >
-            <div className="flex items-center min-h-18 justify-center">
-                <img className='' src={getContentImage(content)} alt="Content Icon" />
+            <div className="flex items-center w-[22vw] h-[13.5vw] justify-center">
+                <img className='h-full w-full' src={getContentImage(content)} alt="Content Icon" />
             </div>
-            <p className="grow break-all text-md leading-4 line-clamp-2 text-ellipsis overflow-hidden ...">{content.title}</p>
-            <div className="absolute w-12 h-12 p-4 top-0 right-0 rounded-md" onClick={handleDropdown}>
+            <p className='flex grow break-all h-[7.2vw] text-sm leading-[3.70vw] line-clamp-2 text-ellipsis overflow-hidden ...'>
+                {content.title}
+            </p>
+            <div className="absolute dark:absolute flex items-center justify-center w-[12vw] h-[7vw] top-0 right-0 rounded-md" onClick={handleDropdown}>
                 <img src={getIcon('dropdown', colorScheme!)} alt="..."/>
             </div>
             {isOpen && <DropdownMenu content={content} />}

@@ -42,7 +42,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ content }) => {
   }, [closeDropdown, content.id]);
 
   return (
-    <div className='fixed w-full h-[135%] top-1/3 left-1/2 origin-center transition -translate-x-1/2 -translate-y-1/2 flex items-center justify-center flex-col m-0 space-y-4 z-10 backdrop-blur-sm backdrop-brightness-50 animate-appear'>
+    <div className='fixed w-full h-[125vh] top-1/3 left-1/2 origin-center transition -translate-x-1/2 -translate-y-1/2 flex items-center justify-center flex-col m-0 space-y-4 z-20 backdrop-blur-sm backdrop-brightness-50 animate-appear'>
       <ContentCardNoDropdown content={content} />
 
       {isEditing ? 
