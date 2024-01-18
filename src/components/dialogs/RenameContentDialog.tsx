@@ -30,7 +30,7 @@ const RenameContentDialog: React.FC<RenameContentDialogProps> = ({onEnd, content
                         className="border-color_input text-light-onprimary dark:text-dark-onprimary dark:placeholder-shown:border-dark-onsecondary dark:disabled:bg-dark-primary 
                                     placeholder-shown:border-light-onsecondary disabled:bg-light-primary 
                                     peer h-full w-full border-b bg-transparent pb-1.5 pt-4 font-sans text-sm font-normal outline outline-0 transition-all 
-                                    placeholder:opacity-0 focus:border-dark-primary focus:outline-0 focus:placeholder:opacity-100 disabled:border-0" />
+                                    placeholder:opacity-0 focus:border-dark-primary focus:outline-0 focus:placeholder:opacity-100 disabled:border-0" autoFocus={true} />
                 <label className="after:content[''] 
                                 peer-placeholder-shown:text-light-onprimary peer-disabled:peer-placeholder-shown:text-light-onprimary
                                 dark:peer-placeholder-shown:text-dark-onprimary dark:peer-disabled:peer-placeholder-shown:text-light-onprimary

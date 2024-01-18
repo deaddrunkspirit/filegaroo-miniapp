@@ -35,6 +35,7 @@ module.exports = {
     },
   },
   plugins: [
+    require('@tailwindcss/line-clamp'),
     function ({ addBase, theme }) {
       addBase({
         'body': {
