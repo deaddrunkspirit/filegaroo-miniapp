@@ -8,7 +8,7 @@ const MainPageHeader: React.FC = () => {
   const { lang } = useTelegramContext();
 
   return (
-    <div className="flex flex-row self-start h-[18.5vw] pl-[8vw] pt-[6.39vw] pr-[7.22vw] pb-[5.56vw] gap-[4.72vw]">
+    <div className="flex flex-row self-start w-full h-[18.5vw] pl-[8vw] pt-[6.39vw] pr-[7.22vw] pb-[5.56vw] gap-[4.72vw] bg-light-primary text-light-onprimary dark:bg-dark-primary dark:text-dark-onprimary">
       <h1 className='text-lg text-light-onprimary dark:text-dark-onprimary'>{getLocalizationString(lang!, 'main-page-name')}</h1>
       <div className='grow' />
       {/* <NavLink to="/settings" end>

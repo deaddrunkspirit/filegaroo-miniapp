@@ -17,7 +17,7 @@ const ContentsPageHeader: React.FC<ContentsPageHeaderProps> = ({title }) => {
   }
   
   return (
-    <div className="flex flex-row justify-center items-center pt-[3.61vw] pb-[2.9vw] px-[8vw] h-[18.5vw] gap-[5.56vw]">
+    <div className="flex flex-row  justify-center items-center pt-[3.61vw] pb-[2.9vw] px-[8vw] h-[18.5vw] gap-[5.56vw] bg-light-primary text-light-onprimary dark:bg-dark-primary dark:text-dark-onprimary">
       <NavLink className='h-[6.11vw] w-[6.11vw]' to="/">
         <img className="h-full w-full" src={getIcon('home', colorScheme!)} alt="Home" />
       </NavLink>
