@@ -11,7 +11,7 @@ const ContentCardNoDropdown: React.FC<ContentCardNoDropdownProps> = ({ content }
             <div className="w-[29.72vw] h-[18.06vw]">
                 <img className="max-w-full max-h-full h-auto" src={getContentImage(content)} alt="Content Icon" />
             </div>
-            <p className="flex justify-center h-[8.06vw] w-[32.22vw] break-all text-sm leading-[4vw] line-clamp-2 text-ellipsis overflow-hidden ...">{content.title}</p>
+            <p className="flex justify-center h-[8.06vw] w-[32.22vw] break-all text-sm  line-clamp-2 text-ellipsis overflow-hidden ...">{content.title}</p>
         </div>
       );
 };
