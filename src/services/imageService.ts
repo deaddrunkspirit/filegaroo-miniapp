@@ -11,8 +11,8 @@ import HomeIconDark from '../assets/control-icons/dark/home-icon-dark.svg';
 import HomeIconLight from '../assets/control-icons/light/home-icon-light.svg';
 import SettingsIconDark from '../assets/control-icons/dark/settings-icon-dark.svg'
 import SettingsIconLight from '../assets/control-icons/light/settings-icon-light.svg'
-import AddFolderIconDark from '../assets/control-icons/dark/add-folder-icon-dark.svg';
-import AddFolderIconLight from '../assets/control-icons/light/add-folder-icon-light.svg';
+import AddFolderIconDark from '../assets/control-icons/dark/add-folder-icon-dark.png';
+import AddFolderIconLight from '../assets/control-icons/light/add-folder-icon-light.png';
 import BackIconDark from '../assets/control-icons/dark/back-icon-dark.svg';
 import BackIconLight from '../assets/control-icons/light/back-icon-light.svg';
 import EditIconDark from '../assets/control-icons/dark/edit-icon-dark.svg';
