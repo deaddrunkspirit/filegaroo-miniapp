@@ -1,11 +1,11 @@
 import { ContentType } from "../types/content";
-import FolderIcon from '../assets/content-icons/folder-icon.svg';
-import TextIcon from '../assets/content-icons/text-icon.svg';
-import AudioIcon from '../assets/content-icons/audio-icon.svg';
-import FileIcon from '../assets/content-icons/file-icon.svg';
-import ImageIcon from '../assets/content-icons/image-icon.svg';
-import VideoIcon from '../assets/content-icons/video-icon.svg';
-import VoiceMessageIcon from '../assets/content-icons/voice-message-icon.svg';
+import FolderIcon from '../assets/content-icons/folder-icon.png';
+import TextIcon from '../assets/content-icons/text-icon.png';
+import AudioIcon from '../assets/content-icons/audio-icon.png';
+import FileIcon from '../assets/content-icons/file-icon.png';
+import ImageIcon from '../assets/content-icons/image-icon.png';
+import VideoIcon from '../assets/content-icons/video-icon.png';
+import VoiceMessageIcon from '../assets/content-icons/voice-message-icon.png';
 
 import HomeIconDark from '../assets/control-icons/dark/home-icon-dark.svg';
 import HomeIconLight from '../assets/control-icons/light/home-icon-light.svg';
