@@ -27,10 +27,12 @@ const AddFolder: React.FC<AddFolderProps> = ({ parent_content_id }) => {
     };
 
     return (
-        <div className="relative flex flex-col items-center py-4 gap-2 h-28 w-[40vw] max-w-40 rounded-3xl shadow-2xl
+        <div className="relative flex flex-col items-center justify-center py-[7.75vw] px-[8.9vw] w-[39vw] h-[31vw] rounded-3xl shadow-lg shadow-gray-400 dark:shadow-black
                  bg-light-secondary text-light-onsecondary dark:bg-dark-secondary dark:text-dark-onsecondary m-0"
             onClick={handleClick}>
-            <img className="w-7/12" src={icon_path} alt="Content Icon" />
+            <div className="w-[21vw] h-[15.4vw]">
+                <img className="h-full w-full" src={icon_path} alt="Content Icon" />
+            </div>
         </div>
     );
 };

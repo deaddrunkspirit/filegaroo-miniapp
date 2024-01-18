@@ -17,14 +17,15 @@ const ContentsPageHeader: React.FC<ContentsPageHeaderProps> = ({title }) => {
   }
   
   return (
-    <div className="flex flex-row self-start items-center p-4 gap-4">
-      <NavLink className='min-w-6 min-h-6' to="/">
-        <img className="w-6 h-6 m-0" src={getIcon('home', colorScheme!)} alt="Home" />
+    <div className="flex flex-row justify-center items-center pt-[3.61vw] pb-[2.9vw] px-[8vw] h-[18.5vw] gap-[5.56vw]">
+      <NavLink className='h-[6.11vw] w-[6.11vw]' to="/">
+        <img className="h-full w-full" src={getIcon('home', colorScheme!)} alt="Home" />
       </NavLink>
-      <button className='min-w-6 min-h-6' onClick={handleBackButton}>
-        <img className="w-6 h-6 m-0" src={getIcon('back', colorScheme!)} alt="Back" />
+      <button className='h-[6.11vw] w-[6.11vw]' onClick={handleBackButton}>
+        <img className="h-full w-full" src={getIcon('back', colorScheme!)} alt="Back" />
       </button>
-      <h1 className='text-lg text-light-onprimary dark:text-dark-onprimary break-all leading-6 line-clamp-2 text-ellipsis overflow-hidden ...'>{title}</h1>
+      <h1 className='flex text-lg w-[59.72vw] h-[12vw] text-light-onprimary dark:text-dark-onprimary break-all leading-[5.7vw] line-clamp-2 text-ellipsis overflow-hidden ...'>
+        {title}</h1>
     </div>
   );
 }

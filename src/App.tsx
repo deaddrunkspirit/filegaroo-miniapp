@@ -39,7 +39,7 @@ function App() {
   
   if (!init_data) return <Placeholder/>
   window.Telegram.WebApp.ready()
-
+  
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
