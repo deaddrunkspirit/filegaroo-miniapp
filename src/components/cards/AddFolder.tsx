@@ -31,7 +31,7 @@ const AddFolder: React.FC<AddFolderProps> = ({ parent_content_id }) => {
                  bg-light-secondary text-light-onsecondary dark:bg-dark-secondary dark:text-dark-onsecondary m-0"
             onClick={handleClick}>
             <div className="w-[21vw] h-[15.4vw]">
-                <img className="w-full h-auto" src={icon_path} alt="Content Icon" />
+                <img className=" object-cover" src={icon_path} alt="Content Icon" />
             </div>
         </div>
     );
