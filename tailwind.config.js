@@ -15,7 +15,7 @@ module.exports = {
         },
         dark: {
           primary: '#171a21',
-          secondary: '#20232c',
+          secondary: '#22242E',
           onprimary: '#F0EFEA',
           onsecondary: '#F0EFEA',
         },
@@ -24,13 +24,13 @@ module.exports = {
         color_orange: '#ffbb2d',
       },
       fontSize: {
-        'xs': '.375rem',
+        'xs': '2.75vw',
         'sm': '3.5vw',
         'md': '4.25vw',
-        'lg': '5.5vw',
+        'lg': '5vw',
       },
       fontFamily: {
-        'sf-pro-text': ['SF Pro Text', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif'],
+        'sf-pro-text': ['SF Pro Text Medium', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif'],
       },
     },
   },

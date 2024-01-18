@@ -18,7 +18,7 @@ const MainPage: React.FC = () => {
   console.log(data)
   if (data) {
     return (
-      <div className='relative flex flex-col items-center h-full min-h-dvh m-0
+      <div className='flex flex-col items-center h-full min-h-dvh m-0
              bg-light-primary text-light-onprimary dark:bg-dark-primary dark:text-dark-onprimary'>
         <MainPageHeader />
         <ContentList data={data} parent_id={null} />

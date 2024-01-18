@@ -24,7 +24,7 @@ const RenameContentDialog: React.FC<RenameContentDialogProps> = ({onEnd, content
     }
     
     return (
-        <div className="m-0 flex-col items-center justify-center w-[55vw] h-[30vw] p-[4vw] ml-[25vw] space-y-[2vw] rounded-3xl bg-color_input dark:bg-dark-secondary bg-opacity-80 dark:bg-opacity-80">
+        <div className="z-[1000] relative m-0 flex-col items-center justify-center w-[55vw] h-[30vw] p-[4vw] ml-[25vw] space-y-[2vw] rounded-3xl bg-color_input dark:bg-dark-secondary bg-opacity-80 dark:bg-opacity-80">
             <div className=" relative h-11 w-full">
                 <input placeholder={getLocalizationString(lang!, 'new-name')} value={newName} onChange={(e) => setNewName(e.target.value)} 
                         className="border-color_input text-light-onprimary dark:text-dark-onprimary dark:placeholder-shown:border-dark-onsecondary dark:disabled:bg-dark-primary 

@@ -26,7 +26,7 @@ const ContentsPage: React.FC = () => {
     if (isError) return <Placeholder />
 
     return (
-        <div className='relative flex flex-col justify-start items-center m-0 h-full min-h-dvh bg-light-primary text-light-onprimary dark:bg-dark-primary dark:text-dark-onprimary'>
+        <div className='flex flex-col justify-start items-center m-0 h-full min-h-dvh bg-light-primary text-light-onprimary dark:bg-dark-primary dark:text-dark-onprimary'>
             <ContentsPageHeader title={title ? title : ''} />
             <ContentList data={data!!} parent_id={parentContentId}></ContentList>
         </div>

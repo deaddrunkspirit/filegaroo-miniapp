@@ -12,7 +12,7 @@ const CardOptionsDialog: React.FC<CardOptionDialogProps> = ({handleEdit, handleD
     const { colorScheme, lang } = useTelegramContext();
 
     return (
-        <div className='flex flex-col w-[49.44vw] h-[29.17] py-[4vw] ml-[25vw] space-y-[2vw] justify-around items-stretch bg-color_input dark:bg-dark-secondary bg-opacity-80 dark:bg-opacity-80 rounded-3xl shadow-xl' id={`dropdown-${content_id}`}>
+        <div className='z-[1000] relative flex flex-col w-[49.44vw] h-[29.17] py-[4vw] ml-[25vw] space-y-[2vw] justify-around items-stretch bg-color_input dark:bg-dark-secondary bg-opacity-80 dark:bg-opacity-80 rounded-3xl shadow-xl' id={`dropdown-${content_id}`}>
           <div className='flex flex-row items-center px-[4vw] gap-[4vw] justify-between' onClick={handleEdit}>
             <p className="flex text-md text-light-onprimary dark:text-dark-onsecondary">{getLocalizationString(lang!, 'rename')}</p>
             <img className='h-[5vw] w-[5vw]' src={getIcon('edit', colorScheme!)} alt='Edit' />

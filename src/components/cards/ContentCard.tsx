@@ -41,8 +41,9 @@ const ContentCard: React.FC<ContentCardProps> = ({ content }) => {
 
 
     return (
+        <>
         <div onClick={content.type === 2 ? handleFolderClick : handleMessageClick} 
-                className='shadow-md shadow-gray-300 dark:shadow-black relative flex flex-col gap-[2vw] items-center justify-center w-[39vw] h-[31vw] px-[3.8vw] pb-[2.56vw] pt-[5.475vw] rounded-3xl dark:drop-shadow-xl bg-light-secondary text-light-onsecondary  dark:bg-dark-secondary dark:text-dark-onsecondary m-0' 
+                className='relative z-20 flex flex-col gap-[2vw] items-center justify-center w-[39vw] h-[31vw] px-[3.8vw] pb-[2.56vw] pt-[5.475vw] rounded-3xl dark:drop-shadow-xl bg-light-secondary text-light-onsecondary  dark:bg-dark-secondary dark:text-dark-onsecondary m-0 shadow-lg shadow-gray-400 dark:shadow-black' 
             >
             <div className="flex items-center w-[22vw] h-[13.5vw] justify-center">
                 <img className='h-full w-full' src={getContentImage(content)} alt="Content Icon" />
@@ -53,8 +54,10 @@ const ContentCard: React.FC<ContentCardProps> = ({ content }) => {
             <div className="absolute dark:absolute flex items-center justify-center w-[12vw] h-[7vw] top-0 right-0 rounded-md" onClick={handleDropdown}>
                 <img src={getIcon('dropdown', colorScheme!)} alt="..."/>
             </div>
-            {isOpen && <DropdownMenu content={content} />}
         </div> 
+
+        {isOpen && <DropdownMenu content={content} />}
+        </>
       );
 };
 
