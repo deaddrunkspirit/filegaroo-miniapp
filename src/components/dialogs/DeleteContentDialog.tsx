@@ -37,7 +37,7 @@ const DeleteContentDialog: React.FC<DeleteContentDialogProps> = ({ onEnd, conten
       <div className='flex flex-row items-center px-[4vw] gap-[4vw] justify-center' onClick={handleDelete}>
         <p className="flex text-center text-sm text-light-onprimary dark:text-dark-onsecondary">
           {content.type == 2 ? getLocalizationString(lang!, 'ensure-delete-folder')
-            : getLocalizationString(lang!, 'ensure-delete-mesage')}
+            : getLocalizationString(lang!, 'ensure-delete-message')}
         </p>
       </div>
       <div className='w-full h-[2px] opacity-20 bg-light-onprimary dark:bg-dark-onsecondary' />

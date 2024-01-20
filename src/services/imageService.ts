@@ -24,18 +24,18 @@ import FAQIconLight from '../assets/control-icons/light/faq-icon-light.svg';
 import DropdownIconDark from '../assets/control-icons/dark/dropdown-icon-dark.svg';
 import DropdownIconLight from '../assets/control-icons/light/dropdown-icon-light.svg';
 
+const imageMapping = {
+  0: FolderIcon,
+  1: TextIcon,
+  2: AudioIcon,
+  3: FileIcon,
+  4: ImageIcon,
+  5: VideoIcon,
+  6: VoiceMessageIcon
+};
 
 export const getContentImage = (content: ContentType) => {
     const contentType = content.attachment ?? 1
-    const imageMapping = {
-        0: FolderIcon,
-        1: TextIcon,
-        2: AudioIcon,
-        3: FileIcon,
-        4: ImageIcon,
-        5: VideoIcon,
-        6: VoiceMessageIcon
-      };
       
       let index: keyof typeof imageMapping;
 
@@ -48,6 +48,10 @@ export const getContentImage = (content: ContentType) => {
       }
       return imageMapping[index] || 'default_icon.svg';
 };
+
+export const getFolderImage = () => {
+    return FolderIcon
+}
 
 const iconMapping: { [key: string]: { [key: string]: string } }  = {
   'light': {

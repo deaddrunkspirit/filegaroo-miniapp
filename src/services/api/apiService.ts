@@ -69,11 +69,11 @@ export async function deleteContent(token: string, content_id: number): Promise<
   return response.data;
 }
 
-export async function addFolder(token: string, user_id: number, parent_content_id?: number | null | undefined): Promise<components['schemas']['ContentRead']> {
+export async function addFolder(token: string, name: string | null | undefined, user_id: number, parent_content_id?: number | null | undefined): Promise<components['schemas']['ContentRead']> {
   let url = `/contents/`
   type CreateContentRequest = components["schemas"]["ContentCreate"];
   let content: CreateContentRequest = {
-    "title": "Новая папка",
+    "title": name ?? "Новая папка",
     "type": 2,
     "user_id": user_id,
   }
