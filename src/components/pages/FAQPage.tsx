@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom';
 
 const _faq_items: Record<string, string[]> = {
     "Что умеет бот Filegaroo?": [
+        "Бот Filegaroo позволяет:",
         "Сохранять сообщения, файлы и записи.",
         "Хранить данные в папках.",
         "Присваивать названия файлам и папкам.",
@@ -14,6 +15,7 @@ const _faq_items: Record<string, string[]> = {
         "Использовать удобную навигацию."
     ],
     "Как сохранить сообщение?": [
+        "Для сохранения сообщения:",
         "Перешлите его в Filegaroo бота.",
         "В Filegaroo боте нажмите на кнопку 'Отправить'.",
         "Выберите папку и нажмите 'Сохранить здесь'."
@@ -36,6 +38,7 @@ const _faq_items: Record<string, string[]> = {
         "Выберите 'Удалить' и подтвердите удаление."
     ],
     "Как работает навигация по приложению?": [
+        "",
         "Используйте иконку домика для возвращения на главную.",
         "Используйте кнопку со стрелкой для шага назад."
     ],
@@ -43,8 +46,7 @@ const _faq_items: Record<string, string[]> = {
         "Перешлите сообщение из социальной сети в Telegram, выберите Filegaroo бота и нажмите 'Отправить'."
     ],
     "Это безопасно?": [
-        "Да, безопасность обеспечивается системами сквозного шифрования Telegram.",
-        "Доступ к вашим данным имеете только вы."
+        "Да, безопасность обеспечивается системами сквозного шифрования Telegram. Доступ к вашим данным имеете только вы."
     ]
 }
 
@@ -59,7 +61,7 @@ const FAQPage: React.FC = () => {
         <div className='flex flex-col h-svh w-full items-center p-[8.33vw] bg-light-primary dark:bg-dark-primary'>
             <div className=' bg-light-secondary dark:bg-dark-secondary text-light-onsecondary dark:text-dark-onsecondary h-svh w-full rounded-3xl overflow-scroll'>
                 <ul>
-                    <li className='flex flex-col px-[4vw]'>
+                    <li className='flex flex-col px-[5.56vw]'>
                         <div className='flex flex-row py-[4vw] justify-between items-center'>
                             <p className='text-lg' >FAQ</p>
                             <NavLink className='' to={'/'}>
@@ -67,7 +69,7 @@ const FAQPage: React.FC = () => {
                             </NavLink>
                         </div>
                     </li>
-                    <div className='w-full h-[2px] opacity-20 bg-light-onprimary dark:bg-dark-onsecondary' />
+                    <div className='w-full h-[2px] opacity-20 bg-light-onsecondary dark:bg-dark-onsecondary' />
                     {faqCards}
                 </ul>
             </div>

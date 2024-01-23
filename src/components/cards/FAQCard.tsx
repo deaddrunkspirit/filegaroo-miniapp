@@ -13,13 +13,16 @@ type FAQAnswerProps = {
 }
 
 const FAQAnswer: React.FC<FAQAnswerProps> = ({items}) => {
-    return <>
-        <ul className=' list-disc px-[6vw] pb-[4vw]'>
-            {items.map((item, i) => 
-                <li className=' text-sm' key={i}>{item}</li>
+    const first = items[0]
+    const list = items.slice(1)
+    return <div className='px-[5.56vw] pb-[6vw]'>
+        <p className='text-sm'>{first}</p>   
+        <ul className=' px-[4vw] list-disc'>
+            {list.map((item, i) => 
+                <li className={`text-sm`} key={i}>{item}</li>
             )}
         </ul>
-    </>
+    </div>
 }
 
 const FAQCard: React.FC<FAQCardProps> = ({question, answer}) => {
@@ -27,14 +30,14 @@ const FAQCard: React.FC<FAQCardProps> = ({question, answer}) => {
     const { colorScheme } = useTelegramContext();
 
     return <>
-        <li className='flex flex-row justify-between px-[4vw] py-[4vw] gap-[2vw] line-clamp-2' onClick={() => {setIsOpened(!isOpened)}}>
+        <li className='flex flex-row justify-between px-[5.56vw] py-[4vw] gap-[2vw] line-clamp-2' onClick={() => {setIsOpened(!isOpened)}}>
             <p className='text-md'>{question}</p>
             <img src={getIcon('expand', colorScheme!)}/>
         </li>
         {
             isOpened ? <FAQAnswer items={answer}/> : null
         }
-        <div className='w-full h-[2px] opacity-20 bg-light-onprimary dark:bg-dark-onsecondary' />
+        <div className='w-full h-[2px] opacity-20 bg-light-onsecondary dark:bg-dark-onsecondary' />
     </>
 }
 
