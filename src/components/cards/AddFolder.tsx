@@ -4,7 +4,7 @@ import ContentCardEmpty from "./ContentCardEmpty";
 import AddFolderDialog from "../dialogs/AddFolderDialog"
 import { useState } from "react";
 
-interface AddFolderProps {
+type AddFolderProps = {
     user_id: number,
     parent_content_id: number | null | undefined
 }

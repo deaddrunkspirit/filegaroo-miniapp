@@ -1,7 +1,7 @@
 import { getContentImage } from "../../services/imageService";
 import { ContentType } from "../../types/content";
 
-interface ContentCardNoDropdownProps {
+type ContentCardNoDropdownProps = {
     content: ContentType;
 }
    

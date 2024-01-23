@@ -1,7 +1,7 @@
 import React from "react";
 import { getFolderImage } from "../../services/imageService";
 
-interface ContentCardEmptyProps {
+type ContentCardEmptyProps = {
     name: string | null
 }
    

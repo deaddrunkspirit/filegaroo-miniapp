@@ -8,7 +8,7 @@ import { useTelegramContext } from "../../providers/TelegramContext";
 
 declare const window: any;
 
-interface ContentCardProps {
+type ContentCardProps = {
     content: ContentType;
 }
    

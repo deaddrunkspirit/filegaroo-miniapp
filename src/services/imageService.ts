@@ -23,6 +23,11 @@ import FAQIconDark from '../assets/control-icons/dark/faq-icon-dark.svg';
 import FAQIconLight from '../assets/control-icons/light/faq-icon-light.svg';
 import DropdownIconDark from '../assets/control-icons/dark/dropdown-icon-dark.svg';
 import DropdownIconLight from '../assets/control-icons/light/dropdown-icon-light.svg';
+import ExpandIconDark from '../assets/control-icons/dark/expand-icon-dark.svg';
+import ExpandIconLight from '../assets/control-icons/light/expand-icon-light.svg';
+import CloseIconDark from '../assets/control-icons/dark/close-icon-dark.svg';
+import CloseIconLight from '../assets/control-icons/light/close-icon-light.svg';
+
 
 const imageMapping = {
   0: FolderIcon,
@@ -63,6 +68,8 @@ const iconMapping: { [key: string]: { [key: string]: string } }  = {
     'add-folder': AddFolderIconLight,
     'home': HomeIconLight,
     'dropdown': DropdownIconLight,
+    'close': CloseIconLight,
+    'expand': ExpandIconLight,
   },
   'dark': {
     'faq': FAQIconDark,
@@ -73,6 +80,8 @@ const iconMapping: { [key: string]: { [key: string]: string } }  = {
     'add-folder': AddFolderIconDark,
     'home': HomeIconDark,
     'dropdown': DropdownIconDark,
+    'close': CloseIconDark,
+    'expand': ExpandIconDark,
   }
 } 
 
