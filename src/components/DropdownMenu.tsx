@@ -14,7 +14,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ content }) => {
   const { closeDropdown } = useDropdown(content.id);
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-  
+  const [contentTitle, setContentTitile] = useState(content.title)
 
   const handleEdit = () => {
     setIsEditing(true)
@@ -43,10 +43,10 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ content }) => {
 
   return (
     <div className=' z-50 dark:fixed fixed w-[125vw] h-[150vh] top-1/3 left-[50vw] origin-center dark:transition transition dark:-translate-x-1/2 -translate-x-1/2 dark:-translate-y-1/2 -translate-y-1/2 flex items-center justify-center flex-col m-0 space-y-[4vw] backdrop-blur-sm backdrop-brightness-50 animate-appear '>
-      <ContentCardNoDropdown content={content} />
+      <ContentCardNoDropdown content={content} title={contentTitle} />
 
       {isEditing ? 
-        <RenameContentDialog onEnd={closeDropdown} content={content} /> 
+        <RenameContentDialog onEnd={closeDropdown} content={content} onTitleChanged={setContentTitile} /> 
         : isDeleting ?
           <DeleteContentDialog onEnd={closeDropdown} content={content}/> 
           :

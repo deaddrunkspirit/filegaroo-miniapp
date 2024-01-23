@@ -6,12 +6,13 @@ import getLocalizationString from "../../services/languageService";
 
 interface RenameContentDialogProps {
     onEnd: () => void;
+    onTitleChanged: (e: string) => void;
     content: ContentType;
 }
 
 
-const RenameContentDialog: React.FC<RenameContentDialogProps> = ({onEnd, content}) => {
-    const [newName, setNewName] = useState<string>('');
+const RenameContentDialog: React.FC<RenameContentDialogProps> = ({onEnd, content, onTitleChanged}) => {
+    const [newName, setNewName] = useState<string>(content.title);
     const { tg, lang } = useTelegramContext();
 
     const handleSave = () => {
@@ -26,7 +27,7 @@ const RenameContentDialog: React.FC<RenameContentDialogProps> = ({onEnd, content
     return (
         <div className="z-[1000] relative m-0 flex-col items-center justify-center w-[55vw] h-[30vw] p-[4vw] ml-[25vw] space-y-[2vw] rounded-3xl bg-color_input dark:bg-dark-secondary bg-opacity-80 dark:bg-opacity-80">
             <div className=" relative h-11 w-full">
-                <input placeholder={getLocalizationString(lang!, 'new-name')} value={newName} onChange={(e) => setNewName(e.target.value)} 
+                <input placeholder={getLocalizationString(lang!, 'new-name')} value={newName} onChange={(e) => {setNewName(e.target.value); onTitleChanged(e.target.value);}} 
                         className="border-color_input text-light-onprimary dark:text-dark-onprimary dark:placeholder-shown:border-dark-onsecondary dark:disabled:bg-dark-primary 
                                     placeholder-shown:border-light-onsecondary disabled:bg-light-primary 
                                     peer h-full w-full border-b bg-transparent pb-1.5 pt-4 font-sans text-sm font-normal outline outline-0 transition-all 

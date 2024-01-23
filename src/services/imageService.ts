@@ -6,6 +6,7 @@ import FileIcon from '../assets/content-icons/file-icon.png';
 import ImageIcon from '../assets/content-icons/image-icon.png';
 import VideoIcon from '../assets/content-icons/video-icon.png';
 import VoiceMessageIcon from '../assets/content-icons/voice-message-icon.png';
+import VideoNoteIcon from '../assets/content-icons/video-note-icon.png';
 
 import HomeIconDark from '../assets/control-icons/dark/home-icon-dark.svg';
 import HomeIconLight from '../assets/control-icons/light/home-icon-light.svg';
@@ -36,7 +37,8 @@ const imageMapping = {
   3: FileIcon,
   4: ImageIcon,
   5: VideoIcon,
-  6: VoiceMessageIcon
+  6: VoiceMessageIcon,
+  7: VideoNoteIcon,
 };
 
 export const getContentImage = (content: ContentType) => {
