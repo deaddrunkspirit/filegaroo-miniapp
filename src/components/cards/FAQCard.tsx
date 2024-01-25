@@ -30,7 +30,7 @@ const FAQCard: React.FC<FAQCardProps> = ({question, answer}) => {
     const { colorScheme } = useTelegramContext();
 
     return <>
-        <li className='flex flex-row justify-between px-[5.56vw] py-[4vw] gap-[2vw] line-clamp-2' onClick={() => {setIsOpened(!isOpened)}}>
+        <li key={question} className='flex flex-row justify-between px-[5.56vw] py-[4vw] gap-[2vw] line-clamp-2' onClick={() => {setIsOpened(!isOpened)}}>
             <p className='text-md'>{question}</p>
             <img src={getIcon('expand', colorScheme!)}/>
         </li>
