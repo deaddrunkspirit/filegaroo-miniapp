@@ -12,11 +12,13 @@ import { TelegramProvider } from './providers/TelegramContext';
 import { authUser } from './services/api/apiService';
 import { useEffect, useState } from 'react';
 import Placeholder from './components/placeholders/Placeholder';
+import { setLocalizationMap } from './services/languageService';
 
 declare const window: any;
 
 function App() {
   const [init_data, setInitData] = useState();
+  const [isLocalizationLoaded, setIsLocalizationLoaded] = useState<boolean>(false)
   const webApp = window.Telegram.WebApp;
 
   const colorScheme = webApp.colorScheme ?? 'dark';
@@ -33,17 +35,19 @@ function App() {
       const doAuth = async () => {
         const res = await authUser(initData); 
         setInitData(res);
+        await setLocalizationMap(res!.init_data!.user.language_code);
+        setIsLocalizationLoaded(true);
       }
     doAuth().catch(console.error)   
   }, [])
   
-  if (!init_data) return <Placeholder/>
+  if (!init_data || !isLocalizationLoaded) return <Placeholder/>
   window.Telegram.WebApp.ready()
   
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <TelegramProvider colorScheme={colorScheme} tg={init_data} lang='ru' >
+        <TelegramProvider colorScheme={colorScheme} tg={init_data} >
           <DropdownProvider>
             <Routes>
               <Route path='/' element={<MainPage />} />

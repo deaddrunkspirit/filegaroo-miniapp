@@ -14,10 +14,17 @@ const api: AxiosInstance = axios.create({
 export async function authUser(initData: string) {
     const response = await api.post(`/users/auth`, {
       grant_type: "password",
-      initData: initData
-    })
-    console.log(response.data)
+      initData: initData,
+    });
+    
+    console.log(response.data);
     return response.data;
+}
+
+export async function getLocalization(lang: string) {
+  const response = await api.get(`/localization/miniapp_strings/${lang}`)
+  console.log(response.data);
+  return response.data;
 }
 
 export async function getContents(token: string, parent_content_id?: number | null): Promise<components['schemas']['ContentRead'][]> {
