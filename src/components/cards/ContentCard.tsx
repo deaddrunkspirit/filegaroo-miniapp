@@ -1,18 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import { getContentImage, getIcon } from "../../services/imageService";
 import { ContentType } from "../../types/content";
-import DropdownMenu from "../DropdownMenu";
+import DropdownMenu from "../menus/DropdownMenu";
 import { useDropdown } from '../../providers/DropdownContext';
 import { forwardMessage } from "../../services/api/apiService";
 import { useTelegramContext } from "../../providers/TelegramContext";
+import getLocalizationString from "../../services/languageService";
 
 declare const window: any;
 
 type ContentCardProps = {
     content: ContentType;
+    parent: ContentType | null;
 }
    
-const ContentCard: React.FC<ContentCardProps> = ({ content }) => {
+const ContentCard: React.FC<ContentCardProps> = ({ content, parent }) => {
     const { openDropdown, closeDropdown, isOpen } = useDropdown(content.id);
     const { tg, colorScheme } = useTelegramContext();
     const shortlink = `/${content.title}/${content.id}`
@@ -56,7 +58,7 @@ const ContentCard: React.FC<ContentCardProps> = ({ content }) => {
             </div>
         </div> 
 
-        {isOpen && <DropdownMenu content={content} />}
+        {isOpen && <DropdownMenu currFolderName={parent ? parent.title : getLocalizationString('main-page-name') as string} content={content} />}
         </>
       );
 };

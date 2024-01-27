@@ -28,7 +28,18 @@ import ExpandIconDark from '../assets/control-icons/dark/expand-icon-dark.svg';
 import ExpandIconLight from '../assets/control-icons/light/expand-icon-light.svg';
 import CloseIconDark from '../assets/control-icons/dark/close-icon-dark.svg';
 import CloseIconLight from '../assets/control-icons/light/close-icon-light.svg';
-
+import SelectIconLight from '../assets/control-icons/light/select-icon-light.svg';
+import SelectIconDark from '../assets/control-icons/dark/select-icon-dark.svg';
+import ClosePageIconLight from '../assets/control-icons/light/close-page-icon-light.svg';
+import ClosePageIconDark from '../assets/control-icons/dark/close-page-icon-dark.svg';
+import SelectCheckedIconLight from '../assets/control-icons/light/select-checked-icon-light.svg';
+import SelectCheckedIconDark from '../assets/control-icons/dark/select-checked-icon-dark.svg';
+import SelectEmptyLight from '../assets/control-icons/light/select-empty-icon-light.svg';
+import SelectEmptyDark from '../assets/control-icons/dark/select-empty-icon-dark.svg';
+import MoveIconLight from '../assets/control-icons/light/move-icon-light.svg';
+import MoveIconDark from '../assets/control-icons/dark/move-icon-dark.svg';
+import DeletePrimaryIconLight from '../assets/control-icons/light/delete-primary-icon-light.svg';
+import DeletePrimaryIconDark from '../assets/control-icons/dark/delete-primary-icon-dark.svg';
 
 const imageMapping = {
   0: FolderIcon,
@@ -72,6 +83,12 @@ const iconMapping: { [key: string]: { [key: string]: string } }  = {
     'dropdown': DropdownIconLight,
     'close': CloseIconLight,
     'expand': ExpandIconLight,
+    'close-page': ClosePageIconLight,
+    'select': SelectIconLight,
+    'select-empty': SelectEmptyLight,
+    'select-checked': SelectCheckedIconLight,
+    'delete-primary': DeletePrimaryIconLight,
+    'move': MoveIconLight
   },
   'dark': {
     'faq': FAQIconDark,
@@ -84,6 +101,12 @@ const iconMapping: { [key: string]: { [key: string]: string } }  = {
     'dropdown': DropdownIconDark,
     'close': CloseIconDark,
     'expand': ExpandIconDark,
+    'close-page': ClosePageIconDark,
+    'select': SelectIconDark,
+    'select-empty': SelectEmptyDark,
+    'select-checked': SelectCheckedIconDark,
+    'delete-primary': DeletePrimaryIconDark,
+    'move': MoveIconDark
   }
 } 
 

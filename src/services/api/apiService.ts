@@ -12,6 +12,7 @@ const api: AxiosInstance = axios.create({
 });
 
 export async function authUser(initData: string) {
+    console.log(initData)
     const response = await api.post(`/users/auth`, {
       grant_type: "password",
       initData: initData,
@@ -41,6 +42,21 @@ export async function getContents(token: string, parent_content_id?: number | nu
   console.log(response)
   return response.data;
 }
+
+export async function getContent(token: string, id?: number | null): Promise<components['schemas']['ContentRead'] | null> {
+  if (!id) return null;
+  let url = `/contents/${id}`;
+  
+  const response = await api.get(url, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  console.log(response)
+  return response.data;
+}
+
+
 
 export async function getFolders(token: string, parent_content_id?: number): Promise<components['schemas']['ContentRead'][]> {
   let url = `/contents/folders`;

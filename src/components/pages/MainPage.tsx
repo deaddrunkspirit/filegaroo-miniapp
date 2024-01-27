@@ -1,6 +1,6 @@
 import React from 'react';
 import MainPageHeader from '../headers/MainPageHeader';
-import ContentList from '../ContentList';
+import ContentList from '../lists/ContentList';
 import { ContentType } from '../../types/content';
 import { getContents } from '../../services/api/apiService';
 import { useQuery } from '@tanstack/react-query';
@@ -21,7 +21,7 @@ const MainPage: React.FC = () => {
       <div className='flex flex-col items-center h-full min-h-dvh m-0
              bg-light-primary text-light-onprimary dark:bg-dark-primary dark:text-dark-onprimary'>
         <MainPageHeader />
-        <ContentList data={data} parent_id={null} />
+        <ContentList parent={null} data={data} parent_id={null} />
       </div>
     );
   }
