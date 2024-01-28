@@ -14,7 +14,7 @@ const MoveChooseFolderHeader: React.FC<MoveChooseFolderHeaderProps> = ({ onClose
     const { colorScheme } = useTelegramContext();
 
     return (
-        <div className="flex flex-row self-start w-full h-[18.5vw] pl-[8vw] pt-[6.39vw] pr-[7.22vw] pb-[5.56vw] gap-[4.72vw] bg-light-primary text-light-onprimary dark:bg-dark-primary dark:text-dark-onprimary">
+        <div className="flex flex-row self-start items-center w-full h-[18.5vw] pl-[8vw] pt-[6.39vw] pr-[7.22vw] pb-[5.56vw] gap-[4.72vw] bg-light-primary text-light-onprimary dark:bg-dark-primary dark:text-dark-onprimary">
             {parent ?
                 <button className='h-[6.11vw] w-[6.11vw]' onClick={() => { onFolderChanged((parent ? parent.parent_content_id : null) ?? null) }}>
                     <img className="h-full w-full" src={getIcon('back', colorScheme!)} alt="Back" />

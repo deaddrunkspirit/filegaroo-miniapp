@@ -37,11 +37,13 @@ const SelectContentsDialog: React.FC<SelectContentsDialogProps> = ({ currFolderN
         document.body.classList.add('overflow-hidden');
     }
 
-    const onMoveClicked = () => { setIsMove(true) }
+    const onMoveClicked = () => { 
+        setIsDelete(false);
+        setIsMove(true);
+        document.body.classList.remove('overflow-hidden');
+    }
 
     const handleDelete = () => {
-        console.log('@@@@@')
-        console.log(selectedContents)
         deleteMutation.mutate();
         onClose();
         document.body.classList.remove('overflow-hidden');
@@ -71,7 +73,7 @@ const SelectContentsDialog: React.FC<SelectContentsDialogProps> = ({ currFolderN
 
     if (isPending) return <Placeholder />
     if (isError) return <Placeholder />
-    
+
     const sortedData = data.sort((a, b) => {
         // First, prioritize type=2 (folders)
         if (a.type === 2 && b.type !== 2) {
@@ -91,7 +93,7 @@ const SelectContentsDialog: React.FC<SelectContentsDialogProps> = ({ currFolderN
         </div>
         <SelectButtonsFooter onDelete={onDeleteClicked} onMove={onMoveClicked} />
         {isDelete ? <DeleteAllContentsDialog onCancel={onCancel} onDelete={handleDelete} /> : null}
-        {isMove ? <MoveChooseFolderDialog onCancel={onCancel} onEnd={onClose} selectedContents={selectedContents} parentContentId={content.parent_content_id ?? null} /> : null}
+        {isMove ? <MoveChooseFolderDialog onEnd={onClose} selectedContents={selectedContents} parentContentId={content.parent_content_id ?? null} /> : null}
     </div>
 }
 

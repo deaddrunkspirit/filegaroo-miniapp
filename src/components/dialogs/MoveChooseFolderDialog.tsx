@@ -11,18 +11,17 @@ import Placeholder from "../placeholders/Placeholder";
 type MoveChooseFolderDialogProps = {
     selectedContents: ContentType[];
     parentContentId: number | null;
-    onCancel: () => void;
     onEnd: () => void;
 }
 
-const MoveChooseFolderDialog: React.FC<MoveChooseFolderDialogProps> = ({ selectedContents, parentContentId, onCancel, onEnd }) => {
+const MoveChooseFolderDialog: React.FC<MoveChooseFolderDialogProps> = ({ selectedContents, parentContentId, onEnd }) => {
     const [folderIdToSave, setFolderIdToSave] = useState<number | null>(parentContentId)
     const [folders, setFolders] = useState<ContentType[]>()
     const { tg } = useTelegramContext();
     const queryClient = useQueryClient();
 
     const moveMutation = useMutation({
-        mutationFn: () => moveContents(tg!.access_token, selectedContents.map(content => content.id), parentContentId),
+        mutationFn: () => moveContents(tg!.access_token, selectedContents.map(content => content.id), folderIdToSave),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['contents'] });
             queryClient.invalidateQueries({ queryKey: ['contents', parentContentId] });
@@ -41,28 +40,29 @@ const MoveChooseFolderDialog: React.FC<MoveChooseFolderDialogProps> = ({ selecte
         },
     });
 
-    const { data: parent, isPending: parentPending, isError: parentError } = useQuery<ContentType | null, Error>({
+    const parentQuery = useQuery<ContentType | null, Error>({
         queryKey: ['parent', folderIdToSave],
         queryFn: () => getContent(tg!.access_token, folderIdToSave)
     });
 
-    if (foldersQuery.isPending || foldersQuery.isError || parentPending || parentError || !folders) {
+    if (foldersQuery.isPending || foldersQuery.isError || parentQuery.isPending || parentQuery.isError || !folders) {
         return <Placeholder/>
     }
 
     const handleMoveConfirm = () => {
-        moveMutation.mutate()
-        // TODO Api request to move selectedContents to folderIdToSave
+        moveMutation.mutate();
         onEnd();
     }
 
     const onFolderChanged = (newId: number | null) => {
+        console.log(newId)
         setFolderIdToSave(newId)
         foldersQuery.refetch();
+        parentQuery.refetch();
     }
     return (
-        <div className="absolute flex flex-col items-center justify-start w-dvw h-dvh z-[1100] top-0 left-0 bg-light-primary origin-center">
-            <MoveChooseFolderHeader onClose={onCancel} onFolderChanged={onFolderChanged} parent={parent} />
+        <div className="absolute flex flex-col items-center justify-start w-dvw h-dvh z-[1300] top-0 left-0 bg-light-primary origin-center">
+            <MoveChooseFolderHeader onClose={onEnd} onFolderChanged={onFolderChanged} parent={parentQuery.data} />
             <div className="flex flex-col items-center justify-start m-0">
                 <ContentListMoveToFolder key={folderIdToSave} folders={folders!!} onFolderClicked={onFolderChanged} />
             </div>
