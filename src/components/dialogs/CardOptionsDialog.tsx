@@ -5,10 +5,11 @@ import getLocalizationString from '../../services/languageService';
 interface CardOptionDialogProps {
     handleDelete: () => void;
     handleEdit: () => void;
+    handleSelect: () => void;
     content_id: number;
 }
 
-const CardOptionsDialog: React.FC<CardOptionDialogProps> = ({handleEdit, handleDelete, content_id}) => {
+const CardOptionsDialog: React.FC<CardOptionDialogProps> = ({handleEdit, handleDelete, handleSelect, content_id}) => {
     const { colorScheme } = useTelegramContext();
 
     return (
@@ -16,6 +17,11 @@ const CardOptionsDialog: React.FC<CardOptionDialogProps> = ({handleEdit, handleD
           <div className='flex flex-row items-center px-[4vw] gap-[4vw] justify-between' onClick={handleEdit}>
             <p className="flex text-md text-light-onprimary dark:text-dark-onsecondary">{getLocalizationString('rename') as string}</p>
             <img className='h-[5vw] w-[5vw]' src={getIcon('edit', colorScheme!)} alt='Edit' />
+          </div>
+          <div className='w-full h-[2px] opacity-20 bg-light-onprimary dark:bg-dark-onsecondary' />
+          <div className='flex flex-row items-center px-[4vw] gap-[4vw] justify-between' onClick={handleSelect}>
+            <p className="flex text-md text-light-onprimary dark:text-dark-onsecondary">{getLocalizationString('select') as string}</p>
+            <img className='h-[5vw] w-[5vw]' src={getIcon('select', colorScheme!)} alt='Edit' />
           </div>
           <div className='w-full h-[2px] opacity-20 bg-light-onprimary dark:bg-dark-onsecondary' />
           <div className='flex flex-row items-center px-[4vw] gap-[4vw] justify-between' onClick={handleDelete}>

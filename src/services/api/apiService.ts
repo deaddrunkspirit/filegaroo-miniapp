@@ -12,6 +12,7 @@ const api: AxiosInstance = axios.create({
 });
 
 export async function authUser(initData: string) {
+    console.log(initData)
     const response = await api.post(`/users/auth`, {
       grant_type: "password",
       initData: initData,
@@ -41,6 +42,20 @@ export async function getContents(token: string, parent_content_id?: number | nu
   console.log(response)
   return response.data;
 }
+
+export async function getContent(token: string, id?: number | null): Promise<components['schemas']['ContentRead'] | null> {
+  if (!id) return null;
+  let url = `/contents/${id}`;
+  
+  const response = await api.get(url, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  console.log(response)
+  return response.data;
+}
+
 
 export async function getFolders(token: string, parent_content_id?: number): Promise<components['schemas']['ContentRead'][]> {
   let url = `/contents/folders`;
@@ -73,6 +88,34 @@ export async function deleteContent(token: string, content_id: number): Promise<
       Authorization: `Bearer ${token}`,
     },
   });
+  return response.data;
+}
+
+export async function deleteAllContents(token: string, content_ids: number[]): Promise<components['schemas']['ContentRead'][]> {
+  let url = `/contents/`
+  const queryString = content_ids.map(id => `contents=${id}`).join('&');
+  const fullUrl = `${url}?${queryString}`;
+  const response = await api.delete(fullUrl, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  })
+
+  return response.data;
+}
+
+export async function moveContents(token: string, content_ids: number[], parent_id: number | null): Promise<components['schemas']['ContentRead'][]> {
+  let url = `/contents/move/${parent_id ?? ''}`
+  console.log(url)
+  const body = {
+    'contents': content_ids
+  }
+  const response = await api.put(url, body, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  })
+  
   return response.data;
 }
 
