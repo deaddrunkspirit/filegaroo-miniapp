@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { ContentType } from "../../types/content";
 import ContentListPicker from '../lists/ContentListPicker';
 import { useTelegramContext } from "../../providers/TelegramContext";
-import { useQuery } from "@tanstack/react-query";
-import { getContents } from "../../services/api/apiService";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { deleteAllContents, getContents } from "../../services/api/apiService";
 import SelectHeader from "../headers/SelectHeader";
 import Placeholder from "../placeholders/Placeholder";
 import SelectButtonsFooter from '../footers/SelectButtonsFooter';
@@ -22,21 +22,33 @@ const SelectContentsDialog: React.FC<SelectContentsDialogProps> = ({ currFolderN
     const [selectedContents, setSelectedContents] = useState<ContentType[]>([])
     const parentContentId = content.parent_content_id;
     const { tg } = useTelegramContext();
+    const queryClient = useQueryClient();
 
-    const onDeleteClicked = () => { 
-        setIsDelete(true); 
-        document.body.classList.add('overflow-hidden');  
+    const deleteMutation = useMutation({
+        mutationFn: () => deleteAllContents(tg!.access_token, selectedContents.map(content => content.id)),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['contents'] });
+            queryClient.invalidateQueries({ queryKey: ['contents', parentContentId] });
+        }
+    })
+
+    const onDeleteClicked = () => {
+        setIsDelete(true);
+        document.body.classList.add('overflow-hidden');
     }
+
     const onMoveClicked = () => { setIsMove(true) }
 
     const handleDelete = () => {
-        // TODO delete all selected contents
-        onClose()
-        document.body.classList.remove('overflow-hidden'); 
+        console.log('@@@@@')
+        console.log(selectedContents)
+        deleteMutation.mutate();
+        onClose();
+        document.body.classList.remove('overflow-hidden');
     }
 
     const onCancel = () => {
-        document.body.classList.remove('overflow-hidden'); 
+        document.body.classList.remove('overflow-hidden');
         setIsDelete(false)
         setIsMove(false);
     }
@@ -59,14 +71,26 @@ const SelectContentsDialog: React.FC<SelectContentsDialogProps> = ({ currFolderN
 
     if (isPending) return <Placeholder />
     if (isError) return <Placeholder />
+    
+    const sortedData = data.sort((a, b) => {
+        // First, prioritize type=2 (folders)
+        if (a.type === 2 && b.type !== 2) {
+          return -1; // Move a to the front
+        } else if (b.type === 2 && a.type !== 2) {
+          return 1; // Move b to the front
+        } else {
+          // If types are the same or both are not type=2, maintain original order
+          return 0;
+        }
+      });
 
     return <div className="absolute flex flex-col items-center justify-start ml-[-8.25vw] mt-[-18.5vw] w-dvw h-dvh z-[1000] top-0 left-0 bg-light-primary origin-center">
         <SelectHeader title={currFolderName} onClose={onClose} />
         <div className="flex flex-col items-center justify-start m-0">
-            <ContentListPicker updateSelectedContents={updateSelectedCards} contents={data} />
+            <ContentListPicker updateSelectedContents={updateSelectedCards} contents={sortedData} />
         </div>
         <SelectButtonsFooter onDelete={onDeleteClicked} onMove={onMoveClicked} />
-        {isDelete ? <DeleteAllContentsDialog onCancel={onCancel} onDelete={handleDelete}  /> : null}
+        {isDelete ? <DeleteAllContentsDialog onCancel={onCancel} onDelete={handleDelete} /> : null}
         {isMove ? <MoveChooseFolderDialog onCancel={onCancel} onEnd={onClose} selectedContents={selectedContents} parentContentId={content.parent_content_id ?? null} /> : null}
     </div>
 }

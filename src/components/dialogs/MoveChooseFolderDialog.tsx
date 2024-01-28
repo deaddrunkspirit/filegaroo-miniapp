@@ -2,10 +2,10 @@ import { ContentType } from "../../types/content";
 import ContentListMoveToFolder from "../lists/ContentListMoveToFolder";
 import MoveChooseFolderHeader from '../headers/MoveChooseFolderHeader';
 import MoveFooter from '../footers/MoveFooter';
-import { useQuery } from "@tanstack/react-query";
-import { getContent, getContents } from "../../services/api/apiService";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
+import { getContent, getContents, moveContents } from "../../services/api/apiService";
 import { useTelegramContext } from "../../providers/TelegramContext";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Placeholder from "../placeholders/Placeholder";
 
 type MoveChooseFolderDialogProps = {
@@ -19,11 +19,23 @@ const MoveChooseFolderDialog: React.FC<MoveChooseFolderDialogProps> = ({ selecte
     const [folderIdToSave, setFolderIdToSave] = useState<number | null>(parentContentId)
     const [folders, setFolders] = useState<ContentType[]>()
     const { tg } = useTelegramContext();
+    const queryClient = useQueryClient();
+
+    const moveMutation = useMutation({
+        mutationFn: () => moveContents(tg!.access_token, selectedContents.map(content => content.id), parentContentId),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['contents'] });
+            queryClient.invalidateQueries({ queryKey: ['contents', parentContentId] });
+            queryClient.invalidateQueries({ queryKey: ['contents', folderIdToSave] });
+            queryClient.invalidateQueries({ queryKey: ['parent', folderIdToSave] });
+        }
+    })
 
     const foldersQuery = useQuery<ContentType[], Error>({
         queryKey: ['contents', folderIdToSave],
         queryFn: async () => {
-            const res = (await getContents(tg!.access_token, folderIdToSave)).filter(content => content.type === 2)
+            const allFolders = (await getContents(tg!.access_token, folderIdToSave)).filter(content => content.type === 2)
+            const res = allFolders.filter(folder => folder.type === 2 && !selectedContents.some(selectedContent => selectedContent.id === folder.id));
             setFolders(res)
             return res
         },
@@ -39,6 +51,7 @@ const MoveChooseFolderDialog: React.FC<MoveChooseFolderDialogProps> = ({ selecte
     }
 
     const handleMoveConfirm = () => {
+        moveMutation.mutate()
         // TODO Api request to move selectedContents to folderIdToSave
         onEnd();
     }
