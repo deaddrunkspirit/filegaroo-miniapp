@@ -61,7 +61,7 @@ const MoveChooseFolderDialog: React.FC<MoveChooseFolderDialogProps> = ({ selecte
         parentQuery.refetch();
     }
     return (
-        <div className="absolute flex flex-col items-center justify-start w-dvw h-dvh z-[1300] top-0 left-0 bg-light-primary origin-center">
+        <div className="absolute flex flex-col items-center justify-start w-dvw h-dvh z-[1300] top-0 left-0 bg-light-primary dark:bg-dark-primary origin-center">
             <MoveChooseFolderHeader onClose={onEnd} onFolderChanged={onFolderChanged} parent={parentQuery.data} />
             <div className="flex flex-col items-center justify-start m-0">
                 <ContentListMoveToFolder key={folderIdToSave} folders={folders!!} onFolderClicked={onFolderChanged} />
