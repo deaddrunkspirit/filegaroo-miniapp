@@ -86,7 +86,7 @@ const SelectContentsDialog: React.FC<SelectContentsDialogProps> = ({ currFolderN
         }
       });
 
-    return <div className="absolute flex flex-col items-center justify-start ml-[-8.25vw] mt-[-18.5vw] w-dvw h-dvh z-[1000] top-0 left-0 bg-light-primary origin-center">
+    return <div className="absolute flex flex-col items-center justify-start ml-[-8.25vw] mt-[-18.5vw] w-100vw h-[125vw] z-[1000] top-0 left-0 bg-light-primary dark:bg-dark-primary origin-center">
         <SelectHeader title={currFolderName} onClose={onClose} />
         <div className="flex flex-col items-center justify-start m-0">
             <ContentListPicker updateSelectedContents={updateSelectedCards} contents={sortedData} />
