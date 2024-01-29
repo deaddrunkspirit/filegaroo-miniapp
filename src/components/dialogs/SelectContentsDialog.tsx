@@ -19,6 +19,7 @@ type SelectContentsDialogProps = {
 const SelectContentsDialog: React.FC<SelectContentsDialogProps> = ({ currFolderName, content, onClose }) => {
     const [isDelete, setIsDelete] = useState<boolean>(false);
     const [isMove, setIsMove] = useState<boolean>(false);
+    const [isSelecting, setIsSelecting] = useState<boolean>(true);
     const [selectedContents, setSelectedContents] = useState<ContentType[]>([])
     const parentContentId = content.parent_content_id;
     const { tg } = useTelegramContext();
@@ -33,11 +34,14 @@ const SelectContentsDialog: React.FC<SelectContentsDialogProps> = ({ currFolderN
     })
 
     const onDeleteClicked = () => {
+        setIsSelecting(false);
         setIsDelete(true);
+        setIsMove(false);
         document.body.classList.add('overflow-hidden');
     }
 
-    const onMoveClicked = () => { 
+    const onMoveClicked = () => {
+        setIsSelecting(false);
         setIsDelete(false);
         setIsMove(true);
         document.body.classList.remove('overflow-hidden');
@@ -53,6 +57,7 @@ const SelectContentsDialog: React.FC<SelectContentsDialogProps> = ({ currFolderN
         document.body.classList.remove('overflow-hidden');
         setIsDelete(false)
         setIsMove(false);
+        setIsSelecting(true);
     }
 
     const updateSelectedCards = (content: ContentType, add: boolean) => {
@@ -71,27 +76,30 @@ const SelectContentsDialog: React.FC<SelectContentsDialogProps> = ({ currFolderN
     }
     );
 
-    if (isPending) return <Placeholder />
-    if (isError) return <Placeholder />
+    if (isPending || isError) return <Placeholder />
 
     const sortedData = data.sort((a, b) => {
         // First, prioritize type=2 (folders)
         if (a.type === 2 && b.type !== 2) {
-          return -1; // Move a to the front
+            return -1; // Move a to the front
         } else if (b.type === 2 && a.type !== 2) {
-          return 1; // Move b to the front
+            return 1; // Move b to the front
         } else {
-          // If types are the same or both are not type=2, maintain original order
-          return 0;
+            // If types are the same or both are not type=2, maintain original order
+            return 0;
         }
-      });
+    });
 
     return <div className="absolute flex flex-col items-center justify-start ml-[-8.25vw] mt-[-18.5vw] w-dvw h-[125%] z-[1000] top-0 left-0 bg-light-primary dark:bg-dark-primary origin-center">
-        <SelectHeader title={currFolderName} onClose={onClose} />
-        <div className="flex flex-col items-center justify-start m-0">
-            <ContentListPicker updateSelectedContents={updateSelectedCards} contents={sortedData} />
-        </div>
-        <SelectButtonsFooter onDelete={onDeleteClicked} onMove={onMoveClicked} />
+        {isSelecting ?
+            <>
+                <SelectHeader title={currFolderName} onClose={onClose} />
+                <div className="flex flex-col items-center justify-start m-0">
+                    <ContentListPicker updateSelectedContents={updateSelectedCards} contents={sortedData} />
+                </div>
+                <SelectButtonsFooter onDelete={onDeleteClicked} onMove={onMoveClicked} />
+            </>
+            : null}
         {isDelete ? <DeleteAllContentsDialog onCancel={onCancel} onDelete={handleDelete} /> : null}
         {isMove ? <MoveChooseFolderDialog onEnd={onClose} selectedContents={selectedContents} parentContentId={content.parent_content_id ?? null} /> : null}
     </div>
