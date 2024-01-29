@@ -32,10 +32,10 @@ import SelectIconLight from '../assets/control-icons/light/select-icon-light.svg
 import SelectIconDark from '../assets/control-icons/dark/select-icon-dark.svg';
 import ClosePageIconLight from '../assets/control-icons/light/close-page-icon-light.svg';
 import ClosePageIconDark from '../assets/control-icons/dark/close-page-icon-dark.svg';
-import SelectCheckedIconLight from '../assets/control-icons/light/select-checked-icon-light.svg';
-import SelectCheckedIconDark from '../assets/control-icons/dark/select-checked-icon-dark.svg';
-import SelectEmptyLight from '../assets/control-icons/light/select-empty-icon-light.svg';
-import SelectEmptyDark from '../assets/control-icons/dark/select-empty-icon-dark.svg';
+import SelectCheckedIconLight from '../assets/control-icons/light/select-checked-icon-light.png';
+import SelectCheckedIconDark from '../assets/control-icons/dark/select-checked-icon-dark.png';
+import SelectEmptyLight from '../assets/control-icons/light/select-empty-icon-light.png';
+import SelectEmptyDark from '../assets/control-icons/dark/select-empty-icon-dark.png';
 import MoveIconLight from '../assets/control-icons/light/move-icon-light.svg';
 import MoveIconDark from '../assets/control-icons/dark/move-icon-dark.svg';
 import DeletePrimaryIconLight from '../assets/control-icons/light/delete-primary-icon-light.svg';

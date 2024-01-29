@@ -30,8 +30,9 @@ const ContentPickerCard: React.FC<ContentPickerCardProps> = ({ content, updateSe
                 {content.title}
             </p>
             <div className="absolute dark:absolute mt-[2vw] flex items-center justify-center w-[12vw] h-[7vw] top-0 right-0 rounded-md">
-                {/* TODO check card */}
-                <img src={checked ? getIcon('select-checked', colorScheme!) : getIcon('select-empty', colorScheme!)}/>
+                <div className="w-[5.56vw] h-[5.56vw]">
+                    <img src={checked ? getIcon('select-checked', colorScheme!) : getIcon('select-empty', colorScheme!)}/>
+                </div>
             </div>
         </div>
 
