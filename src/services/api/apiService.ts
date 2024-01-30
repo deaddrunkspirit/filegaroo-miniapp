@@ -92,9 +92,14 @@ export async function deleteContent(token: string, content_id: number): Promise<
 }
 
 export async function deleteAllContents(token: string, content_ids: number[]) {
-  const res: ContentType[] = []
-  content_ids.forEach(async (n) => res.push(await deleteContent(token, n)))
-  return res;
+  let url = `/contents/remove`
+  const response = await api.post(url, content_ids, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }, 
+  })
+
+  return response.data;
 }
 
 export async function moveContents(token: string, content_ids: number[], parent_id: number | null): Promise<components['schemas']['ContentRead'][]> {
