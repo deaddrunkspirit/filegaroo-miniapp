@@ -114,3 +114,40 @@ export const getIcon = (name: string, theme: string): string => {
   return iconMapping[theme][name];
 }
  
+
+export const getAllImagePaths = (): string[] => {
+  const allImagePaths: string[] = [];
+
+  // Get image paths from content icons
+  Object.values(imageMapping).forEach((path) => {
+    allImagePaths.push(path);
+  });
+
+  // Get image paths from control icons
+  Object.values(iconMapping.light).forEach((path) => {
+    allImagePaths.push(path);
+  });
+
+  Object.values(iconMapping.dark).forEach((path) => {
+    allImagePaths.push(path);
+  });
+
+  return allImagePaths;
+};
+
+
+export const preloadAllImages = (): Promise<void[]> => {
+  const allImagePaths = getAllImagePaths();
+  const allImagePromises: Promise<void>[] = [];
+
+  allImagePaths.forEach((path) => {
+    const imgPromise = new Promise<void>((resolve) => {
+      const img = new Image();
+      img.src = path;
+      img.onload = () => resolve();
+    });
+    allImagePromises.push(imgPromise);
+  });
+
+  return Promise.all(allImagePromises);
+};

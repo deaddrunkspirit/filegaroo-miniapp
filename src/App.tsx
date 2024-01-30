@@ -13,6 +13,7 @@ import { authUser } from './services/api/apiService';
 import { useEffect, useState } from 'react';
 import Placeholder from './components/placeholders/Placeholder';
 import { setLocalizationMap } from './services/languageService';
+import { preloadAllImages } from './services/imageService';
 
 declare const window: any;
 
@@ -33,6 +34,8 @@ function App() {
   
   useEffect(() => {
       const doAuth = async () => {
+
+        await preloadAllImages();
         const res = await authUser(initData); 
         setInitData(res);
         await setLocalizationMap(res!.init_data!.user.language_code);
