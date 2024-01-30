@@ -28,8 +28,10 @@ const SelectContentsDialog: React.FC<SelectContentsDialogProps> = ({ currFolderN
     const deleteMutation = useMutation({
         mutationFn: () => deleteAllContents(tg!.access_token, selectedContents.map(content => content.id)),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['contents'] });
-            queryClient.invalidateQueries({ queryKey: ['contents', parentContentId] });
+            // queryClient.invalidateQueries({ queryKey: ['contents'] });
+            // queryClient.invalidateQueries({ queryKey: ['contents', parentContentId] });
+            queryClient.prefetchQuery({ queryKey: ['contents'] })
+            queryClient.prefetchQuery({ queryKey: ['contents', parentContentId] })
         }
     })
 

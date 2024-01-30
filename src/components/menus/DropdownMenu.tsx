@@ -32,6 +32,11 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ content, currFolderName }) 
     setIsSelecting(true)
   }
 
+  const onSelectionClose = () => { 
+    setIsSelecting(false); 
+    closeDropdown();
+  }
+
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
 
@@ -51,7 +56,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ content, currFolderName }) 
 
   return (
     <>
-      {isSelecting ? <SelectContentsDialog currFolderName={currFolderName} content={content} onClose={() => setIsSelecting(false)}/> : (
+      {isSelecting ? <SelectContentsDialog currFolderName={currFolderName} content={content} onClose={onSelectionClose}/> : (
         <div className=' z-50 dark:fixed fixed w-[125vw] h-[150vh] top-1/3 left-[50vw] origin-center dark:transition transition dark:-translate-x-1/2 -translate-x-1/2 dark:-translate-y-1/2 -translate-y-1/2 flex items-center justify-center flex-col m-0 space-y-[4vw] backdrop-blur-sm backdrop-brightness-50 animate-appear '>
           <ContentCardNoDropdown content={content} title={contentTitle} />
 
