@@ -34,24 +34,24 @@ function App() {
 
   useEffect(() => {
     const doAuth = async () => {
-
       await preloadAllImages();
       const res = await authUser(initData);
       setInitData(res);
-      await setLocalizationMap('ru');//res!.init_data!.user.language_code);
+      await setLocalizationMap(res!.init_data!.user.language_code);
       setIsLocalizationLoaded(true);
     }
     doAuth().catch(console.error)
   }, [])
-
+  
+  if (!window.Telegram.WebApp.isExpanded) {
+    window.Telegram.WebApp.expand();
+  }
+  
   if (!init_data || !isLocalizationLoaded) {
     return <Placeholder />
   }
 
   window.Telegram.WebApp.ready()
-  if (!window.Telegram.WebApp.isExpanded) {
-    window.Telegram.WebApp.expand();
-  }
 
   return (
     <BrowserRouter>
