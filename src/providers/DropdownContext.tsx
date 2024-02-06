@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 
-interface DropdownContextProps {
+type DropdownContextProps = {
   openDropdown: (id: number) => void;
   closeDropdown: () => void;
   isOpen: (id: number) => boolean;

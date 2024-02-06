@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from 'react';
 import InitData from '../types/initData';
 
-interface TelegramContextProps {
+type TelegramContextProps = {
   colorScheme?: string; 
   tg?: { 
     access_token: string, 

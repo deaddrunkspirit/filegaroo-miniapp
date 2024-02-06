@@ -7,7 +7,7 @@ import CardOptionsDialog from '../dialogs/CardOptionsDialog';
 import DeleteContentDialog from '../dialogs/DeleteContentDialog';
 import SelectContentsDialog from '../dialogs/SelectContentsDialog';
 
-interface DropdownMenuProps {
+type DropdownMenuProps = {
   content: ContentType;
   currFolderName: string;
 }

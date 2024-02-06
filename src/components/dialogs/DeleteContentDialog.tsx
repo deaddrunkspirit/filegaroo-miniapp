@@ -6,7 +6,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React from "react";
 import getLocalizationString from "../../services/languageService";
 
-interface DeleteContentDialogProps {
+type DeleteContentDialogProps = {
   onEnd: () => void;
   content: ContentType;
 }

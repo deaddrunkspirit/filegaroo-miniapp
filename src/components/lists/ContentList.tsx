@@ -4,7 +4,7 @@ import ContentCard from '../cards/ContentCard';
 import AddFolder from '../cards/AddFolder';
 import { useTelegramContext } from '../../providers/TelegramContext';
 
-interface ContentListProps {
+type ContentListProps = {
   data: ContentType[];
   parent_id: number | null
   parent: ContentType | null;
