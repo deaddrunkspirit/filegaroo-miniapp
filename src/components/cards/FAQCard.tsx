@@ -2,7 +2,7 @@ import { getIcon } from '../../services/imageService';
 import { useTelegramContext } from '../../providers/TelegramContext'
 import React, { useState } from 'react';
 import FAQAnswerCard from './FAQAnswerCard';
-import sendGAEvent from '../../services/analytics';
+import { useGA } from '../../providers/GAContext';
 
 
 type FAQCardProps = {
@@ -13,7 +13,8 @@ type FAQCardProps = {
 const FAQCard: React.FC<FAQCardProps> = ({ question, answer }) => {
     const [isOpened, setIsOpened] = useState<boolean>(false)
     const { colorScheme, tg } = useTelegramContext();
-
+    const { sendGAEvent } = useGA();
+    
     const handleScroll = () => {
         const container = document.getElementById('faqContainer');
         const faqCard = document.getElementById(`faqCard_${question}`);
