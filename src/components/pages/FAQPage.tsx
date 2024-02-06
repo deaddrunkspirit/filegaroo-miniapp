@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import FAQCard from '../cards/FAQCard';
 import { getIcon } from '../../services/imageService';
 import { useTelegramContext } from '../../providers/TelegramContext';
@@ -13,15 +13,6 @@ const FAQPage: React.FC = () => {
     const faqCards = Object.entries(getLocalizationString('faq-page-content')).map(([q, a]) => (
         <FAQCard key={q} question={q} answer={a} />
     ));
-
-    useEffect(() => {
-        if (containerRef.current) {
-            containerRef.current.scrollTo({
-                behavior: 'smooth',
-                top: containerRef.current.scrollHeight
-            });
-        }
-    }, []);
 
     return (
         <div className='flex flex-col h-svh w-full items-center p-[8.33vw] bg-light-primary dark:bg-dark-primary'>
