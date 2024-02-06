@@ -34,6 +34,9 @@ const SelectContentsDialog: React.FC<SelectContentsDialogProps> = ({ currFolderN
     })
 
     const onDeleteClicked = () => {
+        if (selectedContents.length < 1) {
+            return;
+        }
         setIsSelecting(false);
         setIsDelete(true);
         setIsMove(false);
@@ -41,6 +44,9 @@ const SelectContentsDialog: React.FC<SelectContentsDialogProps> = ({ currFolderN
     }
 
     const onMoveClicked = () => {
+        if (selectedContents.length < 1) {
+            return;
+        }
         setIsSelecting(false);
         setIsDelete(false);
         setIsMove(true);
