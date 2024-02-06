@@ -17,11 +17,7 @@ const FAQCard: React.FC<FAQCardProps> = ({ question, answer }) => {
         const container = document.getElementById('faqContainer');
         const faqCard = document.getElementById(`faqCard_${question}`);
         if (container && faqCard) {
-            const containerRect = container.getBoundingClientRect();
-            const faqCardRect = faqCard.getBoundingClientRect();
-            const offsetTop = faqCardRect.top - containerRect.top;
-            const offsetCenter = offsetTop - (containerRect.height - faqCardRect.height) / 2;
-            container.scrollTop += offsetCenter;
+            faqCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     };
 
