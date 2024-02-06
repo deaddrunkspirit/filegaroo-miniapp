@@ -4,11 +4,15 @@ import { getIcon } from '../../services/imageService';
 import { useTelegramContext } from '../../providers/TelegramContext';
 import { NavLink } from 'react-router-dom';
 import getLocalizationString from '../../services/languageService';
+import { useGA } from '../../providers/GAContext';
+
 
 
 const FAQPage: React.FC = () => {
-    const { colorScheme } = useTelegramContext()
+    const { colorScheme, tg } = useTelegramContext();
+    const { sendGAEvent } = useGA();
     const containerRef = useRef<HTMLDivElement>(null);
+    sendGAEvent(tg!!.init_data.user.id, 'FAQ', 'FAQOpen');
 
     const faqCards = Object.entries(getLocalizationString('faq-page-content')).map(([q, a]) => (
         <FAQCard key={q} question={q} answer={a} />
@@ -20,7 +24,7 @@ const FAQPage: React.FC = () => {
                 <ul className=''>
                     <li key={'faq_title'} className='flex flex-col px-[5.56vw]'>
                         <div className='flex flex-row py-[4vw] justify-between items-center'>
-                            <p className='text-lg' >FAQ</p>
+                            <p className='text-lg'>FAQ</p>
                             <NavLink className='' to={'/'}>
                                 <img src={getIcon('close', colorScheme!)} />
                             </NavLink>

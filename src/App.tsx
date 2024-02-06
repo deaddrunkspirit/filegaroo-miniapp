@@ -4,6 +4,7 @@ import FAQPage from './components/pages/FAQPage';
 import SettingsPage from './components/pages/SettingsPage';
 import ContentsPage from './components/pages/ContentsPage';
 import { DropdownProvider } from './providers/DropdownContext';
+import { GAProvider } from './providers/GAContext';
 import {
   QueryClient,
   QueryClientProvider
@@ -42,11 +43,11 @@ function App() {
     }
     doAuth().catch(console.error)
   }, [])
-  
+
   if (!window.Telegram.WebApp.isExpanded) {
     window.Telegram.WebApp.expand();
   }
-  
+
   if (!init_data || !isLocalizationLoaded) {
     return <Placeholder />
   }
@@ -55,18 +56,20 @@ function App() {
 
   return (
     <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
-        <TelegramProvider colorScheme={colorScheme} tg={init_data} >
-          <DropdownProvider>
-            <Routes>
-              <Route path='/' element={<MainPage />} />
-              <Route path='/faq' element={<FAQPage />} />
-              <Route path='/settings' element={<SettingsPage />} />
-              <Route path='/:title/:parent_content_id' element={<ContentsPage />} />
-            </Routes>
-          </DropdownProvider>
-        </TelegramProvider>
-      </QueryClientProvider>
+      <GAProvider>
+        <QueryClientProvider client={queryClient}>
+          <TelegramProvider colorScheme={colorScheme} tg={init_data} >
+            <DropdownProvider>
+              <Routes>
+                <Route path='/' element={<MainPage />} />
+                <Route path='/faq' element={<FAQPage />} />
+                <Route path='/settings' element={<SettingsPage />} />
+                <Route path='/:title/:parent_content_id' element={<ContentsPage />} />
+              </Routes>
+            </DropdownProvider>
+          </TelegramProvider>
+        </QueryClientProvider>
+      </GAProvider>
     </BrowserRouter>
   );
 }
