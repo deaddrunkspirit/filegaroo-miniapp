@@ -2,6 +2,7 @@ import { getIcon } from '../../services/imageService';
 import { useTelegramContext } from '../../providers/TelegramContext'
 import React, { useState } from 'react';
 import FAQAnswerCard from './FAQAnswerCard';
+import sendGAEvent from '../../services/analytics';
 
 
 type FAQCardProps = {
@@ -11,7 +12,7 @@ type FAQCardProps = {
 
 const FAQCard: React.FC<FAQCardProps> = ({ question, answer }) => {
     const [isOpened, setIsOpened] = useState<boolean>(false)
-    const { colorScheme } = useTelegramContext();
+    const { colorScheme, tg } = useTelegramContext();
 
     const handleScroll = () => {
         const container = document.getElementById('faqContainer');
@@ -21,9 +22,14 @@ const FAQCard: React.FC<FAQCardProps> = ({ question, answer }) => {
         }
     };
 
+    const onOpened = () => {
+        sendGAEvent(tg!!.init_data.user.id, 'FAQ', 'FAQOpen')
+        setIsOpened(!isOpened)
+    }
+
     return (
         <>
-            <li key={question} id={'faqCard_' + question} className='flex flex-row justify-between px-[5.56vw] py-[4vw] gap-[2vw] line-clamp-2' onClick={() => { setIsOpened(!isOpened) }}>
+            <li key={question} id={'faqCard_' + question} className='flex flex-row justify-between px-[5.56vw] py-[4vw] gap-[2vw] line-clamp-2' onClick={onOpened}>
                 <p className='text-md'>{question}</p>
                 <img className={isOpened ? 'transform rotate-180' : 'transform rotate-0'} src={getIcon('expand', colorScheme!)} />
             </li>
