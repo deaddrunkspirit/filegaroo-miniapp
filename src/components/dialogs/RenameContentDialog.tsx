@@ -4,7 +4,7 @@ import { ContentType } from "../../types/content";
 import { useTelegramContext } from "../../providers/TelegramContext";
 import getLocalizationString from "../../services/languageService";
 
-interface RenameContentDialogProps {
+type RenameContentDialogProps = {
     onEnd: () => void;
     onTitleChanged: (e: string) => void;
     content: ContentType;

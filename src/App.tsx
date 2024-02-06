@@ -31,22 +31,28 @@ function App() {
   const DEBUG_MODE = import.meta.env.VITE_DEBUG;
   const MOCKUP_INIT_DATA = import.meta.env.VITE_MOCKUP_INIT_DATA;
   const initData = DEBUG_MODE === 'enabled' ? MOCKUP_INIT_DATA : webApp.initData;
-  
-  useEffect(() => {
-      const doAuth = async () => {
 
-        await preloadAllImages();
-        const res = await authUser(initData); 
-        setInitData(res);
-        await setLocalizationMap(res!.init_data!.user.language_code);
-        setIsLocalizationLoaded(true);
-      }
-    doAuth().catch(console.error)   
+  useEffect(() => {
+    const doAuth = async () => {
+
+      await preloadAllImages();
+      const res = await authUser(initData);
+      setInitData(res);
+      await setLocalizationMap('ru');//res!.init_data!.user.language_code);
+      setIsLocalizationLoaded(true);
+    }
+    doAuth().catch(console.error)
   }, [])
-  
-  if (!init_data || !isLocalizationLoaded) return <Placeholder/>
+
+  if (!init_data || !isLocalizationLoaded) {
+    return <Placeholder />
+  }
+
   window.Telegram.WebApp.ready()
-  
+  if (!window.Telegram.WebApp.isExpanded) {
+    window.Telegram.WebApp.expand();
+  }
+
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>

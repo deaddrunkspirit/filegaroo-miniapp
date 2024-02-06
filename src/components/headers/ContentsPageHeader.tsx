@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { getIcon } from '../../services/imageService';
 
-interface ContentsPageHeaderProps {
+type ContentsPageHeaderProps = {
   title: string;
 }
 
