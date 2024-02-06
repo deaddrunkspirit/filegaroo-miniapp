@@ -7,10 +7,11 @@ import { useTelegramContext } from "../../providers/TelegramContext";
 type ContentPickerCardProps = {
     content: ContentType;
     updateSelectedCards: (content: ContentType, add: boolean) => void;
+    isSelected: boolean;
 }
 
-const ContentPickerCard: React.FC<ContentPickerCardProps> = ({ content, updateSelectedCards }) => {
-    const [checked, setChecked] = useState<boolean>(false);
+const ContentPickerCard: React.FC<ContentPickerCardProps> = ({ content, isSelected, updateSelectedCards }) => {
+    const [checked, setChecked] = useState<boolean>(isSelected);
     const { colorScheme } = useTelegramContext();
 
     const onCheckedChange = () => {
