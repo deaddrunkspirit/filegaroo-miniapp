@@ -9,6 +9,7 @@ import Placeholder from "../placeholders/Placeholder";
 import SelectButtonsFooter from '../footers/SelectButtonsFooter';
 import DeleteAllContentsDialog from '../dialogs/DeleteAllContentsDialog';
 import MoveChooseFolderDialog from '../dialogs/MoveChooseFolderDialog';
+import { useGA } from "../../providers/GAContext";
 
 type SelectContentsDialogProps = {
     content: ContentType;
@@ -24,6 +25,7 @@ const SelectContentsDialog: React.FC<SelectContentsDialogProps> = ({ currFolderN
 
     const parentContentId = content.parent_content_id;
     const { tg } = useTelegramContext();
+    const { sendGAEvent } = useGA();
     const queryClient = useQueryClient();
 
     const deleteMutation = useMutation({
@@ -57,6 +59,7 @@ const SelectContentsDialog: React.FC<SelectContentsDialogProps> = ({ currFolderN
         deleteMutation.mutate();
         onClose();
         document.body.classList.remove('overflow-hidden');
+        sendGAEvent(tg!!.init_data.user.id, 'WebAppInteraction', `DeleteMultipleContents`);
     }
 
     const onCancel = () => {

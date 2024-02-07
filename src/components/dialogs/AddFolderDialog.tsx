@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useTelegramContext } from "../../providers/TelegramContext";
 import getLocalizationString from "../../services/languageService";
 import React from "react";
+import { useGA } from "../../providers/GAContext";
 
 type AddFolderDialogProps = {
     onEnd: () => void;
@@ -15,6 +16,7 @@ type AddFolderDialogProps = {
 const AddFolderDialog: React.FC<AddFolderDialogProps> = ({ onEnd, parent_content_id, setName, name }) => {
     const queryClient = useQueryClient();
     const { tg } = useTelegramContext();
+    const { sendGAEvent } = useGA();
     
     const mutation = useMutation({
         mutationFn: () => addFolder(tg!.access_token, name, tg!.init_data.user.id, parent_content_id),
@@ -32,6 +34,8 @@ const AddFolderDialog: React.FC<AddFolderDialogProps> = ({ onEnd, parent_content
         mutation.mutate();
         onEnd();
         setName('');
+
+        sendGAEvent(tg!!.init_data.user.id, 'WebAppInteraction', `FolderCreated`);
     }
 
     const handleCancel = () => {

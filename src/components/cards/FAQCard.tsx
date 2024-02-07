@@ -24,7 +24,7 @@ const FAQCard: React.FC<FAQCardProps> = ({ question, answer }) => {
     };
 
     const onOpened = () => {
-        sendGAEvent(tg!!.init_data.user.id, 'FAQ', 'FAQOpen')
+        sendGAEvent(tg!!.init_data.user.id, 'FAQ', `Question_${question}` )
         setIsOpened(!isOpened)
     }
 
