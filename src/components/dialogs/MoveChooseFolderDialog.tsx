@@ -41,22 +41,6 @@ const MoveChooseFolderDialog: React.FC<MoveChooseFolderDialogProps> = ({ selecte
         }
     ]})
 
-    // const foldersQuery = useQuery<ContentType[], Error>({
-    //     queryKey: ['contents-move', folderIdToSave],
-    //     queryFn: async () => {
-    //         const allFolders = (await getContents(tg!.access_token, folderIdToSave)).filter(content => content.type === 2)
-    //         const res = allFolders.filter(folder => folder.type === 2 && !selectedContents.some(selectedContent => selectedContent.id === folder.id));
-    //         setFolders(res)
-    //         return res
-    //     },
-    // });
-
-    // const parentQuery = useQuery<ContentType | null, Error>({
-    //     queryKey: ['parent-move', folderIdToSave],
-    //     queryFn: () => getContent(tg!.access_token, folderIdToSave)
-    // });
-
-
     const handleMoveConfirm = () => {
         moveMutation.mutate();
     }
@@ -71,7 +55,7 @@ const MoveChooseFolderDialog: React.FC<MoveChooseFolderDialogProps> = ({ selecte
 
     if (!moveQuery[0].isPending && !moveQuery[1].isPending && !moveQuery[1].isError && !moveQuery[0].isError) {
         return (
-            <div className="absolute flex flex-col items-center justify-start w-dvw h-[125%] z-[1300] top-0 left-0 bg-light-primary dark:bg-dark-primary origin-center">
+            <div className="absolute flex flex-col items-center justify-start w-dvw h-[125%] z-[1300] top-0 left-0 bg-light-primary dark:bg-dark-primary origin-center overflow-hidden">
                 <MoveChooseFolderHeader onClose={onEnd} onHomeClicked={onHomeClick} onFolderChanged={onFolderChanged} parent={moveQuery[1].data} />
                 <div className="flex flex-col items-center justify-start m-0">
                     <ContentListMoveToFolder key={folderIdToSave} data={moveQuery[0].data} selectedContents={selectedContents} onFolderClicked={onFolderChanged} />

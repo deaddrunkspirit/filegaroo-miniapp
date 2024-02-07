@@ -24,7 +24,7 @@ const ContentsPageHeader: React.FC<ContentsPageHeaderProps> = ({title }) => {
       <button className='h-[6.11vw] w-[6.11vw]' onClick={handleBackButton}>
         <img className="h-full w-full" src={getIcon('back', colorScheme!)} alt="Back" />
       </button>
-      <h1 className='text-lg w-[59.72vw] text-light-onprimary dark:text-dark-onprimary line-clamp-2'>
+      <h1 className='text-lg w-[59.72vw] text-light-onprimary dark:text-dark-onprimary line-clamp-2 ...'>
         {title}</h1>
     </div>
   );

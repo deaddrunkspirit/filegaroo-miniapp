@@ -12,7 +12,7 @@ type ContentListMoveToFolderProps = {
 const ContentListPicker: React.FC<ContentListMoveToFolderProps> = ({ contents, selected, updateSelectedContents }) => {
     return (
         <>
-            <div className='relative z-10 flex flex-wrap justify-start pb-[20vh] gap-[5vw] w-[83.5vw] h-full list-none'>
+            <div id='select-content-list' className='relative z-10 flex flex-wrap justify-start pb-[20vh] gap-[5vw] w-[83.5vw] h-full list-none'>
                 {contents.map((content) => {
                     const isSelected = selected.some(selectedContent => selectedContent.id === content.id);
                     return (

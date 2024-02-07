@@ -27,7 +27,7 @@ const MoveChooseFolderHeader: React.FC<MoveChooseFolderHeaderProps> = ({ onClose
                 </>
                 : null
             }
-            <h1 className='text-lg text-light-onprimary dark:text-dark-onprimary'>{parent ? parent.title : getLocalizationString('main-page-name') as string}</h1>
+            <h1 className='text-lg w-[59.72vw] text-light-onprimary dark:text-dark-onprimary line-clamp-2'>{parent ? parent.title : getLocalizationString('main-page-name') as string}</h1>
             <div className='grow' />
             <div onClick={onClose}>
                 <img className="h-[5vw] w-[5vw] m-0" src={getIcon('close-page', colorScheme!)} alt="close" />
