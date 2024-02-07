@@ -96,7 +96,7 @@ const SelectContentsDialog: React.FC<SelectContentsDialogProps> = ({ currFolderN
             }
         });
 
-        return <div className="absolute flex flex-col items-center justify-start ml-[-8.25vw] mt-[-18.5vw] w-dvw h-[125%] z-[1000] top-0 left-0 bg-light-primary dark:bg-dark-primary origin-center">
+        return <div className="absolute flex flex-col items-center justify-start ml-[-8.25vw] mt-[-18.5vw] w-dvw h-[125%] z-[1000] top-0 left-0 bg-light-primary dark:bg-dark-primary origin-center overflow-hidden">
             {isSelecting ?
                 <>
                     <SelectHeader title={currFolderName} onClose={onClose} />
