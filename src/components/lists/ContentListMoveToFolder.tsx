@@ -3,12 +3,19 @@ import { ContentType } from '../../types/content'
 import ContentCardChooseFolder from "../cards/ContentCardChooseFolder";
 
 type ContentListMoveToFolderProps = {
-    folders: ContentType[];
+    data: ContentType[];
+    selectedContents: ContentType[];
     onFolderClicked: (newId: number | null) => void;
 }
 
 
-const ContentListMoveToFolder: React.FC<ContentListMoveToFolderProps> = ({ folders, onFolderClicked }) => {
+const ContentListMoveToFolder: React.FC<ContentListMoveToFolderProps> = ({ data, selectedContents, onFolderClicked }) => {
+    const folders = data.filter(content => content.type === 2)
+                        .filter(folder => folder.type === 2 && 
+                                        !selectedContents.some(selectedContent => 
+                                                                selectedContent.id === folder.id)
+                                                                );
+    
     return <>
         <div className='relative z-10 flex flex-wrap justify-start pb-[20vh] gap-[5vw] w-[83.5vw] h-full list-none'>
             {folders.map((folder) => (

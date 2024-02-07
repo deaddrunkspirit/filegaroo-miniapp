@@ -21,6 +21,7 @@ const SelectContentsDialog: React.FC<SelectContentsDialogProps> = ({ currFolderN
     const [isMove, setIsMove] = useState<boolean>(false);
     const [isSelecting, setIsSelecting] = useState<boolean>(true);
     const [selectedContents, setSelectedContents] = useState<ContentType[]>([content])
+
     const parentContentId = content.parent_content_id;
     const { tg } = useTelegramContext();
     const queryClient = useQueryClient();
@@ -28,8 +29,7 @@ const SelectContentsDialog: React.FC<SelectContentsDialogProps> = ({ currFolderN
     const deleteMutation = useMutation({
         mutationFn: () => deleteAllContents(tg!.access_token, selectedContents.map(content => content.id)),
         onSuccess: () => {
-            queryClient.prefetchQuery({ queryKey: ['contents'] })
-            queryClient.prefetchQuery({ queryKey: ['contents', parentContentId] })
+            queryClient.invalidateQueries({ queryKey: ['contents'] })
         }
     })
 
@@ -77,38 +77,40 @@ const SelectContentsDialog: React.FC<SelectContentsDialogProps> = ({ currFolderN
     }
 
     const { data, isError, isPending } = useQuery<ContentType[], Error>({
-        queryKey: ['contents', parentContentId],
+        queryKey: ['select', 'contents', parentContentId],
         queryFn: () => getContents(tg!.access_token, parentContentId)
     }
     );
 
-    if (isPending || isError) return <Placeholder />
+    
+    if (!isPending && !isError ) {
+        const sortedData = data.sort((a, b) => {
+            // First, prioritize type=2 (folders)
+            if (a.type === 2 && b.type !== 2) {
+                return -1; // Move a to the front
+            } else if (b.type === 2 && a.type !== 2) {
+                return 1; // Move b to the front
+            } else {
+                // If types are the same or both are not type=2, maintain original order
+                return 0;
+            }
+        });
 
-    const sortedData = data.sort((a, b) => {
-        // First, prioritize type=2 (folders)
-        if (a.type === 2 && b.type !== 2) {
-            return -1; // Move a to the front
-        } else if (b.type === 2 && a.type !== 2) {
-            return 1; // Move b to the front
-        } else {
-            // If types are the same or both are not type=2, maintain original order
-            return 0;
-        }
-    });
-
-    return <div className="absolute flex flex-col items-center justify-start ml-[-8.25vw] mt-[-18.5vw] w-dvw h-[125%] z-[1000] top-0 left-0 bg-light-primary dark:bg-dark-primary origin-center">
-        {isSelecting ?
-            <>
-                <SelectHeader title={currFolderName} onClose={onClose} />
-                <div className="flex flex-col items-center justify-start m-0">
-                    <ContentListPicker updateSelectedContents={updateSelectedCards} contents={sortedData} selected={content} />
-                </div>
-                <SelectButtonsFooter onDelete={onDeleteClicked} onMove={onMoveClicked} />
-            </>
-            : null}
-        {isDelete ? <DeleteAllContentsDialog onCancel={onCancel} onDelete={handleDelete} /> : null}
-        {isMove ? <MoveChooseFolderDialog onEnd={onClose} selectedContents={selectedContents} /> : null}
-    </div>
+        return <div className="absolute flex flex-col items-center justify-start ml-[-8.25vw] mt-[-18.5vw] w-dvw h-[125%] z-[1000] top-0 left-0 bg-light-primary dark:bg-dark-primary origin-center">
+            {isSelecting ?
+                <>
+                    <SelectHeader title={currFolderName} onClose={onClose} />
+                    <div className="flex flex-col items-center justify-start m-0">
+                        <ContentListPicker updateSelectedContents={updateSelectedCards} contents={sortedData} selected={selectedContents} />
+                    </div>
+                    <SelectButtonsFooter onDelete={onDeleteClicked} onMove={onMoveClicked} />
+                </>
+                : null}
+            {isDelete ? <DeleteAllContentsDialog onCancel={onCancel} onDelete={handleDelete} /> : null}
+            {isMove ? <MoveChooseFolderDialog onEnd={onClose} selectedContents={selectedContents} /> : null}
+        </div>
+    }
+    return <Placeholder />;
 }
 
 export default SelectContentsDialog;
