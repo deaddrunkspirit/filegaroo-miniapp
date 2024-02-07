@@ -7,6 +7,7 @@ import { getContent, getContents, moveContents } from "../../services/api/apiSer
 import { useTelegramContext } from "../../providers/TelegramContext";
 import { useEffect, useState } from "react";
 import Placeholder from "../placeholders/Placeholder";
+import { useGA } from "../../providers/GAContext";
 
 type MoveChooseFolderDialogProps = {
     selectedContents: ContentType[];
@@ -16,6 +17,7 @@ type MoveChooseFolderDialogProps = {
 const MoveChooseFolderDialog: React.FC<MoveChooseFolderDialogProps> = ({ selectedContents, onEnd }) => {
     const [folderIdToSave, setFolderIdToSave] = useState<number | null>(null)
     const { tg } = useTelegramContext();
+    const { sendGAEvent } = useGA();
     const queryClient = useQueryClient();
 
     useEffect(() => {
@@ -43,6 +45,7 @@ const MoveChooseFolderDialog: React.FC<MoveChooseFolderDialogProps> = ({ selecte
 
     const handleMoveConfirm = () => {
         moveMutation.mutate();
+        sendGAEvent(tg!!.init_data.user.id, 'WebAppInteraction', `MoveContent`);
     }
 
     const onFolderChanged = (newId: number | null) => {

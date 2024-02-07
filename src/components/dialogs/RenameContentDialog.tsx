@@ -3,6 +3,7 @@ import { renameContent } from "../../services/api/apiService";
 import { ContentType } from "../../types/content";
 import { useTelegramContext } from "../../providers/TelegramContext";
 import getLocalizationString from "../../services/languageService";
+import { useGA } from "../../providers/GAContext";
 
 type RenameContentDialogProps = {
     onEnd: () => void;
@@ -14,14 +15,16 @@ type RenameContentDialogProps = {
 const RenameContentDialog: React.FC<RenameContentDialogProps> = ({onEnd, content, onTitleChanged}) => {
     const [newName, setNewName] = useState<string>(content.title);
     const { tg } = useTelegramContext();
+    const { sendGAEvent } = useGA();
 
     const handleSave = () => {
-        renameContent(tg!.access_token, content, newName)
-        onEnd()
+        renameContent(tg!.access_token, content, newName);
+        sendGAEvent(tg!!.init_data.user.id, 'WebAppInteraction', `RenameContent`);
+        onEnd();
     }
 
     const handleCancel = () => {
-        onEnd()
+        onEnd();
     }
     
     return (

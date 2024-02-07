@@ -5,6 +5,7 @@ import { useTelegramContext } from "../../providers/TelegramContext";
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React from "react";
 import getLocalizationString from "../../services/languageService";
+import { useGA } from "../../providers/GAContext";
 
 type DeleteContentDialogProps = {
   onEnd: () => void;
@@ -14,6 +15,7 @@ type DeleteContentDialogProps = {
 
 const DeleteContentDialog: React.FC<DeleteContentDialogProps> = ({ onEnd, content }) => {
   const { tg } = useTelegramContext();
+  const { sendGAEvent } = useGA();
   const queryClient = useQueryClient();
 
   const deleteMutation = useMutation({
@@ -26,6 +28,7 @@ const DeleteContentDialog: React.FC<DeleteContentDialogProps> = ({ onEnd, conten
 
   const handleDelete = () => {
     deleteMutation.mutate();
+    sendGAEvent(tg!!.init_data.user.id, 'WebAppInteraction', `DeleteOneContent`);
   }
 
   const handleCancel = () => {
