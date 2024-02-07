@@ -6,6 +6,7 @@ import { useDropdown } from '../../providers/DropdownContext';
 import { forwardMessage } from "../../services/api/apiService";
 import { useTelegramContext } from "../../providers/TelegramContext";
 import getLocalizationString from "../../services/languageService";
+import { useGA } from "../../providers/GAContext";
 
 declare const window: any;
 
@@ -17,6 +18,8 @@ type ContentCardProps = {
 const ContentCard: React.FC<ContentCardProps> = ({ content, parent }) => {
     const { openDropdown, closeDropdown, isOpen } = useDropdown(content.id);
     const { tg, colorScheme } = useTelegramContext();
+    const { sendGAEvent } = useGA();
+    
     const shortlink = `/${content.title}/${content.id}`
     const navigate = useNavigate();
     
@@ -36,7 +39,7 @@ const ContentCard: React.FC<ContentCardProps> = ({ content, parent }) => {
         if (!isOpen) {
             closeDropdown();
             forwardMessage(tg!.access_token, content.id)
-
+            sendGAEvent(tg!!.init_data.user.id, 'WebAppInteraction', `MessageSendToChat` )
             window.Telegram.WebApp.close()
         }
     }
