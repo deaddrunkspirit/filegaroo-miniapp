@@ -19,7 +19,7 @@ const AddFolderDialog: React.FC<AddFolderDialogProps> = ({ onEnd, parent_content
     const mutation = useMutation({
         mutationFn: () => addFolder(tg!.access_token, name, tg!.init_data.user.id, parent_content_id),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['contents'] });
+            queryClient.invalidateQueries({ queryKey: ['content-page', 'contents'] });
         },
     });
 
