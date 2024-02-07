@@ -31,7 +31,7 @@ const SelectContentsDialog: React.FC<SelectContentsDialogProps> = ({ currFolderN
     const deleteMutation = useMutation({
         mutationFn: () => deleteAllContents(tg!.access_token, selectedContents.map(content => content.id)),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['contents'] })
+            queryClient.invalidateQueries({ queryKey: ['content-page'] })
         }
     })
 
