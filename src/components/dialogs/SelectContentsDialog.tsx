@@ -20,7 +20,7 @@ const SelectContentsDialog: React.FC<SelectContentsDialogProps> = ({ currFolderN
     const [isDelete, setIsDelete] = useState<boolean>(false);
     const [isMove, setIsMove] = useState<boolean>(false);
     const [isSelecting, setIsSelecting] = useState<boolean>(true);
-    const [selectedContents, setSelectedContents] = useState<ContentType[]>([])
+    const [selectedContents, setSelectedContents] = useState<ContentType[]>([content])
     const parentContentId = content.parent_content_id;
     const { tg } = useTelegramContext();
     const queryClient = useQueryClient();
@@ -28,14 +28,15 @@ const SelectContentsDialog: React.FC<SelectContentsDialogProps> = ({ currFolderN
     const deleteMutation = useMutation({
         mutationFn: () => deleteAllContents(tg!.access_token, selectedContents.map(content => content.id)),
         onSuccess: () => {
-            // queryClient.invalidateQueries({ queryKey: ['contents'] });
-            // queryClient.invalidateQueries({ queryKey: ['contents', parentContentId] });
             queryClient.prefetchQuery({ queryKey: ['contents'] })
             queryClient.prefetchQuery({ queryKey: ['contents', parentContentId] })
         }
     })
 
     const onDeleteClicked = () => {
+        if (selectedContents.length < 1) {
+            return;
+        }
         setIsSelecting(false);
         setIsDelete(true);
         setIsMove(false);
@@ -43,6 +44,9 @@ const SelectContentsDialog: React.FC<SelectContentsDialogProps> = ({ currFolderN
     }
 
     const onMoveClicked = () => {
+        if (selectedContents.length < 1) {
+            return;
+        }
         setIsSelecting(false);
         setIsDelete(false);
         setIsMove(true);
@@ -97,13 +101,13 @@ const SelectContentsDialog: React.FC<SelectContentsDialogProps> = ({ currFolderN
             <>
                 <SelectHeader title={currFolderName} onClose={onClose} />
                 <div className="flex flex-col items-center justify-start m-0">
-                    <ContentListPicker updateSelectedContents={updateSelectedCards} contents={sortedData} />
+                    <ContentListPicker updateSelectedContents={updateSelectedCards} contents={sortedData} selected={content} />
                 </div>
                 <SelectButtonsFooter onDelete={onDeleteClicked} onMove={onMoveClicked} />
             </>
             : null}
         {isDelete ? <DeleteAllContentsDialog onCancel={onCancel} onDelete={handleDelete} /> : null}
-        {isMove ? <MoveChooseFolderDialog onEnd={onClose} selectedContents={selectedContents} parentContentId={content.parent_content_id ?? null} /> : null}
+        {isMove ? <MoveChooseFolderDialog onEnd={onClose} selectedContents={selectedContents} /> : null}
     </div>
 }
 

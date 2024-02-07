@@ -4,6 +4,7 @@ import FAQPage from './components/pages/FAQPage';
 import SettingsPage from './components/pages/SettingsPage';
 import ContentsPage from './components/pages/ContentsPage';
 import { DropdownProvider } from './providers/DropdownContext';
+import { GAProvider } from './providers/GAContext';
 import {
   QueryClient,
   QueryClientProvider
@@ -31,36 +32,44 @@ function App() {
   const DEBUG_MODE = import.meta.env.VITE_DEBUG;
   const MOCKUP_INIT_DATA = import.meta.env.VITE_MOCKUP_INIT_DATA;
   const initData = DEBUG_MODE === 'enabled' ? MOCKUP_INIT_DATA : webApp.initData;
-  
-  useEffect(() => {
-      const doAuth = async () => {
 
-        await preloadAllImages();
-        const res = await authUser(initData); 
-        setInitData(res);
-        await setLocalizationMap(res!.init_data!.user.language_code);
-        setIsLocalizationLoaded(true);
-      }
-    doAuth().catch(console.error)   
+  useEffect(() => {
+    const doAuth = async () => {
+      await preloadAllImages();
+      const res = await authUser(initData);
+      setInitData(res);
+      await setLocalizationMap(res!.init_data!.user.language_code);
+      setIsLocalizationLoaded(true);
+    }
+    doAuth().catch(console.error)
   }, [])
-  
-  if (!init_data || !isLocalizationLoaded) return <Placeholder/>
+
+  if (!window.Telegram.WebApp.isExpanded) {
+    window.Telegram.WebApp.expand();
+  }
+
+  if (!init_data || !isLocalizationLoaded) {
+    return <Placeholder />
+  }
+
   window.Telegram.WebApp.ready()
-  
+
   return (
     <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
-        <TelegramProvider colorScheme={colorScheme} tg={init_data} >
-          <DropdownProvider>
-            <Routes>
-              <Route path='/' element={<MainPage />} />
-              <Route path='/faq' element={<FAQPage />} />
-              <Route path='/settings' element={<SettingsPage />} />
-              <Route path='/:title/:parent_content_id' element={<ContentsPage />} />
-            </Routes>
-          </DropdownProvider>
-        </TelegramProvider>
-      </QueryClientProvider>
+      <GAProvider>
+        <QueryClientProvider client={queryClient}>
+          <TelegramProvider colorScheme={colorScheme} tg={init_data} >
+            <DropdownProvider>
+              <Routes>
+                <Route path='/' element={<MainPage />} />
+                <Route path='/faq' element={<FAQPage />} />
+                <Route path='/settings' element={<SettingsPage />} />
+                <Route path='/:title/:parent_content_id' element={<ContentsPage />} />
+              </Routes>
+            </DropdownProvider>
+          </TelegramProvider>
+        </QueryClientProvider>
+      </GAProvider>
     </BrowserRouter>
   );
 }

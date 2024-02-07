@@ -10,12 +10,11 @@ import Placeholder from "../placeholders/Placeholder";
 
 type MoveChooseFolderDialogProps = {
     selectedContents: ContentType[];
-    parentContentId: number | null;
     onEnd: () => void;
 }
 
-const MoveChooseFolderDialog: React.FC<MoveChooseFolderDialogProps> = ({ selectedContents, parentContentId, onEnd }) => {
-    const [folderIdToSave, setFolderIdToSave] = useState<number | null>(parentContentId)
+const MoveChooseFolderDialog: React.FC<MoveChooseFolderDialogProps> = ({ selectedContents, onEnd }) => {
+    const [folderIdToSave, setFolderIdToSave] = useState<number | null>(null)
     const [folders, setFolders] = useState<ContentType[]>()
     const { tg } = useTelegramContext();
     const queryClient = useQueryClient();
@@ -23,8 +22,6 @@ const MoveChooseFolderDialog: React.FC<MoveChooseFolderDialogProps> = ({ selecte
     const moveMutation = useMutation({
         mutationFn: () => moveContents(tg!.access_token, selectedContents.map(content => content.id), folderIdToSave),
         onSuccess: () => {
-            // queryClient.invalidateQueries({ queryKey: ['contents-move', folderIdToSave] });
-            // queryClient.invalidateQueries({ queryKey: ['parent-move', folderIdToSave] });
             queryClient.invalidateQueries({ queryKey: ['contents'] });
             queryClient.invalidateQueries({ queryKey: ['parent'] });
             onEnd();
@@ -52,15 +49,21 @@ const MoveChooseFolderDialog: React.FC<MoveChooseFolderDialogProps> = ({ selecte
     }
 
     const onFolderChanged = (newId: number | null) => {
-        console.log(newId);
         setFolderIdToSave(newId);
         foldersQuery.refetch();
         parentQuery.refetch();
     }
+
+    const onHomeClick = () => {
+        setFolderIdToSave(null);
+        foldersQuery.refetch();
+        parentQuery.refetch();
+    }
+
     if (folders && !foldersQuery.isPending && !parentQuery.isPending && !parentQuery.isError && !foldersQuery.isError) {
         return (
             <div className="absolute flex flex-col items-center justify-start w-dvw h-[125%] z-[1300] top-0 left-0 bg-light-primary dark:bg-dark-primary origin-center">
-                <MoveChooseFolderHeader onClose={onEnd} onFolderChanged={onFolderChanged} parent={parentQuery.data} />
+                <MoveChooseFolderHeader onClose={onEnd} onHomeClicked={onHomeClick} onFolderChanged={onFolderChanged} parent={parentQuery.data} />
                 <div className="flex flex-col items-center justify-start m-0">
                     <ContentListMoveToFolder key={folderIdToSave} folders={folders} onFolderClicked={onFolderChanged} />
                 </div>

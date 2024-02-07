@@ -1,6 +1,8 @@
 import { getIcon } from '../../services/imageService';
 import { useTelegramContext } from '../../providers/TelegramContext'
 import React, { useState } from 'react';
+import FAQAnswerCard from './FAQAnswerCard';
+import { useGA } from '../../providers/GAContext';
 
 
 type FAQCardProps = {
@@ -8,37 +10,36 @@ type FAQCardProps = {
     answer: string[];
 }
 
-type FAQAnswerProps = {
-    items: string[];
-}
-
-const FAQAnswer: React.FC<FAQAnswerProps> = ({items}) => {
-    const first = items[0]
-    const list = items.slice(1)
-    return <div className='px-[5.56vw] pb-[6vw]'>
-        <p className='text-sm'>{first}</p>   
-        <ul className=' px-[4vw] list-disc'>
-            {list.map((item, i) => 
-                <li className={`text-sm`} key={i}>{item}</li>
-            )}
-        </ul>
-    </div>
-}
-
-const FAQCard: React.FC<FAQCardProps> = ({question, answer}) => {
+const FAQCard: React.FC<FAQCardProps> = ({ question, answer }) => {
     const [isOpened, setIsOpened] = useState<boolean>(false)
-    const { colorScheme } = useTelegramContext();
-
-    return <>
-        <li key={question} className='flex flex-row justify-between px-[5.56vw] py-[4vw] gap-[2vw] line-clamp-2' onClick={() => {setIsOpened(!isOpened)}}>
-            <p className='text-md'>{question}</p>
-            <img src={getIcon('expand', colorScheme!)}/>
-        </li>
-        {
-            isOpened ? <FAQAnswer items={answer}/> : null
+    const { colorScheme, tg } = useTelegramContext();
+    const { sendGAEvent } = useGA();
+    
+    const handleScroll = () => {
+        const container = document.getElementById('faqContainer');
+        const faqCard = document.getElementById(`faqCard_${question}`);
+        if (container && faqCard) {
+            faqCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
-        <div className='w-full h-[2px] opacity-20 bg-light-onsecondary dark:bg-dark-onsecondary' />
-    </>
+    };
+
+    const onOpened = () => {
+        sendGAEvent(tg!!.init_data.user.id, 'FAQ', 'FAQOpen')
+        setIsOpened(!isOpened)
+    }
+
+    return (
+        <>
+            <li key={question} id={'faqCard_' + question} className='flex flex-row justify-between px-[5.56vw] py-[4vw] gap-[2vw] line-clamp-2' onClick={onOpened}>
+                <p className='text-md'>{question}</p>
+                <img className={isOpened ? 'transform rotate-180' : 'transform rotate-0'} src={getIcon('expand', colorScheme!)} />
+            </li>
+            {
+                isOpened ? <FAQAnswerCard items={answer} isOpened={isOpened} onScroll={handleScroll} /> : null
+            }
+            <div key={`${question}_div`} className='w-full h-[2px] opacity-20 bg-light-onsecondary dark:bg-dark-onsecondary' />
+        </>
+    )
 }
 
 export default FAQCard;

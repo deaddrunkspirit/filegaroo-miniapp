@@ -4,7 +4,7 @@ import { useTelegramContext } from "../../providers/TelegramContext";
 import getLocalizationString from "../../services/languageService";
 import React from "react";
 
-interface AddFolderDialogProps {
+type AddFolderDialogProps = {
     onEnd: () => void;
     setName: (e: any) => void;
     name: string;
@@ -24,8 +24,14 @@ const AddFolderDialog: React.FC<AddFolderDialogProps> = ({ onEnd, parent_content
     });
 
     const handleSave = () => {
+        if (!name || name == '') {
+            name = getLocalizationString('folder-name-placeholder') as string;
+        }
+
+        console.log(name)
         mutation.mutate();
         onEnd();
+        setName('');
     }
 
     const handleCancel = () => {

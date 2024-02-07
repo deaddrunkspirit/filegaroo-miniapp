@@ -2,7 +2,7 @@ import { useTelegramContext } from "../../providers/TelegramContext";
 import { getIcon } from "../../services/imageService";
 import getLocalizationString from '../../services/languageService';
 
-interface CardOptionDialogProps {
+type CardOptionDialogProps = {
     handleDelete: () => void;
     handleEdit: () => void;
     handleSelect: () => void;
