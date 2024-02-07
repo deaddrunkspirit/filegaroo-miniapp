@@ -1,7 +1,6 @@
-import { ContentType } from '../../types/content';
 import { getContent, getContents } from '../../services/api/apiService';
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQueries } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import ContentList from '../lists/ContentList';
 import ContentsPageHeader from '../headers/ContentsPageHeader';
@@ -16,24 +15,24 @@ const ContentsPage: React.FC = () => {
     console.log(title)
     const { tg } = useTelegramContext();
 
-    const {data : contents, isPending: contentsPending, isError: contentsError} = useQuery<ContentType[], Error>({
-            queryKey: ['contents', parentContentId], 
+    const contentsQuery = useQueries({queries: [{
+            queryKey: ['content-page', 'contents', parentContentId], 
             queryFn: () => getContents(tg!.access_token, parentContentId)
-        });
+        }, {
+            queryKey: ['content-page', 'parent', parentContentId], 
+            queryFn: () => getContent(tg!.access_token, parentContentId)
+        }
+    ]});
 
-    const {data: parent, isPending: parentPending, isError: parentError} = useQuery<ContentType | null, Error>({
-        queryKey: ['parent', parentContentId], 
-        queryFn: () => getContent(tg!.access_token, parentContentId)
-    });
+    if (contentsQuery[0].isPending || contentsQuery[0].isPending || 
+        contentsQuery[1].isError || contentsQuery[1].isError) {
+            return <Placeholder />;
+    }
 
-    console.log(contents)
-
-    if (contentsPending || parentPending) return <Placeholder />
-    if (contentsError || parentError) return <Placeholder />
     return (
         <div className='flex flex-col justify-start items-center m-0 h-full min-h-dvh bg-light-primary text-light-onprimary dark:bg-dark-primary dark:text-dark-onprimary'>
             <ContentsPageHeader title={title ? title : ''} />
-            <ContentList parent={parent ?? null} data={contents!!} parent_id={parentContentId}></ContentList>
+            <ContentList parent={contentsQuery[1].data ?? null} data={contentsQuery[0].data!!} parent_id={parentContentId}></ContentList>
         </div>
     );
 }

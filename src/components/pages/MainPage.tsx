@@ -11,10 +11,11 @@ import { useTelegramContext } from '../../providers/TelegramContext';
 const MainPage: React.FC = () => {
   const { tg } = useTelegramContext();
   console.log(tg)
-  const { data, isError } = useQuery<ContentType[], Error>({ 
-      queryKey: ['contents'], 
-      queryFn: () => getContents(tg!.access_token) 
-    });
+  const { data, isError } = useQuery<ContentType[], Error>({
+    queryKey: ['content-page', 'contents'],
+    queryFn: () => getContents(tg!.access_token)
+  });
+
   console.log(data)
   if (data) {
     return (

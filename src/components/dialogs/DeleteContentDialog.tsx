@@ -19,7 +19,7 @@ const DeleteContentDialog: React.FC<DeleteContentDialogProps> = ({ onEnd, conten
   const deleteMutation = useMutation({
     mutationFn: () => deleteContent(tg!.access_token, content.id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['contents'] });
+      queryClient.invalidateQueries({ queryKey: ['content-page'] });
       onEnd();
     }
   })
