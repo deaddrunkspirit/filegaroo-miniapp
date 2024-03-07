@@ -2,8 +2,6 @@ import { getContent, getContents, moveContents } from '../../services/api/apiSer
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQueries, useQueryClient } from '@tanstack/react-query';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import ContentList from '../lists/ContentList';
-import ContentsPageHeader from '../headers/ContentsPageHeader';
 import { ContentType } from '../../types/content';
 import Placeholder from '../../components/placeholders/Placeholder';
 import { useTelegramContext } from '../../providers/TelegramContext';
@@ -17,7 +15,7 @@ const MoveContentsPage: React.FC = () => {
     const { parent_content_id = null, title = null } = useParams();
     const navigate = useNavigate();
 
-    const parentContentId: number | null = parent_content_id ? parseInt(parent_content_id) : null
+    // const parentContentId: number | null = parent_content_id ? parseInt(parent_content_id) : null
 
     const location = useLocation();
     const { state } = location;
@@ -35,7 +33,7 @@ const MoveContentsPage: React.FC = () => {
     }, [folderIdToSave])
 
     const moveMutation = useMutation({
-        mutationFn: () => moveContents(tg!.access_token, (state.selectedContents as ContentType[]).map(content => content.id), folderIdToSave),
+        mutationFn: () => moveContents(tg!.access_token, (state as ContentType[]).map(content => content.id), folderIdToSave),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['content-page', 'contents'] });
             onEnd();
@@ -78,12 +76,9 @@ const MoveContentsPage: React.FC = () => {
         <div className='flex flex-col justify-start items-center m-0 h-full min-h-dvh bg-light-primary text-light-onprimary dark:bg-dark-primary dark:text-dark-onprimary'>
             <MoveChooseFolderHeader onClose={onEnd} onHomeClicked={onHomeClick} onFolderChanged={onFolderChanged} parent={moveQuery[1].data ?? null} />
             <div className="flex flex-col items-center justify-start m-0">
-                <ContentListMoveToFolder key={folderIdToSave} data={moveQuery[0].data!!} selectedContents={state.selectedContents} onFolderClicked={onFolderChanged} />
+                <ContentListMoveToFolder key={folderIdToSave} data={moveQuery[0].data!!} selectedContents={state} onFolderClicked={onFolderChanged} />
             </div>
             <MoveFooter onMove={handleMoveConfirm} />
-            {/*             
-            <ContentsPageHeader title={title ? title : ''} />
-            <ContentList parent={contentsQuery[1].data ?? null} data={contentsQuery[0].data!!} parent_id={parentContentId}></ContentList> */}
         </div>
     );
 }

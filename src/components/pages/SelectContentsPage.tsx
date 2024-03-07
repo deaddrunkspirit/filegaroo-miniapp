@@ -1,10 +1,7 @@
-import { deleteAllContents, getContent, getContents } from '../../services/api/apiService';
+import { deleteAllContents, getContents } from '../../services/api/apiService';
 import React, { useState } from 'react';
-import { useMutation, useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import ContentList from '../lists/ContentList';
-import ContentsPageHeader from '../headers/ContentsPageHeader';
-import Placeholder from '../../components/placeholders/Placeholder';
 import { useTelegramContext } from '../../providers/TelegramContext';
 import { ContentType } from '../../types/content';
 import { useGA } from '../../providers/GAContext';
@@ -21,12 +18,9 @@ const SelectContentsPage: React.FC = () => {
     const { state } = location;
 
     console.log(`params: ${parent_content_id} ${title}`)
-    console.log(title)
+    console.log(state)
     const { tg } = useTelegramContext();
-    const [isDelete, setIsDelete] = useState<boolean>(false);
-    const [isMove, setIsMove] = useState<boolean>(false);
-    const [isSelecting, setIsSelecting] = useState<boolean>(true);
-    const [selectedContents, setSelectedContents] = useState<ContentType[]>([state.content])
+    const [selectedContents, setSelectedContents] = useState<ContentType[]>(state ? [state as ContentType] : [])
     const navigate = useNavigate();
 
     const { sendGAEvent } = useGA();
@@ -39,40 +33,21 @@ const SelectContentsPage: React.FC = () => {
         }
     })
 
-    const onDeleteClicked = () => {
+    const handleMove = () => {
         if (selectedContents.length < 1) {
             return;
         }
-        setIsSelecting(false);
-        setIsDelete(true);
-        setIsMove(false);
-        document.body.classList.add('overflow-hidden');
-    }
-
-    const onMoveClicked = () => {
-        if (selectedContents.length < 1) {
-            return;
-        }
-        setIsSelecting(false);
-        setIsDelete(false);
-        setIsMove(true);
-        // document.body.classList.remove('overflow-hidden');
-        navigate(parent_content_id ? `/${title}/${parent_content_id}/move`: '/move', {state: selectedContents})
+        
+        const shortlink = parent_content_id ? `/${title}/${parent_content_id}/move`: '/move';
+        navigate(shortlink, {state: selectedContents})
     }
 
     const handleDelete = () => {
         deleteMutation.mutate();
         navigate(-2);
-        document.body.classList.remove('overflow-hidden');
         sendGAEvent(tg!!.init_data.user.id, 'WebAppInteraction', `DeleteMultipleContents`);
     }
 
-    const onCancel = () => {
-        document.body.classList.remove('overflow-hidden');
-        setIsDelete(false)
-        setIsMove(false);
-        setIsSelecting(true);
-    }
 
     const updateSelectedCards = (content: ContentType, add: boolean) => {
         if (!add) {
@@ -91,7 +66,7 @@ const SelectContentsPage: React.FC = () => {
     );
 
 
-    if (!isPending && !isError) {
+    if (!isPending && !isError && data) {
         const sortedData = data.sort((a, b) => {
             // First, prioritize type=2 (folders)
             if (a.type === 2 && b.type !== 2) {
@@ -103,16 +78,16 @@ const SelectContentsPage: React.FC = () => {
                 return 0;
             }
         });
-
+        console.log(sortedData);
+        console.log(selectedContents);
+        console.log(updateSelectedCards);
         return (
             <div className='flex flex-col justify-start items-center m-0 h-full min-h-dvh bg-light-primary text-light-onprimary dark:bg-dark-primary dark:text-dark-onprimary'>
                 <SelectHeader title={getLocalizationString('main-page-name') as string} onClose={() => navigate(-1)} />
                 <div className="flex flex-col items-center justify-start m-0">
                     <ContentListPicker updateSelectedContents={updateSelectedCards} contents={sortedData} selected={selectedContents} />
                 </div>
-                <SelectButtonsFooter onDelete={onDeleteClicked} onMove={onMoveClicked} />
-                {/* <ContentsPageHeader title={title ? title : ''} />
-            <ContentList parent={contentsQuery[1].data ?? null} data={contentsQuery[0].data!!} parent_id={parentContentId}></ContentList> */}
+                <SelectButtonsFooter onDelete={handleDelete} onMove={handleMove} />
             </div>
         );
     }

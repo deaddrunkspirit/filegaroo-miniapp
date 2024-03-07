@@ -64,14 +64,11 @@ function App() {
               <Routes>
                 <Route path='/faq' element={<FAQPage />} />
                 <Route path='/settings' element={<SettingsPage />} />
-
                 <Route path='/' element={<ContentsPage />} />
-                <Route path='/:title/:parent_content_id' element={<ContentsPage />} />
-
                 <Route path='/select' element={<SelectContentsPage />} />
-                <Route path='/:title/:parent_content_id/select' element={<SelectContentsPage />} />
-
                 <Route path='/move' element={<MoveContentsPage />} />
+                <Route path='/:title/:parent_content_id/' element={<ContentsPage />} />
+                <Route path='/:title/:parent_content_id/select' element={<SelectContentsPage />} />
                 <Route path='/:title/:parent_content_id/move' element={<MoveContentsPage />} />
               </Routes>
             </DropdownProvider>
