@@ -31,7 +31,7 @@ const ContentCard: React.FC<ContentCardProps> = ({ content, parent }) => {
     const handleFolderClick = () => {
         if (!isOpen) {
             closeDropdown();
-            navigate(shortlink);
+            navigate(shortlink, {state: content});
         }
     }
 

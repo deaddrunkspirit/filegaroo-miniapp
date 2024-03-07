@@ -6,6 +6,7 @@ import RenameContentDialog from '../dialogs/RenameContentDialog';
 import CardOptionsDialog from '../dialogs/CardOptionsDialog';
 import DeleteContentDialog from '../dialogs/DeleteContentDialog';
 import SelectContentsDialog from '../dialogs/SelectContentsDialog';
+import { useNavigate } from 'react-router-dom';
 
 type DropdownMenuProps = {
   content: ContentType;
@@ -18,6 +19,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ content, currFolderName }) 
   const [isDeleting, setIsDeleting] = useState(false);
   const [isSelecting, setIsSelecting] = useState(false);
   const [contentTitle, setContentTitile] = useState(content.title)
+  let navigate = useNavigate();
 
   const handleEdit = () => {
     setIsEditing(true)
@@ -28,8 +30,11 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ content, currFolderName }) 
   }
 
   const handleSelect = () => {
-    document.body.classList.remove('overflow-hidden');
-    setIsSelecting(true)
+    // document.body.classList.remove('overflow-hidden');
+    // setIsSelecting(true)
+    const shortlink = content.parent_content_id === null ? '/select' : `/${currFolderName}/${content.parent_content_id}/select`;
+    console.log(shortlink);
+    navigate(shortlink, {state: content})
   }
 
   const onSelectionClose = () => { 
