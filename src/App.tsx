@@ -1,8 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import MainPage from './components/pages/MainPage';
 import FAQPage from './components/pages/FAQPage';
 import SettingsPage from './components/pages/SettingsPage';
 import ContentsPage from './components/pages/ContentsPage';
+import SelectContentsPage from './components/pages/SelectContentsPage';
+import MoveContentsPage from './components/pages/MoveContentsPage';
 import { DropdownProvider } from './providers/DropdownContext';
 import { GAProvider } from './providers/GAContext';
 import {
@@ -61,10 +62,14 @@ function App() {
           <TelegramProvider colorScheme={colorScheme} tg={init_data} >
             <DropdownProvider>
               <Routes>
-                <Route path='/' element={<MainPage />} />
                 <Route path='/faq' element={<FAQPage />} />
                 <Route path='/settings' element={<SettingsPage />} />
-                <Route path='/:title/:parent_content_id' element={<ContentsPage />} />
+                <Route path='/' element={<ContentsPage />} />
+                <Route path='/select' element={<SelectContentsPage />} />
+                <Route path='/move' element={<MoveContentsPage />} />
+                <Route path='/:title/:parent_content_id/' element={<ContentsPage />} />
+                <Route path='/:title/:parent_content_id/select' element={<SelectContentsPage />} />
+                <Route path='/:title/:parent_content_id/move' element={<MoveContentsPage />} />
               </Routes>
             </DropdownProvider>
           </TelegramProvider>
