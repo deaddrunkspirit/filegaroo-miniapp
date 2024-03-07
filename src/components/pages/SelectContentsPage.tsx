@@ -13,6 +13,8 @@ import SelectButtonsFooter from '../footers/SelectButtonsFooter';
 
 const SelectContentsPage: React.FC = () => {
     const { parent_content_id = null, title = null } = useParams();
+    console.log(parent_content_id)
+    console.log(title)
     const parentContentId: number | null = parent_content_id ? parseInt(parent_content_id) : null;
     const location = useLocation();
     const { state } = location;
@@ -78,12 +80,10 @@ const SelectContentsPage: React.FC = () => {
                 return 0;
             }
         });
-        console.log(sortedData);
-        console.log(selectedContents);
-        console.log(updateSelectedCards);
+
         return (
             <div className='flex flex-col justify-start items-center m-0 h-full min-h-dvh bg-light-primary text-light-onprimary dark:bg-dark-primary dark:text-dark-onprimary'>
-                <SelectHeader title={getLocalizationString('main-page-name') as string} onClose={() => navigate(-1)} />
+                <SelectHeader title={title ?? getLocalizationString('main-page-name') as string} onClose={() => navigate(-1)} />
                 <div className="flex flex-col items-center justify-start m-0">
                     <ContentListPicker updateSelectedContents={updateSelectedCards} contents={sortedData} selected={selectedContents} />
                 </div>

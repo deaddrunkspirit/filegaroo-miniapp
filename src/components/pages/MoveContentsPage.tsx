@@ -52,12 +52,13 @@ const MoveContentsPage: React.FC = () => {
     ]})
 
     const onEnd = () => {
-        navigate(parent_content_id ? `/${title}/${parent_content_id}` : '/')
+        navigate('/');
     }
 
     const handleMoveConfirm = () => {
         moveMutation.mutate();
         sendGAEvent(tg!!.init_data.user.id, 'WebAppInteraction', `MoveContent`);
+        onEnd();
     }
 
     const onFolderChanged = (newId: number | null) => {

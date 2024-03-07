@@ -20,17 +20,16 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ content, currFolderName }) 
   let navigate = useNavigate();
 
   const handleEdit = () => {
-    setIsEditing(true)
+    setIsEditing(true);
   };
 
   const handleDelete = () => {
-    setIsDeleting(true)
+    setIsDeleting(true);
   }
 
   const handleSelect = () => {
-    console.log(content)
     const shortlink = content.parent_content_id === null ? '/select' : `/${currFolderName}/${content.parent_content_id}/select`;
-    console.log(shortlink);
+    closeDropdown();
     navigate(shortlink, { state: content })
   }
 
