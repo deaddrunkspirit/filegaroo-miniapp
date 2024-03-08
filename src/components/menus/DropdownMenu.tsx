@@ -35,7 +35,6 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ content, currFolderName }) 
 
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
-
             const dropdownMenu = document.getElementById(`dropdown-${content.id}`);
 
             if (dropdownMenu && !dropdownMenu.contains(e.target as Node)) {

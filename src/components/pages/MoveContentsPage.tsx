@@ -12,18 +12,13 @@ import { useGA } from '../../providers/GAContext';
 
 
 const MoveContentsPage: React.FC = () => {
-    const { parent_content_id = null, title = null } = useParams();
     const navigate = useNavigate();
-
     const location = useLocation();
     const { state } = location;
     const [folderIdToSave, setFolderIdToSave] = useState<number | null>(null)
     const { tg } = useTelegramContext();
     const { sendGAEvent } = useGA();
     const queryClient = useQueryClient();
-
-    console.log(`params: ${parent_content_id} ${title}`)
-    console.log(title)
 
 
     useEffect(() => {
@@ -68,20 +63,22 @@ const MoveContentsPage: React.FC = () => {
     const onHomeClick = () => {
         setFolderIdToSave(null);
     }
-    if (moveQuery[0].isPending || moveQuery[0].isPending ||
-        moveQuery[1].isError || moveQuery[1].isError || !moveQuery[0].data) {
-        return <Placeholder />;
+
+    if (!moveQuery[0].isPending && !moveQuery[0].isPending &&
+        !moveQuery[1].isError && !moveQuery[1].isError && moveQuery[0].data) {
+
+        return (
+            <div className='flex flex-col justify-start items-center m-0 h-full min-h-dvh bg-light-primary text-light-onprimary dark:bg-dark-primary dark:text-dark-onprimary'>
+                <MoveChooseFolderHeader onClose={onEnd} onHomeClicked={onHomeClick} onFolderChanged={onFolderChanged} parent={moveQuery[1].data ?? null} />
+                <div className="flex flex-col items-center justify-start m-0">
+                    <ContentListMoveToFolder key={folderIdToSave} data={moveQuery[0].data!!} selectedContents={state} onFolderClicked={onFolderChanged} />
+                </div>
+                <MoveFooter onMove={handleMoveConfirm} />
+            </div>
+        );
     }
 
-    return (
-        <div className='flex flex-col justify-start items-center m-0 h-full min-h-dvh bg-light-primary text-light-onprimary dark:bg-dark-primary dark:text-dark-onprimary'>
-            <MoveChooseFolderHeader onClose={onEnd} onHomeClicked={onHomeClick} onFolderChanged={onFolderChanged} parent={moveQuery[1].data ?? null} />
-            <div className="flex flex-col items-center justify-start m-0">
-                <ContentListMoveToFolder key={folderIdToSave} data={moveQuery[0].data!!} selectedContents={state} onFolderClicked={onFolderChanged} />
-            </div>
-            <MoveFooter onMove={handleMoveConfirm} />
-        </div>
-    );
+    return <Placeholder />;
 }
 
 export default MoveContentsPage;

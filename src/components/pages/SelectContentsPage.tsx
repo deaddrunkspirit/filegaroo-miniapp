@@ -9,18 +9,15 @@ import SelectHeader from '../headers/SelectHeader';
 import getLocalizationString from '../../services/languageService';
 import ContentListPicker from '../lists/ContentListPicker';
 import SelectButtonsFooter from '../footers/SelectButtonsFooter';
+import Placeholder from '../placeholders/Placeholder';
 
 
 const SelectContentsPage: React.FC = () => {
     const { parent_content_id = null, title = null } = useParams();
-    console.log(parent_content_id)
-    console.log(title)
     const parentContentId: number | null = parent_content_id ? parseInt(parent_content_id) : null;
     const location = useLocation();
     const { state } = location;
 
-    console.log(`params: ${parent_content_id} ${title}`)
-    console.log(state)
     const { tg } = useTelegramContext();
     const [selectedContents, setSelectedContents] = useState<ContentType[]>(state ? [state as ContentType] : [])
     const navigate = useNavigate();
@@ -91,6 +88,8 @@ const SelectContentsPage: React.FC = () => {
             </div>
         );
     }
+    
+    return <Placeholder />;
 }
 
 export default SelectContentsPage;
