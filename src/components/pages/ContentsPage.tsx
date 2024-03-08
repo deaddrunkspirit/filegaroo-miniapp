@@ -34,10 +34,9 @@ const ContentsPage: React.FC = () => {
 
     return (
         <div className='flex flex-col justify-start items-center m-0 h-full min-h-dvh bg-light-primary text-light-onprimary dark:bg-dark-primary dark:text-dark-onprimary'>
-            {
-                parent_content_id ?
-                    <ContentsPageHeader title={title ? title : ''} /> :
-                    <MainPageHeader />
+            {parent_content_id ?
+                <ContentsPageHeader title={title ? title : ''} /> :
+                <MainPageHeader />
             }
             <ContentList parent={contentsQuery[1].data ?? null} data={contentsQuery[0].data!!} parent_id={parentContentId}></ContentList>
         </div>

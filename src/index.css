@@ -4,14 +4,15 @@
 
 
 @keyframes pulseOut {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 .animate-appear {
-  animation: pulseOut .2s cubic-bezier(0.4, 0, 0.6, 1);
+    animation: pulseOut .2s cubic-bezier(0.4, 0, 0.6, 1);
 }

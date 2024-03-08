@@ -15,8 +15,6 @@ const MoveContentsPage: React.FC = () => {
     const { parent_content_id = null, title = null } = useParams();
     const navigate = useNavigate();
 
-    // const parentContentId: number | null = parent_content_id ? parseInt(parent_content_id) : null
-
     const location = useLocation();
     const { state } = location;
     const [folderIdToSave, setFolderIdToSave] = useState<number | null>(null)
@@ -29,7 +27,7 @@ const MoveContentsPage: React.FC = () => {
 
 
     useEffect(() => {
-        queryClient.invalidateQueries({queryKey: ['move']});
+        queryClient.invalidateQueries({ queryKey: ['move'] });
     }, [folderIdToSave])
 
     const moveMutation = useMutation({
@@ -40,16 +38,18 @@ const MoveContentsPage: React.FC = () => {
         }
     })
 
-    const moveQuery = useQueries({queries: [
-        {
-            queryKey: ['move', 'contents-move', folderIdToSave],
-            queryFn: async () => getContents(tg!.access_token, folderIdToSave),
-        },
-        {
-            queryKey: ['move', 'parent-move', folderIdToSave],
-            queryFn: () => getContent(tg!.access_token, folderIdToSave),
-        }
-    ]})
+    const moveQuery = useQueries({
+        queries: [
+            {
+                queryKey: ['move', 'contents-move', folderIdToSave],
+                queryFn: async () => getContents(tg!.access_token, folderIdToSave),
+            },
+            {
+                queryKey: ['move', 'parent-move', folderIdToSave],
+                queryFn: () => getContent(tg!.access_token, folderIdToSave),
+            }
+        ]
+    })
 
     const onEnd = () => {
         navigate('/');

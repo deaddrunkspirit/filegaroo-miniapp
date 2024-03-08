@@ -8,4 +8,4 @@ export type ContentType = {
     body?: string | null;
     attachment?: number | null;
     id: number;
- };
+};

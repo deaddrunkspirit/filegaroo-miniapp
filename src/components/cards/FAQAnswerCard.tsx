@@ -9,8 +9,8 @@ type FAQAnswerProps = {
 
 const FAQAnswerCard: React.FC<FAQAnswerProps> = ({ items, isOpened, onScroll }) => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const first = items[0]
-    const list = items.slice(1)
+    const first = items[0];
+    const list = items.slice(1);
 
     useEffect(() => {
         if (isOpened) {
@@ -27,7 +27,7 @@ const FAQAnswerCard: React.FC<FAQAnswerProps> = ({ items, isOpened, onScroll }) 
                 )}
             </ul>
         </div>
-    )
+    );
 }
 
 export default FAQAnswerCard;

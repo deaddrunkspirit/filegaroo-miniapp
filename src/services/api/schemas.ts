@@ -5,178 +5,178 @@
 
 
 export interface paths {
-  "/contents/": {
-    /** Create Content */
-    post: operations["create_content_contents__post"];
-    /** Delete Multiple Contents */
-    delete: operations["delete_multiple_contents_contents__delete"];
-  };
-  "/contents/{content_id}": {
-    /** Get Content */
-    get: operations["get_content_contents__content_id__get"];
-    /** Update Content */
-    put: operations["update_content_contents__content_id__put"];
-    /** Delete Content */
-    delete: operations["delete_content_contents__content_id__delete"];
-  };
-  "/contents/move/{parent_id}": {
-    /** Move Contents To A Different Parent */
-    put: operations["move_contents_to_a_different_parent_contents_move__parent_id__put"];
-  };
-  "/contents/move/": {
-    /** Move Contents To A Root */
-    put: operations["move_contents_to_a_root_contents_move__put"];
-  };
-  "/contents/parent/{parent_content_id}": {
-    /** Get Contents By Parent Id */
-    get: operations["get_contents_by_parent_id_contents_parent__parent_content_id__get"];
-  };
-  "/contents/parent": {
-    /** Get Contents By Parent Id */
-    get: operations["get_contents_by_parent_id_contents_parent_get"];
-  };
-  "/contents/folders/{parent_content_id}": {
-    /** Get Folders By User Id And Parent Content Id */
-    get: operations["get_folders_by_user_id_and_parent_content_id_contents_folders__parent_content_id__get"];
-  };
-  "/contents/folders": {
-    /** Get Root Folders By User Id */
-    get: operations["get_root_folders_by_user_id_contents_folders_get"];
-  };
-  "/contents/update_media_group/{content_id}": {
-    /** Update Media Group */
-    put: operations["update_media_group_contents_update_media_group__content_id__put"];
-  };
-  "/contents/forward_message/{content_id}": {
-    /** Forward Message */
-    post: operations["forward_message_contents_forward_message__content_id__post"];
-  };
-  "/users/auth": {
-    /** Authenticate User */
-    post: operations["authenticate_user_users_auth_post"];
-  };
-  "/users/token": {
-    /** Get User Token */
-    post: operations["get_user_token_users_token_post"];
-  };
-  "/users/{telegram_id}/{lang}": {
-    /** Get Or Create User */
-    get: operations["get_or_create_user_users__telegram_id___lang__get"];
-  };
-  "/localization/bot_strings": {
-    /** Get Bot Strings */
-    get: operations["get_bot_strings_localization_bot_strings_get"];
-  };
-  "/localization/miniapp_strings/{lang}": {
-    /** Get Miniapp Strings */
-    get: operations["get_miniapp_strings_localization_miniapp_strings__lang__get"];
-  };
-  "/": {
-    /** Welcome */
-    get: operations["welcome__get"];
-  };
+    "/contents/": {
+        /** Create Content */
+        post: operations["create_content_contents__post"];
+        /** Delete Multiple Contents */
+        delete: operations["delete_multiple_contents_contents__delete"];
+    };
+    "/contents/{content_id}": {
+        /** Get Content */
+        get: operations["get_content_contents__content_id__get"];
+        /** Update Content */
+        put: operations["update_content_contents__content_id__put"];
+        /** Delete Content */
+        delete: operations["delete_content_contents__content_id__delete"];
+    };
+    "/contents/move/{parent_id}": {
+        /** Move Contents To A Different Parent */
+        put: operations["move_contents_to_a_different_parent_contents_move__parent_id__put"];
+    };
+    "/contents/move/": {
+        /** Move Contents To A Root */
+        put: operations["move_contents_to_a_root_contents_move__put"];
+    };
+    "/contents/parent/{parent_content_id}": {
+        /** Get Contents By Parent Id */
+        get: operations["get_contents_by_parent_id_contents_parent__parent_content_id__get"];
+    };
+    "/contents/parent": {
+        /** Get Contents By Parent Id */
+        get: operations["get_contents_by_parent_id_contents_parent_get"];
+    };
+    "/contents/folders/{parent_content_id}": {
+        /** Get Folders By User Id And Parent Content Id */
+        get: operations["get_folders_by_user_id_and_parent_content_id_contents_folders__parent_content_id__get"];
+    };
+    "/contents/folders": {
+        /** Get Root Folders By User Id */
+        get: operations["get_root_folders_by_user_id_contents_folders_get"];
+    };
+    "/contents/update_media_group/{content_id}": {
+        /** Update Media Group */
+        put: operations["update_media_group_contents_update_media_group__content_id__put"];
+    };
+    "/contents/forward_message/{content_id}": {
+        /** Forward Message */
+        post: operations["forward_message_contents_forward_message__content_id__post"];
+    };
+    "/users/auth": {
+        /** Authenticate User */
+        post: operations["authenticate_user_users_auth_post"];
+    };
+    "/users/token": {
+        /** Get User Token */
+        post: operations["get_user_token_users_token_post"];
+    };
+    "/users/{telegram_id}/{lang}": {
+        /** Get Or Create User */
+        get: operations["get_or_create_user_users__telegram_id___lang__get"];
+    };
+    "/localization/bot_strings": {
+        /** Get Bot Strings */
+        get: operations["get_bot_strings_localization_bot_strings_get"];
+    };
+    "/localization/miniapp_strings/{lang}": {
+        /** Get Miniapp Strings */
+        get: operations["get_miniapp_strings_localization_miniapp_strings__lang__get"];
+    };
+    "/": {
+        /** Welcome */
+        get: operations["welcome__get"];
+    };
 }
 
 export type webhooks = Record<string, never>;
 
 export interface components {
-  schemas: {
-    /** ContentCreate */
-    ContentCreate: {
-      /** Title */
-      title: string;
-      /** Type */
-      type: number;
-      /** Parent Content Id */
-      parent_content_id?: number | null;
-      /** User Id */
-      user_id: number;
-      /** Tg Chat Id */
-      tg_chat_id?: number | null;
-      /** Tg Message Id */
-      tg_message_id?: number | null;
-      /** Body */
-      body?: string | null;
-      /** Attachment */
-      attachment?: number | null;
-      /** Media Group Id */
-      media_group_id?: string | null;
-      /** Media Group Messages */
-      media_group_messages?: number[] | null;
+    schemas: {
+        /** ContentCreate */
+        ContentCreate: {
+            /** Title */
+            title: string;
+            /** Type */
+            type: number;
+            /** Parent Content Id */
+            parent_content_id?: number | null;
+            /** User Id */
+            user_id: number;
+            /** Tg Chat Id */
+            tg_chat_id?: number | null;
+            /** Tg Message Id */
+            tg_message_id?: number | null;
+            /** Body */
+            body?: string | null;
+            /** Attachment */
+            attachment?: number | null;
+            /** Media Group Id */
+            media_group_id?: string | null;
+            /** Media Group Messages */
+            media_group_messages?: number[] | null;
+        };
+        /** ContentMove */
+        ContentMove: {
+            /** Contents */
+            contents: number[];
+        };
+        /** ContentRead */
+        ContentRead: {
+            /** Title */
+            title: string;
+            /** Type */
+            type: number;
+            /** Parent Content Id */
+            parent_content_id?: number | null;
+            /** User Id */
+            user_id: number;
+            /** Tg Chat Id */
+            tg_chat_id?: number | null;
+            /** Tg Message Id */
+            tg_message_id?: number | null;
+            /** Body */
+            body?: string | null;
+            /** Attachment */
+            attachment?: number | null;
+            /** Media Group Id */
+            media_group_id?: string | null;
+            /** Media Group Messages */
+            media_group_messages?: number[] | null;
+            /** Id */
+            id: number;
+        };
+        /** ContentUpdate */
+        ContentUpdate: {
+            /** Title */
+            title: string;
+            /** Type */
+            type: number;
+            /** Parent Content Id */
+            parent_content_id?: number | null;
+            /** User Id */
+            user_id: number;
+            /** Tg Chat Id */
+            tg_chat_id?: number | null;
+            /** Tg Message Id */
+            tg_message_id?: number | null;
+            /** Body */
+            body?: string | null;
+            /** Attachment */
+            attachment?: number | null;
+            /** Media Group Id */
+            media_group_id?: string | null;
+            /** Media Group Messages */
+            media_group_messages?: number[] | null;
+        };
+        /** HTTPValidationError */
+        HTTPValidationError: {
+            /** Detail */
+            detail?: components["schemas"]["ValidationError"][];
+        };
+        /** ValidationError */
+        ValidationError: {
+            /** Location */
+            loc: (string | number)[];
+            /** Message */
+            msg: string;
+            /** Error Type */
+            type: string;
+        };
     };
-    /** ContentMove */
-    ContentMove: {
-      /** Contents */
-      contents: number[];
-    };
-    /** ContentRead */
-    ContentRead: {
-      /** Title */
-      title: string;
-      /** Type */
-      type: number;
-      /** Parent Content Id */
-      parent_content_id?: number | null;
-      /** User Id */
-      user_id: number;
-      /** Tg Chat Id */
-      tg_chat_id?: number | null;
-      /** Tg Message Id */
-      tg_message_id?: number | null;
-      /** Body */
-      body?: string | null;
-      /** Attachment */
-      attachment?: number | null;
-      /** Media Group Id */
-      media_group_id?: string | null;
-      /** Media Group Messages */
-      media_group_messages?: number[] | null;
-      /** Id */
-      id: number;
-    };
-    /** ContentUpdate */
-    ContentUpdate: {
-      /** Title */
-      title: string;
-      /** Type */
-      type: number;
-      /** Parent Content Id */
-      parent_content_id?: number | null;
-      /** User Id */
-      user_id: number;
-      /** Tg Chat Id */
-      tg_chat_id?: number | null;
-      /** Tg Message Id */
-      tg_message_id?: number | null;
-      /** Body */
-      body?: string | null;
-      /** Attachment */
-      attachment?: number | null;
-      /** Media Group Id */
-      media_group_id?: string | null;
-      /** Media Group Messages */
-      media_group_messages?: number[] | null;
-    };
-    /** HTTPValidationError */
-    HTTPValidationError: {
-      /** Detail */
-      detail?: components["schemas"]["ValidationError"][];
-    };
-    /** ValidationError */
-    ValidationError: {
-      /** Location */
-      loc: (string | number)[];
-      /** Message */
-      msg: string;
-      /** Error Type */
-      type: string;
-    };
-  };
-  responses: never;
-  parameters: never;
-  requestBodies: never;
-  headers: never;
-  pathItems: never;
+    responses: never;
+    parameters: never;
+    requestBodies: never;
+    headers: never;
+    pathItems: never;
 }
 
 export type $defs = Record<string, never>;
@@ -185,394 +185,394 @@ export type external = Record<string, never>;
 
 export interface operations {
 
-  /** Create Content */
-  create_content_contents__post: {
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ContentCreate"];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ContentRead"];
+    /** Create Content */
+    create_content_contents__post: {
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ContentCreate"];
+            };
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+        responses: {
+            /** @description Successful Response */
+            200: {
+                content: {
+                    "application/json": components["schemas"]["ContentRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
         };
-      };
     };
-  };
-  /** Delete Multiple Contents */
-  delete_multiple_contents_contents__delete: {
-    parameters: {
-      query: {
-        /** @description List of content IDs to delete */
-        contents: number[];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": unknown;
+    /** Delete Multiple Contents */
+    delete_multiple_contents_contents__delete: {
+        parameters: {
+            query: {
+                /** @description List of content IDs to delete */
+                contents: number[];
+            };
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+        responses: {
+            /** @description Successful Response */
+            200: {
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
         };
-      };
     };
-  };
-  /** Get Content */
-  get_content_contents__content_id__get: {
-    parameters: {
-      path: {
-        content_id: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ContentRead"];
+    /** Get Content */
+    get_content_contents__content_id__get: {
+        parameters: {
+            path: {
+                content_id: number;
+            };
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+        responses: {
+            /** @description Successful Response */
+            200: {
+                content: {
+                    "application/json": components["schemas"]["ContentRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
         };
-      };
     };
-  };
-  /** Update Content */
-  update_content_contents__content_id__put: {
-    parameters: {
-      path: {
-        content_id: number;
-      };
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ContentUpdate"];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ContentRead"];
+    /** Update Content */
+    update_content_contents__content_id__put: {
+        parameters: {
+            path: {
+                content_id: number;
+            };
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ContentUpdate"];
+            };
         };
-      };
-    };
-  };
-  /** Delete Content */
-  delete_content_contents__content_id__delete: {
-    parameters: {
-      path: {
-        content_id: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ContentRead"];
+        responses: {
+            /** @description Successful Response */
+            200: {
+                content: {
+                    "application/json": components["schemas"]["ContentRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+    };
+    /** Delete Content */
+    delete_content_contents__content_id__delete: {
+        parameters: {
+            path: {
+                content_id: number;
+            };
         };
-      };
-    };
-  };
-  /** Move Contents To A Different Parent */
-  move_contents_to_a_different_parent_contents_move__parent_id__put: {
-    parameters: {
-      path: {
-        parent_id: number;
-      };
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ContentMove"];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": unknown;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                content: {
+                    "application/json": components["schemas"]["ContentRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
     };
-  };
-  /** Move Contents To A Root */
-  move_contents_to_a_root_contents_move__put: {
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ContentMove"];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": unknown;
+    /** Move Contents To A Different Parent */
+    move_contents_to_a_different_parent_contents_move__parent_id__put: {
+        parameters: {
+            path: {
+                parent_id: number;
+            };
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ContentMove"];
+            };
         };
-      };
-    };
-  };
-  /** Get Contents By Parent Id */
-  get_contents_by_parent_id_contents_parent__parent_content_id__get: {
-    parameters: {
-      path: {
-        parent_content_id: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ContentRead"][];
+        responses: {
+            /** @description Successful Response */
+            200: {
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
     };
-  };
-  /** Get Contents By Parent Id */
-  get_contents_by_parent_id_contents_parent_get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ContentRead"][];
+    /** Move Contents To A Root */
+    move_contents_to_a_root_contents_move__put: {
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ContentMove"];
+            };
         };
-      };
-    };
-  };
-  /** Get Folders By User Id And Parent Content Id */
-  get_folders_by_user_id_and_parent_content_id_contents_folders__parent_content_id__get: {
-    parameters: {
-      path: {
-        parent_content_id: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ContentRead"][];
+        responses: {
+            /** @description Successful Response */
+            200: {
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
     };
-  };
-  /** Get Root Folders By User Id */
-  get_root_folders_by_user_id_contents_folders_get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ContentRead"][];
+    /** Get Contents By Parent Id */
+    get_contents_by_parent_id_contents_parent__parent_content_id__get: {
+        parameters: {
+            path: {
+                parent_content_id: number;
+            };
         };
-      };
-    };
-  };
-  /** Update Media Group */
-  update_media_group_contents_update_media_group__content_id__put: {
-    parameters: {
-      query: {
-        media_group_id: string;
-        media_group_message: number;
-      };
-      path: {
-        content_id: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ContentRead"];
+        responses: {
+            /** @description Successful Response */
+            200: {
+                content: {
+                    "application/json": components["schemas"]["ContentRead"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
     };
-  };
-  /** Forward Message */
-  forward_message_contents_forward_message__content_id__post: {
-    parameters: {
-      path: {
-        content_id: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ContentRead"];
+    /** Get Contents By Parent Id */
+    get_contents_by_parent_id_contents_parent_get: {
+        responses: {
+            /** @description Successful Response */
+            200: {
+                content: {
+                    "application/json": components["schemas"]["ContentRead"][];
+                };
+            };
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
     };
-  };
-  /** Authenticate User */
-  authenticate_user_users_auth_post: {
-    requestBody: {
-      content: {
-        "application/json": Record<string, never>;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": unknown;
+    /** Get Folders By User Id And Parent Content Id */
+    get_folders_by_user_id_and_parent_content_id_contents_folders__parent_content_id__get: {
+        parameters: {
+            path: {
+                parent_content_id: number;
+            };
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+        responses: {
+            /** @description Successful Response */
+            200: {
+                content: {
+                    "application/json": components["schemas"]["ContentRead"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
         };
-      };
     };
-  };
-  /** Get User Token */
-  get_user_token_users_token_post: {
-    requestBody: {
-      content: {
-        "application/json": Record<string, never>;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": unknown;
+    /** Get Root Folders By User Id */
+    get_root_folders_by_user_id_contents_folders_get: {
+        responses: {
+            /** @description Successful Response */
+            200: {
+                content: {
+                    "application/json": components["schemas"]["ContentRead"][];
+                };
+            };
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
     };
-  };
-  /** Get Or Create User */
-  get_or_create_user_users__telegram_id___lang__get: {
-    parameters: {
-      path: {
-        telegram_id: number;
-        lang: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": unknown;
+    /** Update Media Group */
+    update_media_group_contents_update_media_group__content_id__put: {
+        parameters: {
+            query: {
+                media_group_id: string;
+                media_group_message: number;
+            };
+            path: {
+                content_id: number;
+            };
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+        responses: {
+            /** @description Successful Response */
+            200: {
+                content: {
+                    "application/json": components["schemas"]["ContentRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
         };
-      };
     };
-  };
-  /** Get Bot Strings */
-  get_bot_strings_localization_bot_strings_get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": unknown;
+    /** Forward Message */
+    forward_message_contents_forward_message__content_id__post: {
+        parameters: {
+            path: {
+                content_id: number;
+            };
         };
-      };
-    };
-  };
-  /** Get Miniapp Strings */
-  get_miniapp_strings_localization_miniapp_strings__lang__get: {
-    parameters: {
-      path: {
-        lang: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": unknown;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                content: {
+                    "application/json": components["schemas"]["ContentRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
     };
-  };
-  /** Welcome */
-  welcome__get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": unknown;
+    /** Authenticate User */
+    authenticate_user_users_auth_post: {
+        requestBody: {
+            content: {
+                "application/json": Record<string, never>;
+            };
         };
-      };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
     };
-  };
+    /** Get User Token */
+    get_user_token_users_token_post: {
+        requestBody: {
+            content: {
+                "application/json": Record<string, never>;
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    /** Get Or Create User */
+    get_or_create_user_users__telegram_id___lang__get: {
+        parameters: {
+            path: {
+                telegram_id: number;
+                lang: string;
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    /** Get Bot Strings */
+    get_bot_strings_localization_bot_strings_get: {
+        responses: {
+            /** @description Successful Response */
+            200: {
+                content: {
+                    "application/json": unknown;
+                };
+            };
+        };
+    };
+    /** Get Miniapp Strings */
+    get_miniapp_strings_localization_miniapp_strings__lang__get: {
+        parameters: {
+            path: {
+                lang: string;
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    /** Welcome */
+    welcome__get: {
+        responses: {
+            /** @description Successful Response */
+            200: {
+                content: {
+                    "application/json": unknown;
+                };
+            };
+        };
+    };
 }

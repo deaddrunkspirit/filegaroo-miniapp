@@ -12,12 +12,11 @@ type AddFolderDialogProps = {
     parent_content_id: number | null | undefined;
 }
 
-
 const AddFolderDialog: React.FC<AddFolderDialogProps> = ({ onEnd, parent_content_id, setName, name }) => {
     const queryClient = useQueryClient();
     const { tg } = useTelegramContext();
     const { sendGAEvent } = useGA();
-    
+
     const mutation = useMutation({
         mutationFn: () => addFolder(tg!.access_token, name, tg!.init_data.user.id, parent_content_id),
         onSuccess: () => {
@@ -30,7 +29,6 @@ const AddFolderDialog: React.FC<AddFolderDialogProps> = ({ onEnd, parent_content
             name = getLocalizationString('folder-name-placeholder') as string;
         }
 
-        console.log(name)
         mutation.mutate();
         onEnd();
         setName('');
@@ -41,12 +39,12 @@ const AddFolderDialog: React.FC<AddFolderDialogProps> = ({ onEnd, parent_content
     const handleCancel = () => {
         onEnd();
     }
-    
+
     return (
         <div className="z-[1000] relative m-0 flex-col items-center justify-center w-[55vw] h-[30vw] p-[4vw] ml-[25vw] space-y-[2vw] rounded-3xl bg-color_input dark:bg-dark-secondary bg-opacity-80 dark:bg-opacity-80">
             <div className=" relative h-11 w-full">
-                <input placeholder={getLocalizationString('folder-name-placeholder') as string} value={name} onChange={(e) => setName(e.target.value)} 
-                        className="border-color_input text-light-onprimary dark:text-dark-onprimary dark:placeholder-shown:border-dark-onsecondary dark:disabled:bg-dark-primary 
+                <input placeholder={getLocalizationString('folder-name-placeholder') as string} value={name} onChange={(e) => setName(e.target.value)}
+                    className="border-color_input text-light-onprimary dark:text-dark-onprimary dark:placeholder-shown:border-dark-onsecondary dark:disabled:bg-dark-primary 
                                     placeholder-shown:border-light-onsecondary disabled:bg-light-primary 
                                     peer h-full w-full border-b bg-transparent pb-1.5 pt-4 font-sans text-sm font-normal outline outline-0 transition-all 
                                     placeholder:opacity-0 focus:border-dark-primary focus:outline-0 focus:placeholder:opacity-100 disabled:border-0" autoFocus={true} />
@@ -71,4 +69,4 @@ const AddFolderDialog: React.FC<AddFolderDialogProps> = ({ onEnd, parent_content
     );
 };
 
-export default AddFolderDialog
+export default AddFolderDialog;

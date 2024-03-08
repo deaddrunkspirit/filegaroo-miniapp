@@ -42,112 +42,112 @@ import DeletePrimaryIconLight from '../assets/control-icons/light/delete-primary
 import DeletePrimaryIconDark from '../assets/control-icons/dark/delete-primary-icon-dark.svg';
 
 const imageMapping = {
-  0: FolderIcon,
-  1: TextIcon,
-  2: AudioIcon,
-  3: FileIcon,
-  4: ImageIcon,
-  5: VideoIcon,
-  6: VoiceMessageIcon,
-  7: VideoNoteIcon,
+    0: FolderIcon,
+    1: TextIcon,
+    2: AudioIcon,
+    3: FileIcon,
+    4: ImageIcon,
+    5: VideoIcon,
+    6: VoiceMessageIcon,
+    7: VideoNoteIcon,
 };
 
 export const getContentImage = (content: ContentType) => {
     const contentType = content.attachment ?? 1
-      
-      let index: keyof typeof imageMapping;
 
-      if (content.attachment && content.attachment !== null) {
+    let index: keyof typeof imageMapping;
+
+    if (content.attachment && content.attachment !== null) {
         index = contentType as keyof typeof imageMapping;
-      } else if (content.type === 1) {
+    } else if (content.type === 1) {
         index = contentType as keyof typeof imageMapping;
-      } else {
+    } else {
         index = 0;
-      }
-      return imageMapping[index] || 'default_icon.svg';
+    }
+    return imageMapping[index] || 'default_icon.svg';
 };
 
 export const getFolderImage = () => {
     return FolderIcon
 }
 
-const iconMapping: { [key: string]: { [key: string]: string } }  = {
-  'light': {
-    'faq': FAQIconLight,
-    'settings': SettingsIconLight,
-    'delete': DeleteLight,
-    'edit': EditIconLight,
-    'back': BackIconLight,
-    'add-folder': AddFolderIconLight,
-    'home': HomeIconLight,
-    'dropdown': DropdownIconLight,
-    'close': CloseIconLight,
-    'expand': ExpandIconLight,
-    'close-page': ClosePageIconLight,
-    'select': SelectIconLight,
-    'select-empty': SelectEmptyLight,
-    'select-checked': SelectCheckedIconLight,
-    'delete-primary': DeletePrimaryIconLight,
-    'move': MoveIconLight
-  },
-  'dark': {
-    'faq': FAQIconDark,
-    'settings': SettingsIconDark,
-    'delete': DeleteDark,
-    'edit': EditIconDark,
-    'back': BackIconDark,
-    'add-folder': AddFolderIconDark,
-    'home': HomeIconDark,
-    'dropdown': DropdownIconDark,
-    'close': CloseIconDark,
-    'expand': ExpandIconDark,
-    'close-page': ClosePageIconDark,
-    'select': SelectIconDark,
-    'select-empty': SelectEmptyDark,
-    'select-checked': SelectCheckedIconDark,
-    'delete-primary': DeletePrimaryIconDark,
-    'move': MoveIconDark
-  }
-} 
+const iconMapping: { [key: string]: { [key: string]: string } } = {
+    'light': {
+        'faq': FAQIconLight,
+        'settings': SettingsIconLight,
+        'delete': DeleteLight,
+        'edit': EditIconLight,
+        'back': BackIconLight,
+        'add-folder': AddFolderIconLight,
+        'home': HomeIconLight,
+        'dropdown': DropdownIconLight,
+        'close': CloseIconLight,
+        'expand': ExpandIconLight,
+        'close-page': ClosePageIconLight,
+        'select': SelectIconLight,
+        'select-empty': SelectEmptyLight,
+        'select-checked': SelectCheckedIconLight,
+        'delete-primary': DeletePrimaryIconLight,
+        'move': MoveIconLight
+    },
+    'dark': {
+        'faq': FAQIconDark,
+        'settings': SettingsIconDark,
+        'delete': DeleteDark,
+        'edit': EditIconDark,
+        'back': BackIconDark,
+        'add-folder': AddFolderIconDark,
+        'home': HomeIconDark,
+        'dropdown': DropdownIconDark,
+        'close': CloseIconDark,
+        'expand': ExpandIconDark,
+        'close-page': ClosePageIconDark,
+        'select': SelectIconDark,
+        'select-empty': SelectEmptyDark,
+        'select-checked': SelectCheckedIconDark,
+        'delete-primary': DeletePrimaryIconDark,
+        'move': MoveIconDark
+    }
+}
 
 export const getIcon = (name: string, theme: string): string => {
-  return iconMapping[theme][name];
+    return iconMapping[theme][name];
 }
- 
+
 
 export const getAllImagePaths = (): string[] => {
-  const allImagePaths: string[] = [];
+    const allImagePaths: string[] = [];
 
-  // Get image paths from content icons
-  Object.values(imageMapping).forEach((path) => {
-    allImagePaths.push(path);
-  });
+    // Get image paths from content icons
+    Object.values(imageMapping).forEach((path) => {
+        allImagePaths.push(path);
+    });
 
-  // Get image paths from control icons
-  Object.values(iconMapping.light).forEach((path) => {
-    allImagePaths.push(path);
-  });
+    // Get image paths from control icons
+    Object.values(iconMapping.light).forEach((path) => {
+        allImagePaths.push(path);
+    });
 
-  Object.values(iconMapping.dark).forEach((path) => {
-    allImagePaths.push(path);
-  });
+    Object.values(iconMapping.dark).forEach((path) => {
+        allImagePaths.push(path);
+    });
 
-  return allImagePaths;
+    return allImagePaths;
 };
 
 
 export const preloadAllImages = (): Promise<void[]> => {
-  const allImagePaths = getAllImagePaths();
-  const allImagePromises: Promise<void>[] = [];
+    const allImagePaths = getAllImagePaths();
+    const allImagePromises: Promise<void>[] = [];
 
-  allImagePaths.forEach((path) => {
-    const imgPromise = new Promise<void>((resolve) => {
-      const img = new Image();
-      img.src = path;
-      img.onload = () => resolve();
+    allImagePaths.forEach((path) => {
+        const imgPromise = new Promise<void>((resolve) => {
+            const img = new Image();
+            img.src = path;
+            img.onload = () => resolve();
+        });
+        allImagePromises.push(imgPromise);
     });
-    allImagePromises.push(imgPromise);
-  });
 
-  return Promise.all(allImagePromises);
+    return Promise.all(allImagePromises);
 };
