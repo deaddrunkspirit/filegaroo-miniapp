@@ -39,9 +39,9 @@ const SelectContentsPage: React.FC = () => {
         if (selectedContents.length < 1) {
             return;
         }
-        
-        const shortlink = parent_content_id ? `/${title}/${parent_content_id}/move`: '/move';
-        navigate(shortlink, {state: selectedContents})
+
+        const shortlink = parent_content_id ? `/${title}/${parent_content_id}/move` : '/move';
+        navigate(shortlink, { state: selectedContents })
     }
 
     const handleDelete = () => {

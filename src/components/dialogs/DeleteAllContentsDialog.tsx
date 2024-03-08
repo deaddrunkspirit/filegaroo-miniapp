@@ -26,7 +26,7 @@ const DeleteAllContensDialog: React.FC<DeleteAllContentsDialogProps> = ({ onDele
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default DeleteAllContensDialog;

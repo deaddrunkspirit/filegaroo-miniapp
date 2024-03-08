@@ -9,7 +9,7 @@ const Placeholder: React.FC = () => {
                 <span className="sr-only">Loading...</span>
             </div>
         </div>
-    )
+    );
 }
 
 export default Placeholder;

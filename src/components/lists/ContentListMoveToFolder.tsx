@@ -8,7 +8,6 @@ type ContentListMoveToFolderProps = {
     onFolderClicked: (newId: number | null) => void;
 }
 
-
 const ContentListMoveToFolder: React.FC<ContentListMoveToFolderProps> = ({ data, selectedContents, onFolderClicked }) => {
     const folders = data.filter(content => content.type === 2)
         .filter(folder => folder.type === 2 &&

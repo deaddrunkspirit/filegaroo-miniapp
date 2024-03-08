@@ -16,7 +16,7 @@ const MoveChooseFolderHeader: React.FC<MoveChooseFolderHeaderProps> = ({ onClose
     console.log(parent);
     return (
         <div className="flex flex-row self-start items-center w-full h-[18.5vw] pl-[8vw] pt-[6.39vw] pr-[7.22vw] pb-[5.56vw] gap-[4.72vw] bg-light-primary text-light-onprimary dark:bg-dark-primary dark:text-dark-onprimary">
-            {parent ?
+            { parent ?
                 <>
                     <button className='h-[6.11vw] w-[6.11vw]' onClick={() => { onHomeClicked() }}>
                         <img className="h-full w-full" src={getIcon('home', colorScheme!)} alt="Home" />

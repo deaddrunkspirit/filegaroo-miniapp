@@ -14,7 +14,7 @@ const FAQCard: React.FC<FAQCardProps> = ({ question, answer }) => {
     const [isOpened, setIsOpened] = useState<boolean>(false)
     const { colorScheme, tg } = useTelegramContext();
     const { sendGAEvent } = useGA();
-    
+
     const handleScroll = () => {
         const container = document.getElementById('faqContainer');
         const faqCard = document.getElementById(`faqCard_${question}`);
@@ -24,8 +24,8 @@ const FAQCard: React.FC<FAQCardProps> = ({ question, answer }) => {
     };
 
     const onOpened = () => {
-        sendGAEvent(tg!!.init_data.user.id, 'FAQ', `Question_${question}` )
-        setIsOpened(!isOpened)
+        sendGAEvent(tg!!.init_data.user.id, 'FAQ', `Question_${question}`);
+        setIsOpened(!isOpened);
     }
 
     return (
@@ -39,7 +39,7 @@ const FAQCard: React.FC<FAQCardProps> = ({ question, answer }) => {
             }
             <div key={`${question}_div`} className='w-full h-[2px] opacity-20 bg-light-onsecondary dark:bg-dark-onsecondary' />
         </>
-    )
+    );
 }
 
 export default FAQCard;

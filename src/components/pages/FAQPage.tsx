@@ -7,7 +7,6 @@ import getLocalizationString from '../../services/languageService';
 import { useGA } from '../../providers/GAContext';
 
 
-
 const FAQPage: React.FC = () => {
     const { colorScheme, tg } = useTelegramContext();
     const { sendGAEvent } = useGA();
