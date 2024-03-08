@@ -22,7 +22,7 @@ const ContentListPicker: React.FC<ContentListMoveToFolderProps> = ({ contents, s
                 )}
             </div>
         </>
-    )
+    );
 }
 
 export default ContentListPicker;

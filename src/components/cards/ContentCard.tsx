@@ -20,7 +20,7 @@ const ContentCard: React.FC<ContentCardProps> = ({ content, parent }) => {
     const { tg, colorScheme } = useTelegramContext();
     const { sendGAEvent } = useGA();
     
-    const shortlink = `/${content.title}/${content.id}`
+    const shortlink = `/${content.title}/${content.id}`;
     const navigate = useNavigate();
     
     const handleDropdown = (e: React.MouseEvent) => {
@@ -31,16 +31,16 @@ const ContentCard: React.FC<ContentCardProps> = ({ content, parent }) => {
     const handleFolderClick = () => {
         if (!isOpen) {
             closeDropdown();
-            navigate(shortlink);
+            navigate(shortlink, {state: content});
         }
     }
 
     const handleMessageClick = () => {
         if (!isOpen) {
             closeDropdown();
-            forwardMessage(tg!.access_token, content.id)
-            sendGAEvent(tg!!.init_data.user.id, 'WebAppInteraction', `MessageSendToChat` )
-            window.Telegram.WebApp.close()
+            forwardMessage(tg!.access_token, content.id);
+            sendGAEvent(tg!!.init_data.user.id, 'WebAppInteraction', `MessageSendToChat`);
+            window.Telegram.WebApp.close();
         }
     }
 
@@ -66,5 +66,5 @@ const ContentCard: React.FC<ContentCardProps> = ({ content, parent }) => {
       );
 };
 
-export default ContentCard
+export default ContentCard;
    

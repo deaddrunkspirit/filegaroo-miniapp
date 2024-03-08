@@ -5,16 +5,15 @@ import AddFolderDialog from "../dialogs/AddFolderDialog"
 import { useState } from "react";
 
 type AddFolderProps = {
-    user_id: number,
-    parent_content_id: number | null | undefined
+    user_id: number;
+    parent_content_id: number | null | undefined;
 }
-
 
 const AddFolder: React.FC<AddFolderProps> = ({ parent_content_id }) => {
     const [isAddingFolder, setIsAddingFolder] = useState<boolean>(false)
     const [name, setName] = useState<string>('');
     const { colorScheme } = useTelegramContext();
-    const icon_path = getIcon('add-folder', colorScheme!) 
+    const icon_path = getIcon('add-folder', colorScheme!);
 
     const handleClick = () => {
         setIsAddingFolder(true);
@@ -24,7 +23,7 @@ const AddFolder: React.FC<AddFolderProps> = ({ parent_content_id }) => {
         <>
             <div className="relative flex flex-col items-center justify-center py-[7.75vw] px-[8.9vw] w-[39vw] h-[32vw] rounded-3xl shadow-lg shadow-gray-400 dark:shadow-black
                  bg-light-secondary text-light-onsecondary dark:bg-dark-secondary dark:text-dark-onsecondary m-0"
-                    onClick={handleClick}>
+                onClick={handleClick}>
                 <div className="w-[21vw] h-[15.4vw]">
                     <img className="max-w-full max-h-full h-auto" src={icon_path} alt="Content Icon" />
                 </div>
