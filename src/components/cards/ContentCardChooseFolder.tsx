@@ -11,7 +11,6 @@ type ContentCardChooseFolderProps = {
 const ContentCardChooseFolder: React.FC<ContentCardChooseFolderProps> = ({ folder, onFolderClick }) => {
 
     const handleCardClicked = () => {
-        console.log(folder.id);
         onFolderClick(folder.id);
     }
 

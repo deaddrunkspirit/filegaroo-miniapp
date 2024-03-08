@@ -27,7 +27,6 @@ export const GAProvider: React.FC<GAProviderProps> = ({ children }) => {
         } else {
             console.error('Google Analytics gtag function not available.');
         }
-        console.log(`Sending GA event: ${eventName}`);
     };
 
     return <GAContext.Provider value={{ sendGAEvent }}>{children}</GAContext.Provider>;
