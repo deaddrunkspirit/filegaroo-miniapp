@@ -1,7 +1,7 @@
 import { getContent, getContents, moveContents } from '../../services/api/apiService';
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQueries, useQueryClient } from '@tanstack/react-query';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ContentType } from '../../types/content';
 import Placeholder from '../../components/placeholders/Placeholder';
 import { useTelegramContext } from '../../providers/TelegramContext';
