@@ -38,12 +38,13 @@ const SelectContentsPage: React.FC = () => {
         }
 
         const shortlink = parent_content_id ? `/${title}/${parent_content_id}/move` : '/move';
-        navigate(shortlink, { state: selectedContents })
+        navigate(shortlink, { state: selectedContents });
     }
 
     const handleDelete = () => {
         deleteMutation.mutate();
-        navigate(-2);
+        const shortlink = `/${title}/${parent_content_id}`;
+        navigate(shortlink);
         sendGAEvent(tg!!.init_data.user.id, 'WebAppInteraction', `DeleteMultipleContents`);
     }
 
